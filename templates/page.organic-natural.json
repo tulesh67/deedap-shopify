@@ -1,0 +1,93 @@
+{
+  "sections": {
+    "landing": {
+      "type": "deedap-editable-category-landing",
+      "settings": {
+        "button_label": "Explore Organic & Natural",
+        "button_url": "/collections/organic-natural",
+        "products_eyebrow": "THE NATURAL EDIT",
+        "products_title": "Goodness, gathered naturally.",
+        "footer_note": "SAMPLE PRODUCTS AND PRICES · EDIT IN THEME CUSTOMIZER",
+        "placeholder_icon": "✳",
+        "accent": "#62804E",
+        "soft_color": "#E9EDDF"
+      },
+      "blocks": {
+        "forest_honey": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=85&w=1000&auto=format&fit=crop",
+            "badge": "PURE HARVEST",
+            "kicker": "PANTRY / 01",
+            "title": "Raw Wild Forest Honey",
+            "description": "Unfiltered, single-origin honey with a deep floral finish.",
+            "price": "₹850",
+            "link_label": "View collection"
+          }
+        },
+        "vedic_turmeric": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=85&w=1000&auto=format&fit=crop",
+            "badge": "SMALL BATCH",
+            "kicker": "PANTRY / 02",
+            "title": "Stone-Ground Vedic Turmeric",
+            "description": "Small-batch turmeric, slow milled for a bright, earthy aroma.",
+            "price": "₹280",
+            "link_label": "View collection"
+          }
+        },
+        "mustard_oil": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=85&w=1000&auto=format&fit=crop",
+            "badge": "PANTRY ESSENTIAL",
+            "kicker": "PANTRY / 03",
+            "title": "Cold-Pressed Mustard Oil",
+            "description": "Traditional wood-pressed oil with a rich, peppery character.",
+            "price": "₹450",
+            "link_label": "View collection"
+          }
+        },
+        "green_tea": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=85&w=1000&auto=format&fit=crop",
+            "badge": "BOTANICAL PICK",
+            "kicker": "BOTANICALS / 04",
+            "title": "Whole-Leaf Green Tea",
+            "description": "Fresh green tea leaves with a light, clean finish.",
+            "price": "₹580",
+            "link_label": "View collection"
+          }
+        },
+        "coconut_oil": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?q=85&w=1000&auto=format&fit=crop",
+            "badge": "EVERYDAY GOODNESS",
+            "kicker": "PANTRY / 05",
+            "title": "Virgin Coconut Oil",
+            "description": "Cold-pressed coconut oil for everyday kitchen rituals.",
+            "price": "₹490",
+            "link_label": "View collection"
+          }
+        },
+        "botanical_soap": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=85&w=1000&auto=format&fit=crop",
+            "badge": "NATURAL LIVING",
+            "kicker": "NATURAL LIVING / 06",
+            "title": "Herbal Botanical Soap",
+            "description": "Gentle, plant-based cleansing with a fresh herbal scent.",
+            "price": "₹220",
+            "link_label": "View collection"
+          }
+        }
+      },
+      "block_order": ["forest_honey", "vedic_turmeric", "mustard_oil", "green_tea", "coconut_oil", "botanical_soap"]
+    }
+  },
+  "order": ["landing"]
+}

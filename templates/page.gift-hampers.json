@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "gift_hampers": {
+      "type": "deedap-gift-hampers",
+      "settings": {}
+    }
+  },
+  "order": ["gift_hampers"]
+}

@@ -6,12 +6,12 @@
     else if (p.indexOf('information-technology') !== -1 || p.indexOf('electronic') !== -1) dest = '/pages/electronics';
     else if (p.indexOf('jeweller') !== -1 || p.indexOf('jewelry') !== -1) dest = '/pages/jewelry';
     else if (p.indexOf('accessories') !== -1) dest = '/pages/accessories';
-    else if (p.indexOf('organic') !== -1) dest = '/#row-organic-natural';
+    else if (p.indexOf('organic') !== -1 || p.indexOf('raw-honey') !== -1) dest = '/pages/organic-natural';
     else if (p.indexOf('global') !== -1) dest = '/#row-global-collections';
     else if (p.indexOf('essential') !== -1) dest = '/#row-essentials';
-    else if (p.indexOf('cookware') !== -1) dest = '/#row-cookware';
-    else if (p.indexOf('hamper') !== -1) dest = '/#row-gift-hampers';
-    else if (p.indexOf('bag') !== -1) dest = '/#row-carryout-bags';
+    else if (p.indexOf('cookware') !== -1) dest = '/pages/cookware';
+    else if (p.indexOf('hamper') !== -1) dest = '/pages/gift-hampers';
+    else if (p.indexOf('bag') !== -1) dest = '/pages/carryout-bags';
     if (dest) {
       window.location.replace(dest);
     }

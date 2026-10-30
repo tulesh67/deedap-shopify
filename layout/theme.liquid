@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
+    <script>if((location.pathname==='/pages/organic-natural'||new URLSearchParams(location.search).get('department')==='organic')){document.documentElement.classList.add('organic-landing-route')}</script>
+    <style>html.organic-landing-route .deedap-textile-page{display:none!important}html.organic-landing-route .deedap-organic-page{display:block!important}html:not(.organic-landing-route) .deedap-organic-page{display:none!important}</style>
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -74,6 +76,14 @@
           <script>window.location.replace('/pages/jewelry');</script>
         {%- when 'accessories' -%}
           <script>window.location.replace('/pages/accessories');</script>
+        {%- when 'organic-natural', 'raw-honey' -%}
+          <script>window.location.replace('/pages/organic-natural');</script>
+        {%- when 'gift-hampers' -%}
+          <script>window.location.replace('/pages/gift-hampers');</script>
+        {%- when 'cookware' -%}
+          <script>window.location.replace('/pages/cookware');</script>
+        {%- when 'carryout-bags' -%}
+          <script>window.location.replace('/pages/carryout-bags');</script>
       {%- endcase -%}
     {%- endif -%}
     {{ content_for_header }}

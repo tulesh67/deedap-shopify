@@ -315,17 +315,17 @@
               elsif check_id contains 'accessor'
                 assign card_url = '/pages/accessories'
               elsif check_id contains 'honey' or check_id contains 'organic' or check_id contains 'natural'
-                assign card_url = collections['raw-honey'].url | default: '/collections/raw-honey'
+                assign card_url = '/pages/organic-natural'
               elsif check_id contains 'import' or check_id contains 'global'
                 assign card_url = collections['imported'].url | default: '/collections/imported'
               elsif check_id contains 'essential' or check_id contains 'living'
                 assign card_url = collections['essentials'].url | default: '/collections/essentials'
               elsif check_id contains 'cookware' or check_id contains 'kitchen'
-                assign card_url = collections['cookware'].url | default: '/collections/cookware'
+                assign card_url = '/pages/cookware'
               elsif check_id contains 'gift' or check_id contains 'hamper'
-                assign card_url = collections['gift-hampers'].url | default: '/collections/gift-hampers'
+                assign card_url = '/pages/gift-hampers'
               elsif check_id contains 'bag' or check_id contains 'carry'
-                assign card_url = collections['carryout-bags'].url | default: '/collections/carryout-bags'
+                assign card_url = '/pages/carryout-bags'
               else
                 assign card_url = routes.all_products_collection_url
               endif
@@ -390,7 +390,7 @@
           <h3 class="deedap-dept-title">Information & Technology</h3>
         </a>
 
-        <a href="/collections/raw-honey" class="deedap-dept-card" id="honey">
+        <a href="/pages/organic-natural" class="deedap-dept-card" id="honey">
           <div class="deedap-dept-media">
             <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1000&auto=format&fit=crop" alt="Organic and Natural Products" loading="lazy" width="800" height="700">
           </div>
@@ -418,21 +418,21 @@
           <h3 class="deedap-dept-title">Jewellery</h3>
         </a>
 
-        <a href="/collections/cookware" class="deedap-dept-card" id="cookware">
+        <a href="/pages/cookware" class="deedap-dept-card" id="cookware">
           <div class="deedap-dept-media">
             <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop" alt="Cookware & Kitchenware" loading="lazy" width="800" height="700">
           </div>
           <h3 class="deedap-dept-title">Cookware & Kitchenware</h3>
         </a>
 
-        <a href="/collections/gift-hampers" class="deedap-dept-card" id="gift-hampers">
+        <a href="/pages/gift-hampers" class="deedap-dept-card" id="gift-hampers">
           <div class="deedap-dept-media">
             <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop" alt="Gift Hampers" loading="lazy" width="800" height="700">
           </div>
           <h3 class="deedap-dept-title">Gift Hampers</h3>
         </a>
 
-        <a href="/collections/carryout-bags" class="deedap-dept-card" id="carryout-bags">
+        <a href="/pages/carryout-bags" class="deedap-dept-card" id="carryout-bags">
           <div class="deedap-dept-media">
             <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1000&auto=format&fit=crop" alt="Carryout Bags" loading="lazy" width="800" height="700">
           </div>
@@ -554,13 +554,13 @@
       "blocks": [
         { "type": "category_card", "settings": { "custom_title": "Clothing & Fine Textiles", "anchor_id": "clothing", "custom_url": "/pages/textiles" } },
         { "type": "category_card", "settings": { "custom_title": "Information & Technology", "anchor_id": "electronics", "custom_url": "/pages/electronics" } },
-        { "type": "category_card", "settings": { "custom_title": "Organic and Natural Products", "anchor_id": "honey", "custom_url": "/collections/raw-honey" } },
+        { "type": "category_card", "settings": { "custom_title": "Organic and Natural Products", "anchor_id": "honey", "custom_url": "/pages/organic-natural" } },
         { "type": "category_card", "settings": { "custom_title": "Global Collections", "anchor_id": "imported", "custom_url": "/collections/imported" } },
         { "type": "category_card", "settings": { "custom_title": "Home & Everyday Essentials", "anchor_id": "essentials", "custom_url": "/collections/essentials" } },
         { "type": "category_card", "settings": { "custom_title": "Jewellery", "anchor_id": "jewelry", "custom_url": "/pages/jewelry" } },
-        { "type": "category_card", "settings": { "custom_title": "Cookware & Kitchenware", "anchor_id": "cookware", "custom_url": "/collections/cookware" } },
-        { "type": "category_card", "settings": { "custom_title": "Gift Hampers", "anchor_id": "gift-hampers", "custom_url": "/collections/gift-hampers" } },
-        { "type": "category_card", "settings": { "custom_title": "Carryout Bags", "anchor_id": "carryout-bags", "custom_url": "/collections/carryout-bags" } },
+        { "type": "category_card", "settings": { "custom_title": "Cookware & Kitchenware", "anchor_id": "cookware", "custom_url": "/pages/cookware" } },
+        { "type": "category_card", "settings": { "custom_title": "Gift Hampers", "anchor_id": "gift-hampers", "custom_url": "/pages/gift-hampers" } },
+        { "type": "category_card", "settings": { "custom_title": "Carryout Bags", "anchor_id": "carryout-bags", "custom_url": "/pages/carryout-bags" } },
         { "type": "category_card", "settings": { "custom_title": "Accessories", "anchor_id": "accessories", "custom_url": "/pages/accessories" } }
       ]
     }

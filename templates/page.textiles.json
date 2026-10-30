@@ -16,7 +16,14 @@
         "women_collection": "",
         "kids_collection": ""
       }
+    },
+    "organic_page": {
+      "type": "deedap-organic-hub",
+      "settings": {}
     }
   },
-  "order": ["textile_page"]
+  "order": [
+    "textile_page",
+    "organic_page"
+  ]
 }

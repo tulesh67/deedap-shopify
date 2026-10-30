@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "landing": {
+      "type": "deedap-editable-category-landing",
+      "settings": {
+        "button_label": "Explore Cookware",
+        "button_url": "/collections/cookware",
+        "products_eyebrow": "THE KITCHEN EDIT",
+        "products_title": "Good tools. Better cooking.",
+        "footer_note": "SAMPLE PRODUCTS AND PRICES · EDIT IN THEME CUSTOMIZER",
+        "placeholder_icon": "✳",
+        "accent": "#9C542E",
+        "soft_color": "#EFE5D7"
+      },
+      "blocks": {
+        "frypan": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=85&w=1000&auto=format&fit=crop",
+            "badge": "EVERYDAY FAVOURITE",
+            "kicker": "NON-STICK COOKWARE",
+            "title": "Everyday Non-Stick Frypan",
+            "description": "A versatile sample pick for quick breakfasts and easy weeknight meals.",
+            "price": "₹1,299",
+            "link_label": "View collection"
+          }
+        },
+        "steel_set": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=85&w=1000&auto=format&fit=crop",
+            "badge": "KITCHEN CLASSIC",
+            "kicker": "STAINLESS STEEL",
+            "title": "Stainless Steel Cookware Set",
+            "description": "A polished cookware set concept for everyday kitchen routines.",
+            "price": "₹3,999",
+            "link_label": "View collection"
+          }
+        },
+        "cast_iron": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1584990347449-a0a2c31e2c72?q=85&w=1000&auto=format&fit=crop",
+            "badge": "HEARTY COOKING",
+            "kicker": "CAST IRON",
+            "title": "Cast Iron Kadai",
+            "description": "A sturdy sample pick for slow-cooked favourites and shared meals.",
+            "price": "₹2,149",
+            "link_label": "View collection"
+          }
+        }
+      },
+      "block_order": ["frypan", "steel_set", "cast_iron"]
+    }
+  },
+  "order": ["landing"]
+}

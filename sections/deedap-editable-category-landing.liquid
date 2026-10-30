@@ -1,0 +1,78 @@
+<section class="dd-edit-landing" style="--landing-accent:{{ section.settings.accent }};--landing-soft:{{ section.settings.soft_color }}" aria-labelledby="landing-{{ section.id }}">
+  <div class="dd-edit-landing__wrap">
+    <div class="dd-edit-landing__section-head">
+      <div><p>{{ section.settings.products_eyebrow | escape }}</p><h1>{{ section.settings.products_title | escape }}</h1></div>
+      <span>{{ section.blocks.size }} EDITED PICKS</span>
+    </div>
+
+    <div class="dd-edit-landing__grid">
+      {% for block in section.blocks %}
+        <article class="dd-edit-product" {{ block.shopify_attributes }}>
+          <a class="dd-edit-product__media" href="{{ block.settings.product_link | default: section.settings.button_url | default: '#' }}" aria-label="{{ block.settings.title | escape }}">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 33vw, (min-width: 650px) 50vw, 100vw', alt: block.settings.title }}
+            {% elsif block.settings.fallback_image != blank %}
+              <img src="{{ block.settings.fallback_image | escape }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="900" height="820">
+            {% else %}
+              <div class="dd-edit-product__placeholder" aria-hidden="true">{{ section.settings.placeholder_icon }}</div>
+            {% endif %}
+            {% if block.settings.badge != blank %}<span class="dd-edit-product__badge">{{ block.settings.badge | escape }}</span>{% endif %}
+            <span class="dd-edit-product__index">0{{ forloop.index }}</span>
+          </a>
+          <div class="dd-edit-product__body">
+            {% if block.settings.kicker != blank %}<p class="dd-edit-product__kicker">{{ block.settings.kicker | escape }}</p>{% endif %}
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p class="dd-edit-product__description">{{ block.settings.description | escape }}</p>
+            <div class="dd-edit-product__foot"><strong>{{ block.settings.price | escape }}</strong><a href="{{ block.settings.product_link | default: section.settings.button_url | default: '#' }}">{{ block.settings.link_label | default: 'Discover' | escape }} <span aria-hidden="true">→</span></a></div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <footer class="dd-edit-landing__footer"><span>{{ section.settings.footer_note | escape }}</span>{% if section.settings.button_url != blank %}<a href="{{ section.settings.button_url }}">{{ section.settings.button_label | default: 'Explore the collection' | escape }} ↑</a>{% endif %}</footer>
+  </div>
+</section>
+
+<style>
+  .dd-edit-landing{--ink:#211b17;--paper:#faf7f0;--muted:#746b62;background:var(--paper);color:var(--ink);padding:clamp(24px,3vw,40px) 22px 24px}
+  .dd-edit-landing__wrap{max-width:1320px;margin:auto}.dd-edit-landing__section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px;border-bottom:1px solid rgba(33,27,23,.14);padding-bottom:14px}.dd-edit-landing__section-head>div>p{margin:0 0 6px;color:var(--landing-accent);font-size:10px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}.dd-edit-landing__section-head h1{margin:0;font-family:var(--font-heading-family,Georgia,serif);font-size:clamp(26px,3.3vw,40px);font-weight:500;letter-spacing:-.03em}.dd-edit-landing__section-head>span{padding-bottom:5px;color:#80746b;font-size:9px;font-weight:800;letter-spacing:.14em}.dd-edit-landing__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.dd-edit-product{overflow:hidden;border:1px solid rgba(33,27,23,.1);border-radius:13px;background:#fff;box-shadow:0 10px 28px rgba(39,27,20,.055);transition:transform .25s ease,box-shadow .25s ease}.dd-edit-product:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(39,27,20,.12)}.dd-edit-product__media{display:block;position:relative;aspect-ratio:1.18;overflow:hidden;background:var(--landing-soft)}.dd-edit-product__media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s ease}.dd-edit-product:hover .dd-edit-product__media img{transform:scale(1.035)}.dd-edit-product__badge{position:absolute;top:14px;left:14px;padding:8px 10px;background:#fff;color:var(--landing-accent);font-size:9px;font-weight:900;letter-spacing:.1em}.dd-edit-product__index{position:absolute;right:14px;bottom:12px;color:#fff;font-size:11px;font-weight:800;text-shadow:0 1px 7px #0008}.dd-edit-product__placeholder{display:grid;width:100%;height:100%;place-items:center;color:var(--landing-accent);font-size:76px}.dd-edit-product__body{padding:18px 20px 17px}.dd-edit-product__kicker{margin:0 0 7px;color:var(--landing-accent);font-size:9px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.dd-edit-product h3{margin:0;font-family:var(--font-heading-family,Georgia,serif);font-size:22px;font-weight:500;line-height:1.2}.dd-edit-product__description{min-height:42px;margin:9px 0 16px;color:var(--muted);font-size:12px;line-height:1.55}.dd-edit-product__foot{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #eee9e2;padding-top:14px}.dd-edit-product__foot strong{color:var(--landing-accent);font-size:24px;letter-spacing:-.04em}.dd-edit-product__foot a{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.dd-edit-product__foot a span{color:var(--landing-accent);font-size:15px}.dd-edit-landing__footer{display:flex;justify-content:space-between;gap:15px;margin-top:24px;padding-top:14px;border-top:1px solid rgba(33,27,23,.14);color:#87796c;font-size:9px;font-weight:800;letter-spacing:.13em}.dd-edit-landing__footer a{color:var(--landing-accent);text-decoration:none}
+  @media(max-width:850px){.dd-edit-landing__grid{gap:14px}.dd-edit-product__body{padding:16px}.dd-edit-product h3{font-size:19px}.dd-edit-product__foot strong{font-size:21px}}
+  @media(max-width:620px){.dd-edit-landing{padding:24px 16px 20px}.dd-edit-landing__section-head>span{font-size:8px}.dd-edit-landing__grid{grid-template-columns:1fr;max-width:480px;margin:auto}.dd-edit-product__media{aspect-ratio:1.25}.dd-edit-product__body{padding:18px 20px}.dd-edit-product h3{font-size:23px}.dd-edit-product__description{min-height:0}.dd-edit-landing__footer{font-size:8px;letter-spacing:.08em}}
+</style>
+
+{% schema %}
+{
+  "name": "DEEDAP category landing",
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Footer collection link label", "default": "Explore the collection" },
+    { "type": "url", "id": "button_url", "label": "Default product and collection link" },
+    { "type": "text", "id": "products_eyebrow", "label": "Products eyebrow", "default": "A FEW GOOD PICKS" },
+    { "type": "text", "id": "products_title", "label": "Products heading", "default": "Made for your everyday" },
+    { "type": "text", "id": "footer_note", "label": "Footer note", "default": "DEEDAP CURATED COLLECTION" },
+    { "type": "text", "id": "placeholder_icon", "label": "Placeholder icon", "default": "✳" },
+    { "type": "color", "id": "accent", "label": "Accent colour", "default": "#9C542E" },
+    { "type": "color", "id": "soft_color", "label": "Image placeholder colour", "default": "#EFE5D7" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Sample product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "url", "id": "fallback_image", "label": "Preview image URL" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "DEEDAP PICK" },
+        { "type": "text", "id": "kicker", "label": "Category label", "default": "EVERYDAY ESSENTIAL" },
+        { "type": "text", "id": "title", "label": "Product title", "default": "Sample product" },
+        { "type": "textarea", "id": "description", "label": "Product description", "default": "A thoughtful everyday essential from the DEEDAP collection." },
+        { "type": "text", "id": "price", "label": "Display price", "default": "₹999" },
+        { "type": "text", "id": "link_label", "label": "Card link label", "default": "Discover" },
+        { "type": "url", "id": "product_link", "label": "Card link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    { "name": "DEEDAP category landing", "blocks": [ { "type": "product" }, { "type": "product" }, { "type": "product" } ] }
+  ]
+}
+{% endschema %}

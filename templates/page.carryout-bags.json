@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "landing": {
+      "type": "deedap-editable-category-landing",
+      "settings": {
+        "button_label": "Explore Carryout Bags",
+        "button_url": "/collections/carryout-bags",
+        "products_eyebrow": "BAGS FOR EVERYDAY",
+        "products_title": "Carry a little more style.",
+        "footer_note": "SAMPLE PRODUCTS AND PRICES · EDIT IN THEME CUSTOMIZER",
+        "placeholder_icon": "✳",
+        "accent": "#247B68",
+        "soft_color": "#DDEDE7"
+      },
+      "blocks": {
+        "kraft_bag": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1544816155-12df9643f363?q=85&w=1000&auto=format&fit=crop",
+            "badge": "EVERYDAY ESSENTIAL",
+            "kicker": "PAPER CARRY BAGS",
+            "title": "Kraft Paper Carry Bag",
+            "description": "A simple, sturdy sample option for everyday shopping and takeaway orders.",
+            "price": "₹25",
+            "link_label": "View collection"
+          }
+        },
+        "reusable_bag": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=85&w=1000&auto=format&fit=crop",
+            "badge": "REUSABLE PICK",
+            "kicker": "REUSABLE BAGS",
+            "title": "Everyday Reusable Shopper",
+            "description": "A reusable bag concept for market trips and daily errands.",
+            "price": "₹199",
+            "link_label": "View collection"
+          }
+        },
+        "gift_bag": {
+          "type": "product",
+          "settings": {
+            "fallback_image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=85&w=1000&auto=format&fit=crop",
+            "badge": "GIFT-READY",
+            "kicker": "GIFT CARRY BAGS",
+            "title": "Festive Gift Carry Bag",
+            "description": "A polished sample bag for presenting a thoughtful gift.",
+            "price": "₹75",
+            "link_label": "View collection"
+          }
+        }
+      },
+      "block_order": ["kraft_bag", "reusable_bag", "gift_bag"]
+    }
+  },
+  "order": ["landing"]
+}

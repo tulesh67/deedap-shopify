@@ -1,0 +1,944 @@
+{% comment %} DEEDAP Cookware Landing Page {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ========== RESET & BASE ========== */
+.cw-page *, .cw-page *::before, .cw-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.cw-page { font-family: 'Plus Jakarta Sans', sans-serif; background: #FAFAF8; color: #1A1208; overflow-x: hidden; }
+
+/* ========== HERO ========== */
+.cw-hero {
+  position: relative;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3D0A0A 0%, #6B1A1A 35%, #8B1A1A 60%, #B8923A 100%);
+}
+.cw-hero-bg {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 20% 50%, rgba(245,196,81,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 30%, rgba(184,146,58,0.22) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(61,10,10,0.8) 0%, transparent 60%);
+}
+.cw-hero-pattern {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F5C451' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='0' cy='0' r='2'/%3E%3Ccircle cx='60' cy='0' r='2'/%3E%3Ccircle cx='0' cy='60' r='2'/%3E%3Ccircle cx='60' cy='60' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.cw-hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 80px 24px 100px;
+  max-width: 860px;
+}
+.cw-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(245,196,81,0.5);
+  background: rgba(245,196,81,0.12);
+  color: #F5C451;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+}
+.cw-hero-badge svg { width:14px; height:14px; }
+.cw-hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 0.95;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.cw-hero-title span {
+  background: linear-gradient(90deg, #F5C451 0%, #E8A020 50%, #F5C451 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cw-hero-sub {
+  font-size: 17px; font-weight: 500; line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  max-width: 580px; margin: 0 auto 36px;
+}
+.cw-hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cw-btn-gold {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 32px; border-radius: 999px;
+  background: linear-gradient(135deg, #F5C451, #D4960A);
+  color: #1A0C00; font-weight: 800; font-size: 15px;
+  text-decoration: none; border: none; cursor: pointer;
+  box-shadow: 0 8px 30px rgba(245,196,81,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cw-btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(245,196,81,0.5); }
+.cw-btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: 999px;
+  background: transparent;
+  color: #fff; font-weight: 700; font-size: 15px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  transition: border-color 0.3s, background 0.3s;
+}
+.cw-btn-outline:hover { border-color: #F5C451; background: rgba(245,196,81,0.1); }
+.cw-hero-wave {
+  position: absolute; bottom: -2px; left: 0; right: 0; z-index: 3;
+}
+/* floating pans decoration */
+.cw-hero-deco {
+  position: absolute; z-index: 1; opacity: 0.12;
+  font-size: 120px; line-height: 1; pointer-events: none;
+  animation: cwFloat 6s ease-in-out infinite;
+}
+.cw-hero-deco.d1 { right: 6%; top: 10%; animation-delay: 0s; }
+.cw-hero-deco.d2 { left: 4%; bottom: 20%; font-size: 80px; animation-delay: 2s; }
+.cw-hero-deco.d3 { right: 18%; bottom: 15%; font-size: 60px; animation-delay: 4s; }
+@keyframes cwFloat { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-18px) rotate(4deg)} }
+
+/* ========== TRUST STRIP ========== */
+.cw-trust {
+  background: #FFF8EE;
+  border-bottom: 1px solid #E8D8B0;
+  padding: 18px 24px;
+}
+.cw-trust-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  gap: 40px; flex-wrap: wrap;
+}
+.cw-trust-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700; color: #5C3D1A; letter-spacing: 0.06em;
+}
+.cw-trust-icon { width: 28px; height: 28px; color: #B8923A; flex-shrink: 0; }
+
+/* ========== SECTION HEADER ========== */
+.cw-section { padding: 80px 24px; }
+.cw-section-header { text-align: center; margin-bottom: 56px; }
+.cw-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.22em;
+  color: #B8923A; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.cw-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800; line-height: 1.08;
+  color: #1A1208; letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.cw-section-desc {
+  font-size: 16px; font-weight: 500; color: #6B5D45; line-height: 1.6;
+  max-width: 560px; margin: 0 auto;
+}
+
+/* ========== CATEGORY BANDS ========== */
+.cw-cats-grid {
+  max-width: 1140px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.cw-cat-card {
+  position: relative; border-radius: 24px; overflow: hidden;
+  min-height: 280px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  cursor: pointer; text-decoration: none;
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+.cw-cat-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
+.cw-cat-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+}
+.cw-cat-card:hover .cw-cat-img { transform: scale(1.06); }
+.cw-cat-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.75) 100%);
+}
+.cw-cat-body { position: relative; z-index: 2; padding: 24px; }
+.cw-cat-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.16em;
+  color: #F5C451; background: rgba(245,196,81,0.18);
+  border: 1px solid rgba(245,196,81,0.35); border-radius: 999px;
+  padding: 4px 12px; margin-bottom: 8px;
+}
+.cw-cat-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px; font-weight: 800; color: #fff; line-height: 1.1;
+}
+.cw-cat-sub { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+.cw-cat-arrow {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; margin-top: 14px;
+  transition: background 0.3s, border-color 0.3s, transform 0.4s;
+}
+.cw-cat-card:hover .cw-cat-arrow { background: #F5C451; border-color: #F5C451; color: #1A0C00; transform: rotate(45deg); }
+/* fallback gradient bg for categories when no image set */
+.cw-cat-card.c1 { background: linear-gradient(135deg,#6B1A1A,#B8923A); }
+.cw-cat-card.c2 { background: linear-gradient(135deg,#1A3A2A,#2E7D52); }
+.cw-cat-card.c3 { background: linear-gradient(135deg,#1A1A5A,#2E4D8A); }
+
+/* ========== PRODUCTS GRID ========== */
+.cw-products-wrap { max-width: 1140px; margin: 0 auto; }
+.cw-filter-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 36px; justify-content: center;
+}
+.cw-filter-btn {
+  padding: 9px 22px; border-radius: 999px; border: 1.5px solid #D8C89A;
+  background: #fff; color: #5C3D1A; font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.25s;
+}
+.cw-filter-btn:hover, .cw-filter-btn.active {
+  background: #3D0A0A; color: #fff; border-color: #3D0A0A;
+}
+.cw-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.cw-prod-card {
+  background: #fff; border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s;
+  display: flex; flex-direction: column;
+}
+.cw-prod-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.14); }
+.cw-prod-img-wrap {
+  position: relative; overflow: hidden;
+  aspect-ratio: 1 / 1; background: #F5F0E8;
+}
+.cw-prod-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+}
+.cw-prod-card:hover .cw-prod-img { transform: scale(1.07); }
+.cw-prod-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+  padding: 4px 10px; border-radius: 999px;
+  text-transform: uppercase;
+}
+.cw-prod-badge.new { background: #3D0A0A; color: #fff; }
+.cw-prod-badge.sale { background: #F5C451; color: #1A0C00; }
+.cw-prod-badge.hot { background: #E8401A; color: #fff; }
+.cw-prod-wishlist {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #B8923A; transition: background 0.2s, transform 0.2s;
+}
+.cw-prod-wishlist:hover { background: #fff; transform: scale(1.15); }
+.cw-prod-body { padding: 18px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.cw-prod-cat { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; color: #B8923A; text-transform: uppercase; margin-bottom: 6px; }
+.cw-prod-name { font-size: 15px; font-weight: 700; color: #1A1208; line-height: 1.3; flex: 1; margin-bottom: 12px; }
+.cw-prod-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+.cw-stars { color: #F5C451; font-size: 13px; letter-spacing: 1px; }
+.cw-rating-count { font-size: 12px; color: #999; font-weight: 600; }
+.cw-prod-price-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.cw-prod-price { font-size: 18px; font-weight: 800; color: #3D0A0A; }
+.cw-prod-price-old { font-size: 13px; color: #AAA; text-decoration: line-through; }
+.cw-prod-add {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: #3D0A0A; color: #fff; border: none; cursor: pointer;
+  font-size: 20px; font-weight: 400; line-height: 1;
+  transition: background 0.25s, transform 0.25s;
+}
+.cw-prod-add:hover { background: #B8923A; transform: rotate(90deg) scale(1.1); }
+
+/* ========== FEATURES STRIP ========== */
+.cw-features {
+  background: linear-gradient(135deg, #1A0C00 0%, #3D1A00 50%, #6B1A1A 100%);
+  padding: 72px 24px;
+}
+.cw-features-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.cw-feat-item { text-align: center; color: #fff; }
+.cw-feat-icon {
+  width: 64px; height: 64px; border-radius: 20px;
+  background: rgba(245,196,81,0.15);
+  border: 1.5px solid rgba(245,196,81,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px; color: #F5C451;
+}
+.cw-feat-icon svg { width: 30px; height: 30px; }
+.cw-feat-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+.cw-feat-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+/* ========== NEWSLETTER ========== */
+.cw-newsletter { background: #FFF8EE; padding: 72px 24px; }
+.cw-newsletter-inner {
+  max-width: 580px; margin: 0 auto; text-align: center;
+}
+.cw-newsletter-title { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: #1A1208; margin-bottom: 12px; }
+.cw-newsletter-sub { font-size: 15px; color: #6B5D45; margin-bottom: 28px; }
+.cw-newsletter-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; }
+.cw-newsletter-input {
+  flex: 1; padding: 14px 20px; border-radius: 999px;
+  border: 1.5px solid #D8C89A; background: #fff;
+  font-size: 14px; outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s;
+}
+.cw-newsletter-input:focus { border-color: #B8923A; }
+.cw-newsletter-btn {
+  padding: 14px 24px; border-radius: 999px;
+  background: #3D0A0A; color: #fff;
+  font-size: 14px; font-weight: 700;
+  border: none; cursor: pointer;
+  transition: background 0.25s;
+  white-space: nowrap;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.cw-newsletter-btn:hover { background: #B8923A; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .cw-products-grid { grid-template-columns: repeat(3, 1fr); }
+  .cw-features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .cw-cats-grid { grid-template-columns: 1fr; }
+  .cw-products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cw-trust-inner { gap: 20px; }
+  .cw-newsletter-form { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .cw-products-grid { grid-template-columns: 1fr; }
+  .cw-features-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ========== ANIMATION VISIBILITY FIX ========== */
+.cw-reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.cw-reveal.visible { opacity: 1; transform: none; }
+</style>
+
+<div class="cw-page" data-section-id="{{ section.id }}">
+
+  <!-- ===== HERO ===== -->
+  <div class="cw-hero">
+    <div class="cw-hero-bg"></div>
+    <div class="cw-hero-pattern"></div>
+    <div class="cw-hero-deco d1">🍳</div>
+    <div class="cw-hero-deco d2">🥘</div>
+    <div class="cw-hero-deco d3">🫕</div>
+    <div class="cw-hero-content">
+      <div class="cw-hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+        PREMIUM COOKWARE COLLECTION
+      </div>
+      <h1 class="cw-hero-title">
+        {{ section.settings.hero_title | default: 'Cook With' }}<br>
+        <span>{{ section.settings.hero_highlight | default: 'Passion &amp; Precision' }}</span>
+      </h1>
+      <p class="cw-hero-sub">{{ section.settings.hero_subtitle | default: 'Discover our curated collection of premium cookware — from everyday essentials to professional-grade cooksets trusted by home chefs worldwide.' }}</p>
+      <div class="cw-hero-btns">
+        <a href="#cw-products" class="cw-btn-gold">
+          Shop Now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="{{ section.settings.hero_secondary_url | default: '#cw-categories' }}" class="cw-btn-outline">Browse Categories</a>
+      </div>
+    </div>
+    <svg class="cw-hero-wave" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 60V30C240 0 480 60 720 30C960 0 1200 60 1440 30V60H0Z" fill="#FAFAF8"/>
+    </svg>
+  </div>
+
+  <!-- ===== TRUST STRIP ===== -->
+  <div class="cw-trust">
+    <div class="cw-trust-inner">
+      <div class="cw-trust-item">
+        <svg class="cw-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        FOOD-SAFE CERTIFIED
+      </div>
+      <div class="cw-trust-item">
+        <svg class="cw-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+        </svg>
+        FREE SHIPPING ₹499+
+      </div>
+      <div class="cw-trust-item">
+        <svg class="cw-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        24/7 CUSTOMER SUPPORT
+      </div>
+      <div class="cw-trust-item">
+        <svg class="cw-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+        </svg>
+        30-DAY EASY RETURNS
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="cw-section" id="cw-categories">
+    <div class="cw-section-header cw-reveal">
+      <div class="cw-eyebrow">✦ SHOP BY CATEGORY</div>
+      <h2 class="cw-section-title">Find Your Perfect Kitchen Companion</h2>
+      <p class="cw-section-desc">From sizzling woks to slow-simmering casseroles — explore every corner of the kitchen.</p>
+    </div>
+    <div class="cw-cats-grid">
+
+      <!-- Category 1 -->
+      <a href="{{ section.settings.cat1_url | default: '#' }}" class="cw-cat-card c1 cw-reveal" style="--delay:0.1s">
+        {%- if section.settings.cat1_image != blank -%}
+          <img class="cw-cat-img" src="{{ section.settings.cat1_image | image_url: width: 800 }}" alt="{{ section.settings.cat1_name | default: 'Non-Stick Cookware' }}" loading="lazy">
+        {%- else -%}
+          <div class="cw-cat-img" style="background:linear-gradient(135deg,#6B1A1A,#B8923A);display:flex;align-items:center;justify-content:center;font-size:80px;">🍳</div>
+        {%- endif -%}
+        <div class="cw-cat-grad"></div>
+        <div class="cw-cat-body">
+          <span class="cw-cat-tag">{{ section.settings.cat1_tag | default: 'BESTSELLER' }}</span>
+          <div class="cw-cat-name">{{ section.settings.cat1_name | default: 'Non-Stick Cookware' }}</div>
+          <div class="cw-cat-sub">{{ section.settings.cat1_sub | default: '48 Products' }}</div>
+          <div class="cw-cat-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Category 2 -->
+      <a href="{{ section.settings.cat2_url | default: '#' }}" class="cw-cat-card c2 cw-reveal" style="--delay:0.2s">
+        {%- if section.settings.cat2_image != blank -%}
+          <img class="cw-cat-img" src="{{ section.settings.cat2_image | image_url: width: 800 }}" alt="{{ section.settings.cat2_name | default: 'Stainless Steel' }}" loading="lazy">
+        {%- else -%}
+          <div class="cw-cat-img" style="background:linear-gradient(135deg,#1A3A2A,#2E7D52);display:flex;align-items:center;justify-content:center;font-size:80px;">🥘</div>
+        {%- endif -%}
+        <div class="cw-cat-grad"></div>
+        <div class="cw-cat-body">
+          <span class="cw-cat-tag">{{ section.settings.cat2_tag | default: 'NEW ARRIVALS' }}</span>
+          <div class="cw-cat-name">{{ section.settings.cat2_name | default: 'Stainless Steel' }}</div>
+          <div class="cw-cat-sub">{{ section.settings.cat2_sub | default: '32 Products' }}</div>
+          <div class="cw-cat-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Category 3 -->
+      <a href="{{ section.settings.cat3_url | default: '#' }}" class="cw-cat-card c3 cw-reveal" style="--delay:0.3s">
+        {%- if section.settings.cat3_image != blank -%}
+          <img class="cw-cat-img" src="{{ section.settings.cat3_image | image_url: width: 800 }}" alt="{{ section.settings.cat3_name | default: 'Cast Iron' }}" loading="lazy">
+        {%- else -%}
+          <div class="cw-cat-img" style="background:linear-gradient(135deg,#1A1A5A,#2E4D8A);display:flex;align-items:center;justify-content:center;font-size:80px;">🫕</div>
+        {%- endif -%}
+        <div class="cw-cat-grad"></div>
+        <div class="cw-cat-body">
+          <span class="cw-cat-tag">{{ section.settings.cat3_tag | default: 'PREMIUM' }}</span>
+          <div class="cw-cat-name">{{ section.settings.cat3_name | default: 'Cast Iron' }}</div>
+          <div class="cw-cat-sub">{{ section.settings.cat3_sub | default: '24 Products' }}</div>
+          <div class="cw-cat-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS ===== -->
+  <section class="cw-section" id="cw-products" style="background:#fff; padding-top:24px;">
+    <div class="cw-section-header cw-reveal">
+      <div class="cw-eyebrow">✦ FEATURED PRODUCTS</div>
+      <h2 class="cw-section-title">Top Picks for Your Kitchen</h2>
+      <p class="cw-section-desc">Handpicked by our culinary experts — quality you can taste.</p>
+    </div>
+
+    <!-- Filter buttons (visual only — link to real collections below) -->
+    <div class="cw-products-wrap">
+      <div class="cw-filter-row">
+        <button class="cw-filter-btn active" onclick="cwFilter(this,'all')">All Products</button>
+        <button class="cw-filter-btn" onclick="cwFilter(this,'nonstick')">Non-Stick</button>
+        <button class="cw-filter-btn" onclick="cwFilter(this,'steel')">Steel</button>
+        <button class="cw-filter-btn" onclick="cwFilter(this,'castiron')">Cast Iron</button>
+        <button class="cw-filter-btn" onclick="cwFilter(this,'sets')">Cookware Sets</button>
+      </div>
+
+      <div class="cw-products-grid">
+
+        <!-- Product 1 -->
+        <div class="cw-prod-card cw-reveal" data-cat="nonstick">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p1_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p1_image | image_url: width: 600 }}" alt="{{ section.settings.p1_name | default: 'Premium Non-Stick Frypan 28cm' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#F5F0E8,#E8D8B0);display:flex;align-items:center;justify-content:center;font-size:72px;">🍳</div>
+            {%- endif -%}
+            <span class="cw-prod-badge hot">HOT</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Non-Stick</div>
+            <div class="cw-prod-name">{{ section.settings.p1_name | default: 'Premium Non-Stick Frypan 28cm' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★★</span>
+              <span class="cw-rating-count">(128)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p1_price | default: '₹1,299' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p1_compare_price | default: '₹1,999' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="cw-prod-card cw-reveal" data-cat="sets">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p2_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p2_image | image_url: width: 600 }}" alt="{{ section.settings.p2_name | default: '5-Piece Stainless Cookware Set' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#E8F0F5,#C8D8E8);display:flex;align-items:center;justify-content:center;font-size:72px;">🥘</div>
+            {%- endif -%}
+            <span class="cw-prod-badge sale">SAVE 35%</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Cookware Sets</div>
+            <div class="cw-prod-name">{{ section.settings.p2_name | default: '5-Piece Stainless Cookware Set' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★☆</span>
+              <span class="cw-rating-count">(84)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p2_price | default: '₹3,999' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p2_compare_price | default: '₹6,199' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="cw-prod-card cw-reveal" data-cat="castiron">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p3_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p3_image | image_url: width: 600 }}" alt="{{ section.settings.p3_name | default: 'Cast Iron Kadai 26cm' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#2A2A2A,#5A3A1A);display:flex;align-items:center;justify-content:center;font-size:72px;">🫕</div>
+            {%- endif -%}
+            <span class="cw-prod-badge new">NEW</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Cast Iron</div>
+            <div class="cw-prod-name">{{ section.settings.p3_name | default: 'Cast Iron Kadai 26cm' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★★</span>
+              <span class="cw-rating-count">(203)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p3_price | default: '₹2,149' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p3_compare_price | default: '₹2,799' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="cw-prod-card cw-reveal" data-cat="steel">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p4_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p4_image | image_url: width: 600 }}" alt="{{ section.settings.p4_name | default: 'Tri-Ply Steel Pressure Cooker 5L' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#D8E8E8,#A8C8D0);display:flex;align-items:center;justify-content:center;font-size:72px;">🫙</div>
+            {%- endif -%}
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Stainless Steel</div>
+            <div class="cw-prod-name">{{ section.settings.p4_name | default: 'Tri-Ply Steel Pressure Cooker 5L' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★☆</span>
+              <span class="cw-rating-count">(57)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p4_price | default: '₹2,599' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p4_compare_price | default: '₹3,299' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="cw-prod-card cw-reveal" data-cat="nonstick">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p5_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p5_image | image_url: width: 600 }}" alt="{{ section.settings.p5_name | default: 'Granite Coated Wok 30cm' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#4A3A2A,#8A6A3A);display:flex;align-items:center;justify-content:center;font-size:72px;">🍲</div>
+            {%- endif -%}
+            <span class="cw-prod-badge sale">SALE</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Non-Stick</div>
+            <div class="cw-prod-name">{{ section.settings.p5_name | default: 'Granite Coated Wok 30cm' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★★</span>
+              <span class="cw-rating-count">(167)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p5_price | default: '₹999' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p5_compare_price | default: '₹1,599' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="cw-prod-card cw-reveal" data-cat="sets">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p6_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p6_image | image_url: width: 600 }}" alt="{{ section.settings.p6_name | default: '7-Piece Premium Cookware Set' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#3A1A3A,#7A3A5A);display:flex;align-items:center;justify-content:center;font-size:72px;">🧑‍🍳</div>
+            {%- endif -%}
+            <span class="cw-prod-badge hot">POPULAR</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Cookware Sets</div>
+            <div class="cw-prod-name">{{ section.settings.p6_name | default: '7-Piece Premium Cookware Set' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★★</span>
+              <span class="cw-rating-count">(312)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p6_price | default: '₹5,499' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p6_compare_price | default: '₹8,999' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="cw-prod-card cw-reveal" data-cat="castiron">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p7_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p7_image | image_url: width: 600 }}" alt="{{ section.settings.p7_name | default: 'Enameled Cast Iron Dutch Oven' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#3A1A0A,#6B3A1A);display:flex;align-items:center;justify-content:center;font-size:72px;">🫕</div>
+            {%- endif -%}
+            <span class="cw-prod-badge new">NEW</span>
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Cast Iron</div>
+            <div class="cw-prod-name">{{ section.settings.p7_name | default: 'Enameled Cast Iron Dutch Oven' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★☆</span>
+              <span class="cw-rating-count">(89)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p7_price | default: '₹3,249' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p7_compare_price | default: '₹4,199' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="cw-prod-card cw-reveal" data-cat="steel">
+          <div class="cw-prod-img-wrap">
+            {%- if section.settings.p8_image != blank -%}
+              <img class="cw-prod-img" src="{{ section.settings.p8_image | image_url: width: 600 }}" alt="{{ section.settings.p8_name | default: 'Stainless Sauce Pan with Lid' }}">
+            {%- else -%}
+              <div class="cw-prod-img" style="background:linear-gradient(135deg,#C8D8E8,#90A8C0);display:flex;align-items:center;justify-content:center;font-size:72px;">🍵</div>
+            {%- endif -%}
+            <button class="cw-prod-wishlist" aria-label="Add to wishlist">♡</button>
+          </div>
+          <div class="cw-prod-body">
+            <div class="cw-prod-cat">Stainless Steel</div>
+            <div class="cw-prod-name">{{ section.settings.p8_name | default: 'Stainless Sauce Pan with Lid' }}</div>
+            <div class="cw-prod-rating">
+              <span class="cw-stars">★★★★★</span>
+              <span class="cw-rating-count">(44)</span>
+            </div>
+            <div class="cw-prod-price-row">
+              <div>
+                <div class="cw-prod-price">{{ section.settings.p8_price | default: '₹849' }}</div>
+                <div class="cw-prod-price-old">{{ section.settings.p8_compare_price | default: '₹1,199' }}</div>
+              </div>
+              <button class="cw-prod-add" aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cw-products-grid -->
+
+      <!-- View All CTA -->
+      <div style="text-align:center;margin-top:48px;">
+        <a href="{{ section.settings.view_all_url | default: '/collections/all' }}" class="cw-btn-gold" style="font-size:15px;padding:16px 40px;">
+          View All Cookware
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <div class="cw-features">
+    <div class="cw-features-grid">
+      <div class="cw-feat-item cw-reveal">
+        <div class="cw-feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="cw-feat-title">PFOA-Free Guaranteed</div>
+        <div class="cw-feat-desc">All our non-stick cookware is certified PFOA-free and completely safe for your family.</div>
+      </div>
+      <div class="cw-feat-item cw-reveal">
+        <div class="cw-feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+        </div>
+        <div class="cw-feat-title">Heat Distribution</div>
+        <div class="cw-feat-desc">Advanced tri-ply construction ensures even heat distribution across every surface.</div>
+      </div>
+      <div class="cw-feat-item cw-reveal">
+        <div class="cw-feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <div class="cw-feat-title">Induction Compatible</div>
+        <div class="cw-feat-desc">Works on all stovetops — induction, gas, electric and ceramic — for versatile cooking.</div>
+      </div>
+      <div class="cw-feat-item cw-reveal">
+        <div class="cw-feat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="cw-feat-title">Lifetime Warranty</div>
+        <div class="cw-feat-desc">We stand behind every piece. Premium cookware backed by our lifetime quality promise.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <div class="cw-newsletter">
+    <div class="cw-newsletter-inner cw-reveal">
+      <div class="cw-eyebrow" style="text-align:center;">✦ STAY IN THE LOOP</div>
+      <div class="cw-newsletter-title">Get Exclusive Cookware Deals</div>
+      <div class="cw-newsletter-sub">Subscribe for early access to sales, new arrivals, and chef-tested recipes.</div>
+      <form class="cw-newsletter-form" onsubmit="return false;">
+        <input class="cw-newsletter-input" type="email" placeholder="Enter your email address" aria-label="Email address">
+        <button class="cw-newsletter-btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+</div><!-- /cw-page -->
+
+<script>
+/* ---- filter ---- */
+function cwFilter(btn, cat) {
+  document.querySelectorAll('.cw-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cw-prod-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+/* ---- scroll reveal ---- */
+(function() {
+  var els = document.querySelectorAll('.cw-reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { io.observe(el); });
+  } else {
+    els.forEach(function(el) { el.classList.add('visible'); });
+  }
+})();
+
+/* ---- wishlist toggle ---- */
+document.querySelectorAll('.cw-prod-wishlist').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    this.textContent = this.textContent === '♡' ? '♥' : '♡';
+    this.style.color = this.textContent === '♥' ? '#E8401A' : '#B8923A';
+  });
+});
+
+/* ---- smooth scroll ---- */
+document.querySelectorAll('a[href^="#cw-"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "DEEDAP Cookware",
+  "tag": "section",
+  "class": "section-deedap-cookware",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🔥 Hero Banner"
+    },
+    { "type": "text",       "id": "hero_title",     "label": "Hero Title",           "default": "Cook With" },
+    { "type": "text",       "id": "hero_highlight",  "label": "Hero Highlighted Text","default": "Passion & Precision" },
+    { "type": "textarea",   "id": "hero_subtitle",   "label": "Hero Subtitle",        "default": "Discover our curated collection of premium cookware — from everyday essentials to professional-grade cooksets trusted by home chefs worldwide." },
+    { "type": "url",        "id": "hero_secondary_url","label": "Secondary Button URL","info": "Leave blank to scroll to categories" },
+
+    {
+      "type": "header",
+      "content": "📂 Category 1 — Non-Stick"
+    },
+    { "type": "image_picker","id": "cat1_image", "label": "Category 1 Image" },
+    { "type": "text",       "id": "cat1_name",  "label": "Category 1 Name",  "default": "Non-Stick Cookware" },
+    { "type": "text",       "id": "cat1_tag",   "label": "Category 1 Badge", "default": "BESTSELLER" },
+    { "type": "text",       "id": "cat1_sub",   "label": "Category 1 Subtitle","default": "48 Products" },
+    { "type": "url",        "id": "cat1_url",   "label": "Category 1 Link" },
+
+    {
+      "type": "header",
+      "content": "📂 Category 2 — Stainless Steel"
+    },
+    { "type": "image_picker","id": "cat2_image", "label": "Category 2 Image" },
+    { "type": "text",       "id": "cat2_name",  "label": "Category 2 Name",  "default": "Stainless Steel" },
+    { "type": "text",       "id": "cat2_tag",   "label": "Category 2 Badge", "default": "NEW ARRIVALS" },
+    { "type": "text",       "id": "cat2_sub",   "label": "Category 2 Subtitle","default": "32 Products" },
+    { "type": "url",        "id": "cat2_url",   "label": "Category 2 Link" },
+
+    {
+      "type": "header",
+      "content": "📂 Category 3 — Cast Iron"
+    },
+    { "type": "image_picker","id": "cat3_image", "label": "Category 3 Image" },
+    { "type": "text",       "id": "cat3_name",  "label": "Category 3 Name",  "default": "Cast Iron" },
+    { "type": "text",       "id": "cat3_tag",   "label": "Category 3 Badge", "default": "PREMIUM" },
+    { "type": "text",       "id": "cat3_sub",   "label": "Category 3 Subtitle","default": "24 Products" },
+    { "type": "url",        "id": "cat3_url",   "label": "Category 3 Link" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 1"
+    },
+    { "type": "image_picker","id": "p1_image",         "label": "Product 1 Image" },
+    { "type": "text",        "id": "p1_name",          "label": "Product 1 Name",          "default": "Premium Non-Stick Frypan 28cm" },
+    { "type": "text",        "id": "p1_price",         "label": "Product 1 Price",         "default": "₹1,299" },
+    { "type": "text",        "id": "p1_compare_price", "label": "Product 1 Compare Price", "default": "₹1,999" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 2"
+    },
+    { "type": "image_picker","id": "p2_image",         "label": "Product 2 Image" },
+    { "type": "text",        "id": "p2_name",          "label": "Product 2 Name",          "default": "5-Piece Stainless Cookware Set" },
+    { "type": "text",        "id": "p2_price",         "label": "Product 2 Price",         "default": "₹3,999" },
+    { "type": "text",        "id": "p2_compare_price", "label": "Product 2 Compare Price", "default": "₹6,199" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 3"
+    },
+    { "type": "image_picker","id": "p3_image",         "label": "Product 3 Image" },
+    { "type": "text",        "id": "p3_name",          "label": "Product 3 Name",          "default": "Cast Iron Kadai 26cm" },
+    { "type": "text",        "id": "p3_price",         "label": "Product 3 Price",         "default": "₹2,149" },
+    { "type": "text",        "id": "p3_compare_price", "label": "Product 3 Compare Price", "default": "₹2,799" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 4"
+    },
+    { "type": "image_picker","id": "p4_image",         "label": "Product 4 Image" },
+    { "type": "text",        "id": "p4_name",          "label": "Product 4 Name",          "default": "Tri-Ply Steel Pressure Cooker 5L" },
+    { "type": "text",        "id": "p4_price",         "label": "Product 4 Price",         "default": "₹2,599" },
+    { "type": "text",        "id": "p4_compare_price", "label": "Product 4 Compare Price", "default": "₹3,299" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 5"
+    },
+    { "type": "image_picker","id": "p5_image",         "label": "Product 5 Image" },
+    { "type": "text",        "id": "p5_name",          "label": "Product 5 Name",          "default": "Granite Coated Wok 30cm" },
+    { "type": "text",        "id": "p5_price",         "label": "Product 5 Price",         "default": "₹999" },
+    { "type": "text",        "id": "p5_compare_price", "label": "Product 5 Compare Price", "default": "₹1,599" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 6"
+    },
+    { "type": "image_picker","id": "p6_image",         "label": "Product 6 Image" },
+    { "type": "text",        "id": "p6_name",          "label": "Product 6 Name",          "default": "7-Piece Premium Cookware Set" },
+    { "type": "text",        "id": "p6_price",         "label": "Product 6 Price",         "default": "₹5,499" },
+    { "type": "text",        "id": "p6_compare_price", "label": "Product 6 Compare Price", "default": "₹8,999" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 7"
+    },
+    { "type": "image_picker","id": "p7_image",         "label": "Product 7 Image" },
+    { "type": "text",        "id": "p7_name",          "label": "Product 7 Name",          "default": "Enameled Cast Iron Dutch Oven" },
+    { "type": "text",        "id": "p7_price",         "label": "Product 7 Price",         "default": "₹3,249" },
+    { "type": "text",        "id": "p7_compare_price", "label": "Product 7 Compare Price", "default": "₹4,199" },
+
+    {
+      "type": "header",
+      "content": "🛍 Product 8"
+    },
+    { "type": "image_picker","id": "p8_image",         "label": "Product 8 Image" },
+    { "type": "text",        "id": "p8_name",          "label": "Product 8 Name",          "default": "Stainless Sauce Pan with Lid" },
+    { "type": "text",        "id": "p8_price",         "label": "Product 8 Price",         "default": "₹849" },
+    { "type": "text",        "id": "p8_compare_price", "label": "Product 8 Compare Price", "default": "₹1,199" },
+
+    {
+      "type": "header",
+      "content": "🔗 View All Button"
+    },
+    { "type": "url",  "id": "view_all_url", "label": "View All Link", "info": "Link to your full cookware collection" }
+  ],
+  "presets": [
+    { "name": "DEEDAP Cookware" }
+  ]
+}
+{% endschema %}
