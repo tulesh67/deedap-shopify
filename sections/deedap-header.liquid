@@ -15,7 +15,7 @@
     margin: 0 !important;
     padding: 0 !important;
     display: block !important;
-    background: #ffffff !important;
+    background: #F7F1E3 !important;
   }
   .dd-na,
   header.dd-na {
@@ -24,7 +24,7 @@
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: #ffffff !important;
+    background: #F7F1E3 !important;
   }
   .dd-nav2 {
     width: 100% !important;
@@ -45,10 +45,11 @@
     justify-content: space-between !important;
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 84px !important;
     padding: 8px 32px 7px !important;
     box-sizing: border-box !important;
     gap: 20px !important;
-    background: #ffffff !important;
+    background: #F7F1E3 !important;
     border-bottom: 1px solid rgba(20, 17, 12, 0.06) !important;
   }
 
@@ -56,12 +57,20 @@
     display: inline-flex !important;
     align-items: center !important;
     flex-shrink: 0 !important;
+    width: 190px !important;
+    height: auto !important;
     font-size: 26px !important;
     letter-spacing: 0.3em !important;
     font-weight: 700 !important;
     color: #14110C !important;
     text-decoration: none !important;
     font-family: 'Syne', serif, system-ui !important;
+  }
+
+  .dd-logo-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
   /* Right corner group: Search Bar + Account + Bag */
@@ -267,6 +276,7 @@
       gap: 12px !important;
     }
     .dd-logo-wrap {
+      width: 145px !important;
       font-size: 20px !important;
     }
     .dd-nsearch-corner {
@@ -292,11 +302,7 @@
     <!-- TOP ROW: Logo on Left, Search Bar & Bag in Right Corner -->
     <div class="dd-nav2-top">
       <a href="{{ routes.root_url }}" class="dd-serif dd-logo dd-logo-wrap">
-        {%- if section.settings.logo != blank -%}
-          {{ section.settings.logo | image_url: width: 350 | image_tag: loading: 'eager', alt: shop.name, style: 'height:30px;width:auto' }}
-        {%- else -%}
-          {{ section.settings.logo_text | default: shop.name | upcase }}<span style="color:#B8923F"> &middot;</span>
-        {%- endif -%}
+        <img src="{{ 'deedap-logo-maroon.png' | asset_url }}" alt="{{ shop.name | escape }}" class="dd-logo-image" width="1314" height="440" fetchpriority="high">
       </a>
 
       <!-- Right Corner Controls: Search Bar + Account + Bag -->
