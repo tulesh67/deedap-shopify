@@ -1,0 +1,87 @@
+{%- comment -%}
+  One product tile (portrait card) with QuickView & Direct Buy support.
+  Params: product, tag (pill text), tint (placeholder colour), show_cat (bool), cat_label, cat_color
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign alt_text = product.featured_image.alt | default: product.title
+  assign tint_color = tint | default: '#F4E4CB'
+  assign prod_desc = product.description | strip_html | truncatewords: 35
+  if prod_desc == blank
+    assign prod_desc = 'Verified physical discovery inspected for structural fidelity, craftsmanship authenticity, and daily wear durability.'
+  endif
+-%}
+<article
+  class="dd-sq"
+  data-qv-trigger="true"
+  data-title="{{ product.title | escape }}"
+  data-price="{{ product.price | money }}"
+  data-category="{{ product.type | default: 'Curated Department' | escape }}"
+  data-color="{{ cat_color | default: '#96752C' }}"
+  data-description="{{ prod_desc | escape }}"
+  data-image="{{ product.featured_image | image_url: width: 900 }}"
+  data-variant-id="{{ variant.id }}"
+  data-product-url="{{ product.url }}"
+  style="cursor: pointer;"
+>
+  <div class="dd-sqimg{% unless product.featured_image %} dd-stripe{% endunless %}" style="background:{{ tint_color }}">
+    <a class="dd-sq-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true" data-qv-trigger="true">
+      <span class="dd-zoom">
+        {%- if product.featured_image -%}
+          {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 480, 640', sizes: '(min-width: 1290px) 235px, (min-width: 750px) 22vw, 60vw', alt: alt_text }}
+        {%- else -%}
+          {%- liquid
+            assign p_low = product.title | downcase
+            assign p_t_low = product.type | downcase
+            assign def_img = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+            if p_low contains 'tech' or p_low contains 'adapter' or p_t_low contains 'tech' or p_t_low contains 'electr'
+              assign def_img = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'earbud' or p_low contains 'audio'
+              assign def_img = 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'honey' or p_low contains 'oil' or p_t_low contains 'organ'
+              assign def_img = 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'ring' or p_low contains 'diamond' or p_t_low contains 'jewel'
+              assign def_img = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'skillet' or p_low contains 'pan' or p_t_low contains 'cook'
+              assign def_img = 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'bag' or p_low contains 'tote' or p_t_low contains 'bag'
+              assign def_img = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'
+            elsif p_low contains 'belt' or p_low contains 'wallet' or p_t_low contains 'access'
+              assign def_img = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop'
+            endif
+          -%}
+          <img src="{{ def_img }}" alt="{{ product.title | escape }}" loading="lazy" width="600" height="600" style="width:100%;height:100%;object-fit:cover;display:block">
+        {%- endif -%}
+      </span>
+    </a>
+    {%- if product.available -%}
+      {%- if tag != blank -%}<span class="dd-pill">{{ tag }}</span>{%- endif -%}
+    {%- else -%}
+      <span class="dd-pill is-sold">Sold out</span>
+    {%- endif -%}
+    {%- if product.available and product.has_only_default_variant -%}
+      <button class="dd-addb dd-sqadd" type="button" data-dd-add data-variant-id="{{ variant.id }}" data-product-url="{{ product.url }}" aria-pressed="false" aria-label="Add {{ product.title | escape }} to bag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      </button>
+    {%- elsif product.available -%}
+      <button class="dd-addb dd-sqadd" type="button" data-dd-add data-variant-id="{{ variant.id }}" data-product-url="{{ product.url }}" aria-label="Add {{ product.title | escape }} to bag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      </button>
+    {%- else -%}
+      <button class="dd-addb dd-sqadd" type="button" disabled aria-label="{{ product.title | escape }} is sold out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    {%- endif -%}
+  </div>
+  <div class="dd-sq-body">
+    {%- if show_cat and cat_label != blank -%}
+      <div class="dd-sq-cat"><i style="background:{{ cat_color | default: '#B8923F' }}"></i><span>{{ cat_label }}</span></div>
+    {%- endif -%}
+    <h3><a href="{{ product.url }}" data-qv-trigger="true" style="color:inherit;text-decoration:none">{{ product.title }}</a></h3>
+    <div class="dd-price">
+      {%- if product.price_varies -%}From {% endif -%}
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
+    </div>
+  </div>
+</article>

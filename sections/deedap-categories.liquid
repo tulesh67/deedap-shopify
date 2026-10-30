@@ -1,0 +1,569 @@
+<style>
+  /* DEEDAP — Curated Departments Horizontal End-to-End Scroller */
+  #sourcing-departments,
+  .template-index #sourcing-departments {
+    max-width: 1440px !important;
+    width: 100% !important;
+    margin: 40px auto 90px !important;
+    padding: 0 32px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    display: block !important;
+    clear: both !important;
+  }
+
+  #sourcing-departments .deedap-section-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px solid rgba(20, 17, 12, 0.08) !important;
+    width: 100% !important;
+  }
+
+  #sourcing-departments .deedap-kicker {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: #96752C !important;
+    margin-bottom: 6px !important;
+  }
+
+  #sourcing-departments .deedap-heading-xl {
+    font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: #14110C !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Scroller Controls Header Right */
+  .deedap-scroller-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .deedap-scroller-hint {
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #7A7468 !important;
+    margin-right: 6px !important;
+  }
+
+  .deedap-scroll-btn {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    border: 1px solid #dcd7ce !important;
+    color: #14110C !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.22s ease !important;
+    padding: 0 !important;
+  }
+
+  .deedap-scroll-btn:hover {
+    background: #14110C !important;
+    color: #F4D98F !important;
+    border-color: #14110C !important;
+    transform: scale(1.08) !important;
+  }
+
+  .deedap-scroll-btn:active {
+    transform: scale(0.95) !important;
+  }
+
+  /* Exactly 1 Single Horizontal Row — NO Second Row Ever! */
+  .deedap-dept-scroller-wrap {
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .deedap-dept-scroller {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 22px !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 10px 4px 24px 4px !important;
+    margin: 0 !important;
+    list-style: none !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #B8923F #f0f0f0 !important;
+  }
+
+  .deedap-dept-scroller::-webkit-scrollbar {
+    height: 6px !important;
+  }
+
+  .deedap-dept-scroller::-webkit-scrollbar-track {
+    background: #f0ede6 !important;
+    border-radius: 999px !important;
+  }
+
+  .deedap-dept-scroller::-webkit-scrollbar-thumb {
+    background: #B8923F !important;
+    border-radius: 999px !important;
+  }
+
+  /* Big Vertical Rectangle Card — Exactly 4 Visible in a Row on Desktop */
+  .deedap-dept-card,
+  .pod-span-7,
+  .pod-span-5,
+  .pod-span-4,
+  .pod-span-6,
+  .pod-span-12 {
+    flex: 0 0 calc((100% - (3 * 22px)) / 4) !important;
+    min-width: calc((100% - (3 * 22px)) / 4) !important;
+    max-width: calc((100% - (3 * 22px)) / 4) !important;
+    grid-column: unset !important;
+    scroll-snap-align: start !important;
+    background: #ffffff !important;
+    border: 2.5px solid #14110C !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+    color: #14110C !important;
+    box-shadow: 0 4px 18px rgba(20, 17, 12, 0.05) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+  }
+
+  .deedap-dept-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 36px rgba(20, 17, 12, 0.12) !important;
+    border-color: #B8923F !important;
+  }
+
+  /* Big Vertical Image: Tall Rectangle (340px) with object-fit: cover */
+  .deedap-dept-media {
+    width: 100% !important;
+    height: 340px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: #f7f6f2 !important;
+  }
+
+  .deedap-dept-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  }
+
+  .deedap-dept-card:hover .deedap-dept-media img {
+    transform: scale(1.06) !important;
+  }
+
+  /* Department Title: Bold, Elegant, Cleanly Centered */
+  .deedap-dept-title {
+    font-family: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 16.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.35 !important;
+    color: #14110C !important;
+    margin: 0 !important;
+    padding: 18px 16px 20px !important;
+    text-align: center !important;
+    transition: color 0.2s ease !important;
+    min-height: 64px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .deedap-dept-card:hover .deedap-dept-title {
+    color: #96752C !important;
+  }
+
+  /* Responsive Widths for 1-Row Scrolling */
+  @media screen and (max-width: 1200px) {
+    .deedap-dept-card,
+    .pod-span-7,
+    .pod-span-5,
+    .pod-span-4,
+    .pod-span-6,
+    .pod-span-12 {
+      flex: 0 0 calc((100% - (2 * 18px)) / 3) !important;
+      min-width: calc((100% - (2 * 18px)) / 3) !important;
+      max-width: calc((100% - (2 * 18px)) / 3) !important;
+    }
+    .deedap-dept-media {
+      height: 310px !important;
+    }
+  }
+
+  @media screen and (max-width: 820px) {
+    .deedap-dept-card,
+    .pod-span-7,
+    .pod-span-5,
+    .pod-span-4,
+    .pod-span-6,
+    .pod-span-12 {
+      flex: 0 0 calc((100% - 16px) / 2) !important;
+      min-width: calc((100% - 16px) / 2) !important;
+      max-width: calc((100% - 16px) / 2) !important;
+    }
+    .deedap-dept-media {
+      height: 280px !important;
+    }
+    .deedap-dept-title {
+      font-size: 15px !important;
+      padding: 14px 12px 16px !important;
+      min-height: 56px !important;
+    }
+    .deedap-scroller-hint {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    #sourcing-departments,
+    .template-index #sourcing-departments {
+      padding: 0 16px !important;
+      margin: 30px auto 60px !important;
+    }
+    .deedap-dept-card,
+    .pod-span-7,
+    .pod-span-5,
+    .pod-span-4,
+    .pod-span-6,
+    .pod-span-12 {
+      flex: 0 0 78vw !important;
+      min-width: 78vw !important;
+      max-width: 78vw !important;
+    }
+    .deedap-dept-media {
+      height: 290px !important;
+    }
+    .deedap-dept-title {
+      font-size: 14.5px !important;
+      padding: 14px 10px !important;
+    }
+    #sourcing-departments .deedap-heading-xl {
+      font-size: 22px !important;
+    }
+  }
+</style>
+
+<section class="page-width" id="sourcing-departments">
+  <div class="deedap-section-header">
+    <div>
+      <div class="deedap-kicker">{{ section.settings.kicker | default: '01 // Sourcing Directory' }}</div>
+      <h2 class="deedap-heading-xl">{{ section.settings.heading | default: 'Curated Departments' }}</h2>
+    </div>
+    <div class="deedap-scroller-controls">
+      <span class="deedap-scroller-hint">10 DEPARTMENTS &bull; SCROLL</span>
+      <button type="button" class="deedap-scroll-btn" id="deptScrollPrev" aria-label="Previous departments">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button type="button" class="deedap-scroll-btn" id="deptScrollNext" aria-label="Next departments">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="deedap-dept-scroller-wrap">
+    <div class="deedap-dept-scroller" id="deptScroller">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign current_collection = block.settings.collection
+            assign card_title = block.settings.custom_title
+            if card_title == blank and current_collection != blank
+              assign card_title = current_collection.title
+            endif
+            if card_title == blank
+              assign card_title = 'Curated Department'
+            endif
+
+            assign card_url = block.settings.custom_url
+            if card_url == blank and current_collection != blank
+              assign card_url = current_collection.url
+            endif
+            assign check_id = block.settings.anchor_id | downcase
+            if card_url == blank or card_url contains '#'
+              if check_id contains 'clothing' or check_id contains 'apparel' or check_id contains 'textile'
+                assign card_url = '/pages/textiles'
+              elsif check_id contains 'tech' or check_id contains 'electronic'
+                assign card_url = '/pages/electronics'
+              elsif check_id contains 'jewelry' or check_id contains 'jewel'
+                assign card_url = '/pages/jewelry'
+              elsif check_id contains 'accessor'
+                assign card_url = '/pages/accessories'
+              elsif check_id contains 'honey' or check_id contains 'organic' or check_id contains 'natural'
+                assign card_url = collections['raw-honey'].url | default: '/collections/raw-honey'
+              elsif check_id contains 'import' or check_id contains 'global'
+                assign card_url = collections['imported'].url | default: '/collections/imported'
+              elsif check_id contains 'essential' or check_id contains 'living'
+                assign card_url = collections['essentials'].url | default: '/collections/essentials'
+              elsif check_id contains 'cookware' or check_id contains 'kitchen'
+                assign card_url = collections['cookware'].url | default: '/collections/cookware'
+              elsif check_id contains 'gift' or check_id contains 'hamper'
+                assign card_url = collections['gift-hampers'].url | default: '/collections/gift-hampers'
+              elsif check_id contains 'bag' or check_id contains 'carry'
+                assign card_url = collections['carryout-bags'].url | default: '/collections/carryout-bags'
+              else
+                assign card_url = routes.all_products_collection_url
+              endif
+            endif
+
+            assign card_image = block.settings.image
+            if card_image == blank
+              assign card_image = block.settings.custom_image
+            endif
+            if card_image == blank and current_collection != blank and current_collection.featured_image != blank
+              assign card_image = current_collection.featured_image
+            endif
+
+            assign card_image_url = ''
+            if card_image != blank
+              assign card_image_url = card_image | image_url: width: 1200
+            elsif check_id contains 'clothing' or check_id contains 'apparel' or check_id contains 'textile'
+              assign card_image_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'tech' or check_id contains 'electronic'
+              assign card_image_url = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'jewelry' or check_id contains 'jewel'
+              assign card_image_url = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'honey' or check_id contains 'organic' or check_id contains 'natural'
+              assign card_image_url = 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'import' or check_id contains 'global'
+              assign card_image_url = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'essential' or check_id contains 'living'
+              assign card_image_url = 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'cookware' or check_id contains 'kitchen'
+              assign card_image_url = 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'gift' or check_id contains 'hamper'
+              assign card_image_url = 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'bag' or check_id contains 'carry'
+              assign card_image_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1000&auto=format&fit=crop'
+            elsif check_id contains 'accessor'
+              assign card_image_url = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=1000&auto=format&fit=crop'
+            else
+              assign card_image_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1000&auto=format&fit=crop'
+            endif
+          -%}
+
+          <a href="{{ card_url }}" class="deedap-dept-card" id="{{ block.settings.anchor_id | default: block.id | escape }}" {{ block.shopify_attributes }}>
+            <div class="deedap-dept-media">
+              <img src="{{ card_image_url }}" alt="{{ card_title | escape }}" loading="lazy" width="800" height="700">
+            </div>
+            <h3 class="deedap-dept-title">{{ card_title }}</h3>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Preset 10 Departments: Clean Big Vertical Rectangle Card (Image + Title ONLY) -->
+        <a href="/pages/textiles" class="deedap-dept-card" id="clothing">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1000&auto=format&fit=crop" alt="Clothing & Fine Textiles" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Clothing & Fine Textiles</h3>
+        </a>
+
+        <a href="/pages/electronics" class="deedap-dept-card" id="electronics">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=1000&auto=format&fit=crop" alt="Information & Technology" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Information & Technology</h3>
+        </a>
+
+        <a href="/collections/raw-honey" class="deedap-dept-card" id="honey">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=1000&auto=format&fit=crop" alt="Organic and Natural Products" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Organic & Natural Products</h3>
+        </a>
+
+        <a href="/collections/imported" class="deedap-dept-card" id="imported">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop" alt="Global Collections" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Global Collections</h3>
+        </a>
+
+        <a href="/collections/essentials" class="deedap-dept-card" id="essentials">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop" alt="Home & Everyday Essentials" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Home & Everyday Essentials</h3>
+        </a>
+
+        <a href="/pages/jewelry" class="deedap-dept-card" id="jewelry">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=1000&auto=format&fit=crop" alt="Jewellery" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Jewellery</h3>
+        </a>
+
+        <a href="/collections/cookware" class="deedap-dept-card" id="cookware">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop" alt="Cookware & Kitchenware" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Cookware & Kitchenware</h3>
+        </a>
+
+        <a href="/collections/gift-hampers" class="deedap-dept-card" id="gift-hampers">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop" alt="Gift Hampers" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Gift Hampers</h3>
+        </a>
+
+        <a href="/collections/carryout-bags" class="deedap-dept-card" id="carryout-bags">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1000&auto=format&fit=crop" alt="Carryout Bags" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Carryout Bags</h3>
+        </a>
+
+        <a href="/pages/accessories" class="deedap-dept-card" id="accessories">
+          <div class="deedap-dept-media">
+            <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=1000&auto=format&fit=crop" alt="Accessories" loading="lazy" width="800" height="700">
+          </div>
+          <h3 class="deedap-dept-title">Accessories</h3>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initDeptScroller() {
+      var scroller = document.getElementById('deptScroller');
+      var prevBtn = document.getElementById('deptScrollPrev');
+      var nextBtn = document.getElementById('deptScrollNext');
+
+      if (!scroller || !prevBtn || !nextBtn) return;
+
+      function getScrollStep() {
+        var card = scroller.querySelector('.deedap-dept-card');
+        if (!card) return scroller.clientWidth * 0.75;
+        var gap = 22;
+        return (card.offsetWidth + gap) * 2;
+      }
+
+      nextBtn.onclick = function(e) {
+        e.preventDefault();
+        scroller.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      };
+
+      prevBtn.onclick = function(e) {
+        e.preventDefault();
+        scroller.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      };
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDeptScroller);
+    } else {
+      initDeptScroller();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DEEDAP Sourcing Mosaic",
+  "tag": "section",
+  "class": "section-deedap-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Section Kicker",
+      "default": "01 // Sourcing Directory"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Curated Departments"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Header Badge",
+      "default": "10 CURATED CATEGORIES"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Department Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Shopify Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Background Image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title Override"
+        },
+        {
+          "type": "url",
+          "id": "custom_url",
+          "label": "Custom Link Override"
+        },
+        {
+          "type": "text",
+          "id": "anchor_id",
+          "label": "Storefront Anchor ID"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DEEDAP Sourcing Mosaic",
+      "blocks": [
+        { "type": "category_card", "settings": { "custom_title": "Clothing & Fine Textiles", "anchor_id": "clothing", "custom_url": "/pages/textiles" } },
+        { "type": "category_card", "settings": { "custom_title": "Information & Technology", "anchor_id": "electronics", "custom_url": "/pages/electronics" } },
+        { "type": "category_card", "settings": { "custom_title": "Organic and Natural Products", "anchor_id": "honey", "custom_url": "/collections/raw-honey" } },
+        { "type": "category_card", "settings": { "custom_title": "Global Collections", "anchor_id": "imported", "custom_url": "/collections/imported" } },
+        { "type": "category_card", "settings": { "custom_title": "Home & Everyday Essentials", "anchor_id": "essentials", "custom_url": "/collections/essentials" } },
+        { "type": "category_card", "settings": { "custom_title": "Jewellery", "anchor_id": "jewelry", "custom_url": "/pages/jewelry" } },
+        { "type": "category_card", "settings": { "custom_title": "Cookware & Kitchenware", "anchor_id": "cookware", "custom_url": "/collections/cookware" } },
+        { "type": "category_card", "settings": { "custom_title": "Gift Hampers", "anchor_id": "gift-hampers", "custom_url": "/collections/gift-hampers" } },
+        { "type": "category_card", "settings": { "custom_title": "Carryout Bags", "anchor_id": "carryout-bags", "custom_url": "/collections/carryout-bags" } },
+        { "type": "category_card", "settings": { "custom_title": "Accessories", "anchor_id": "accessories", "custom_url": "/pages/accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

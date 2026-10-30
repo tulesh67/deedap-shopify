@@ -1,0 +1,65 @@
+{% render 'deedap-assets' %}
+
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign dot_colors = section.settings.dot_colors | split: ','
+-%}
+
+<header class="dd-na" role="banner">
+  <nav class="dd-nav2" aria-label="Primary">
+    <div class="dd-nav2-top">
+      <a href="{{ routes.root_url }}" class="dd-serif dd-logo" style="font-size:28px;font-weight:700;letter-spacing:.34em;color:#14110C;text-decoration:none;flex-shrink:0">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'eager', alt: shop.name, style: 'height:36px;width:auto' }}
+        {%- else -%}
+          {{ section.settings.logo_text | default: shop.name | upcase }}<span style="color:#B8923F"> &middot;</span>
+        {%- endif -%}
+      </a>
+
+      <form class="dd-nsearch" action="{{ routes.search_url }}" method="get" role="search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7A5710" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+        <label class="dd-visually-hidden" for="dd-search-{{ section.id }}">Search</label>
+        <input id="dd-search-{{ section.id }}" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | escape }}" autocomplete="off">
+      </form>
+
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        <a href="{{ routes.account_url }}" class="dd-nico" aria-label="Account">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg>
+        </a>
+        {%- if section.settings.wishlist_url != blank -%}
+          <a href="{{ section.settings.wishlist_url }}" class="dd-nico" aria-label="Wishlist">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9.2C1.2 8.6 3 5 6.5 5c2 0 3.6 1.1 5.5 3 1.9-1.9 3.5-3 5.5-3C21 5 22.8 8.6 21.3 11.8 19 16.4 12 21 12 21z"></path></svg>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="dd-bagb" aria-label="Bag, {{ cart.item_count }} items">BAG<span data-dd-cart-count>{{ cart.item_count }}</span></a>
+      </div>
+    </div>
+
+    {%- if menu != blank and menu.links.size > 0 -%}
+      <ul class="dd-nav2-links">
+        {%- for link in menu.links -%}
+          {%- assign c = dot_colors[forloop.index0] | strip | default: '#B8923F' -%}
+          <li>
+            <a class="dd-navl" href="{{ link.url }}" style="--c:{{ c }}"{% if link.current %} aria-current="page"{% endif %}><i></i>{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Deedap · Header",
+  "tag": "header",
+  "class": "dd-header-section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image (optional)" },
+    { "type": "text", "id": "logo_text", "label": "Logo text (used when no image)", "default": "Deedap" },
+    { "type": "link_list", "id": "menu", "label": "Category menu", "default": "main-menu" },
+    { "type": "textarea", "id": "dot_colors", "label": "Dot colours, in menu order (comma separated hex)", "default": "#C2780C,#1E88C7,#B0541A,#6D3FD1,#0E8F6E,#8A6416,#D1334A,#C42B67,#1F9D6B,#4C3FD1" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search jewellery, textiles, tech…" },
+    { "type": "url", "id": "wishlist_url", "label": "Wishlist link (leave empty to hide the heart)" }
+  ]
+}
+{% endschema %}

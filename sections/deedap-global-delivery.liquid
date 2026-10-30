@@ -1,0 +1,42 @@
+{{ 'deedap-global-delivery.css' | asset_url | stylesheet_tag }}
+<section id="global-hero" class="global-hero-stage" aria-labelledby="global-hero-title">
+  <iframe
+    src="{{ 'global-delivery-animation.html' | asset_url }}"
+    title="Illustrative DEEDAP global route map"
+    class="global-hero-iframe"
+    scrolling="no"
+    loading="eager"
+    aria-hidden="true"
+    tabindex="-1">
+  </iframe>
+  <div class="global-hero-content">
+    <div class="global-hero-kicker"><span aria-hidden="true">✦</span> {{ section.settings.kicker | default: 'DEEDAP / Global sourcing' | escape }}</div>
+    <h1 id="global-hero-title">{{ section.settings.heading_line1 | default: 'Good finds,' | escape }}<br><em>{{ section.settings.heading_line2 | default: 'delivered with care.' | escape }}</em></h1>
+    <p>{{ section.settings.description | default: 'Explore our curated departments. Shipping availability and rates are confirmed at checkout for your delivery address.' | escape }}</p>
+    <div class="global-hero-actions">
+      <a href="{{ routes.root_url }}#sourcing-departments" class="global-hero-primary">{{ section.settings.primary_cta_label | default: 'Explore departments' | escape }} <span aria-hidden="true">↓</span></a>
+      <a href="{{ routes.account_url }}" class="global-hero-secondary">{{ section.settings.secondary_cta_label | default: 'Your orders' | escape }} <span aria-hidden="true">↗</span></a>
+      {%- if shop.shipping_policy.url != blank -%}
+        <a href="{{ shop.shipping_policy.url }}" class="global-hero-policy">Shipping policy <span aria-hidden="true">↗</span></a>
+      {%- endif -%}
+    </div>
+    <div class="global-hero-note"><span class="global-hero-note-dot" aria-hidden="true"></span> Delivery availability and rates are confirmed at checkout</div>
+  </div>
+  <div class="global-hero-map-caption">Illustrative global route map</div>
+</section>
+
+{% schema %}
+{
+  "name": "DEEDAP Global Delivery",
+  "tag": "section",
+  "class": "section-deedap-global-delivery",
+  "settings": [
+    {"type":"text","id":"kicker","label":"Eyebrow","default":"DEEDAP / Global sourcing"},
+    {"type":"text","id":"heading_line1","label":"Heading line 1","default":"Good finds,"},
+    {"type":"text","id":"heading_line2","label":"Heading line 2","default":"delivered with care."},
+    {"type":"textarea","id":"description","label":"Description","default":"Explore our curated departments. Shipping availability and rates are confirmed at checkout for your delivery address."},
+    {"type":"text","id":"primary_cta_label","label":"Primary action label","default":"Explore departments"},
+    {"type":"text","id":"secondary_cta_label","label":"Account action label","default":"Your orders"}
+  ]
+}
+{% endschema %}

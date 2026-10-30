@@ -1,0 +1,179 @@
+{% render 'deedap-assets' %}
+
+{%- liquid
+  assign col = section.settings.collection
+  assign heading = section.settings.title
+  if heading == blank and col != blank and col.title != blank
+    assign heading = col.title
+  endif
+  if heading == blank
+    assign heading = section.id | replace: 'row-', '' | replace: '-', ' ' | capitalize
+  endif
+
+  # Derive the exact category identifier for filtering and fallbacks
+  assign cat_key = heading | downcase
+  if cat_key contains 'cloth' or cat_key contains 'textil'
+    assign cat_type = 'clothing'
+  elsif cat_key contains 'tech' or cat_key contains 'electr' or cat_key contains 'information'
+    assign cat_type = 'tech'
+  elsif cat_key contains 'organ' or cat_key contains 'honey' or cat_key contains 'natur'
+    assign cat_type = 'organic'
+  elsif cat_key contains 'global' or cat_key contains 'import'
+    assign cat_type = 'global'
+  elsif cat_key contains 'essential' or cat_key contains 'living'
+    assign cat_type = 'essentials'
+  elsif cat_key contains 'jewel'
+    assign cat_type = 'jewellery'
+  elsif cat_key contains 'cook' or cat_key contains 'kitchen'
+    assign cat_type = 'cookware'
+  elsif cat_key contains 'hamper' or cat_key contains 'gift'
+    assign cat_type = 'hampers'
+  elsif cat_key contains 'bag' or cat_key contains 'carry'
+    assign cat_type = 'bags'
+  elsif cat_key contains 'access'
+    assign cat_type = 'accessories'
+  else
+    assign cat_type = section.id | downcase
+  endif
+
+  assign accent = section.settings.color
+-%}
+
+<section class="dd-na dd-sec dd-catsec" aria-label="{{ heading | escape }}" style="--c:{{ accent }}">
+  <div class="dd-wrap" style="padding:18px 0 4px">
+    <div class="dd-sh">
+      <div class="dd-sh-l">
+        <span class="dd-dot"></span>
+        <h2 class="dd-disp"><a href="{{ see_all_url }}" style="color:inherit;text-decoration:none">{{ heading }}</a></h2>
+        {%- if section.settings.subtitle != blank -%}
+          <span class="dd-rule"></span>
+          <span class="dd-sub">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+      </div>
+      {%- assign handle_check = col.handle | default: cat_type -%}
+      {%- if section.settings.custom_link != blank -%}
+        {%- assign see_all_url = section.settings.custom_link -%}
+      {%- elsif cat_type == 'clothing' -%}
+        {%- assign see_all_url = '/pages/textiles' -%}
+      {%- elsif cat_type == 'tech' -%}
+        {%- assign see_all_url = '/pages/electronics' -%}
+      {%- elsif cat_type == 'jewellery' -%}
+        {%- assign see_all_url = '/pages/jewelry' -%}
+      {%- elsif cat_type == 'accessories' -%}
+        {%- assign see_all_url = '/pages/accessories' -%}
+      {%- else -%}
+        {%- assign see_all_url = col.url | default: routes.all_products_collection_url -%}
+      {%- endif -%}
+      <a class="dd-seeall" href="{{ see_all_url | default: routes.all_products_collection_url }}">{{ section.settings.see_all_label | default: 'See all' }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+    </div>
+    <div class="dd-prog dd-prog-static" aria-hidden="true"><span></span></div>
+
+    <div class="dd-row">
+      {%- assign rendered_real_count = 0 -%}
+
+      <!-- 1. If section has an assigned collection with products -->
+      {%- if col != blank and col.products_count > 0 -%}
+        {%- for product in col.products limit: section.settings.limit -%}
+          {%- if forloop.first -%}{%- assign tag = section.settings.tag_first -%}{%- else -%}{%- assign tag = section.settings.tag_rest -%}{%- endif -%}
+          {% render 'deedap-tile', product: product, tag: tag, tint: section.settings.tint, show_cat: false %}
+          {%- assign rendered_real_count = rendered_real_count | plus: 1 -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- 2. Scan all products for matching department type/tags -->
+        {%- for prod in collections['all'].products -%}
+          {%- if rendered_real_count < section.settings.limit -%}
+            {%- assign p_type_low = prod.type | downcase -%}
+            {%- assign p_tags_low = prod.tags | join: ' ' | downcase -%}
+            {%- assign is_match = false -%}
+
+            {%- if cat_type == 'clothing' -%}
+              {%- if p_type_low contains 'cloth' or p_type_low contains 'textil' or p_type_low contains 'dress' or p_tags_low contains 'clothing' or p_tags_low contains 'textil' or p_tags_low contains 'shirt' or p_tags_low contains 'kurta' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'tech' -%}
+              {%- if p_type_low contains 'tech' or p_type_low contains 'electr' or p_tags_low contains 'technology' or p_tags_low contains 'electronics' or p_tags_low contains 'charger' or p_tags_low contains 'earbuds' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'organic' -%}
+              {%- if p_type_low contains 'organ' or p_type_low contains 'honey' or p_tags_low contains 'organic' or p_tags_low contains 'honey' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'jewellery' -%}
+              {%- if p_type_low contains 'jewel' or p_tags_low contains 'jewel' or p_tags_low contains 'ring' or p_tags_low contains 'necklace' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'cookware' -%}
+              {%- if p_type_low contains 'cook' or p_tags_low contains 'cookware' or p_tags_low contains 'kitchen' or p_tags_low contains 'skillet' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'hampers' -%}
+              {%- if p_type_low contains 'hamper' or p_type_low contains 'gift' or p_tags_low contains 'hamper' or p_tags_low contains 'gift' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'bags' -%}
+              {%- if p_type_low contains 'bag' or p_tags_low contains 'bag' or p_tags_low contains 'tote' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'accessories' -%}
+              {%- if p_type_low contains 'access' or p_tags_low contains 'accessories' or p_tags_low contains 'belt' or p_tags_low contains 'scarf' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'global' -%}
+              {%- if p_type_low contains 'global' or p_tags_low contains 'global' or p_tags_low contains 'import' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- elsif cat_type == 'essentials' -%}
+              {%- if p_type_low contains 'essential' or p_tags_low contains 'essential' -%}
+                {%- assign is_match = true -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if is_match -%}
+              {%- if rendered_real_count == 0 -%}{%- assign tag = section.settings.tag_first -%}{%- else -%}{%- assign tag = section.settings.tag_rest -%}{%- endif -%}
+              {% render 'deedap-tile', product: prod, tag: tag, tint: section.settings.tint, show_cat: false %}
+              {%- assign rendered_real_count = rendered_real_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      <!-- 3. If no matching real products exist yet, render that specific department curated items -->
+      {%- if rendered_real_count == 0 -%}
+        {%- assign lim = section.settings.limit | default: 5 | minus: 1 -%}
+        {%- for idx in (0..lim) -%}
+          {%- if idx == 0 -%}{%- assign tag = section.settings.tag_first -%}{%- else -%}{%- assign tag = section.settings.tag_rest -%}{%- endif -%}
+          {% render 'deedap-tile-fallback', cat_handle: cat_type, item_index: idx, tag: tag, tint: section.settings.tint, show_cat: false %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Deedap · Category row",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "title", "label": "Title (empty = collection title)" },
+    { "type": "text", "id": "subtitle", "label": "Tagline" },
+    { "type": "color", "id": "color", "label": "Accent colour", "default": "#B8923F" },
+    { "type": "color", "id": "tint", "label": "Placeholder colour (no product image)", "default": "#F4E4CB" },
+    { "type": "range", "id": "limit", "label": "Products shown", "min": 4, "max": 12, "step": 1, "default": 5 },
+    { "type": "text", "id": "tag_first", "label": "Pill on the first tile", "default": "NEW" },
+    { "type": "text", "id": "tag_rest", "label": "Pill on the other tiles", "default": "FEATURED", "info": "Leave empty for no pill." },
+    { "type": "text", "id": "see_all_label", "label": "See-all link text", "default": "See all" },
+    { "type": "url", "id": "custom_link", "label": "Custom Landing Page Link (optional)", "info": "e.g. /pages/textiles to link directly to a rich landing page" }
+  ],
+  "presets": [
+    {
+      "name": "Deedap · Category row",
+      "settings": {
+        "title": "Clothing & Textiles",
+        "subtitle": "Everyday weaves & home textiles",
+        "color": "#C2780C"
+      }
+    }
+  ]
+}
+{% endschema %}

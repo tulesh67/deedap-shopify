@@ -1,0 +1,69 @@
+{% render 'deedap-assets' %}
+
+<section class="dd-na dd-hero" aria-label="{{ section.settings.heading_line1 | default: section.settings.line_1 | escape }}">
+  <div class="dd-hero-glow" aria-hidden="true"></div>
+  {%- assign badge_val = section.settings.badge_text | default: section.settings.badge -%}
+  {%- if badge_val != blank -%}
+    <div class="dd-hero-badge dd-heroin">&#9733; {{ badge_val }}</div>
+  {%- endif -%}
+  <h1 class="dd-disp dd-heroin">
+    {%- assign l1 = section.settings.heading_line1 | default: section.settings.line_1 | default: "Discover More" -%}
+    {%- assign l2 = section.settings.heading_line2 | default: section.settings.line_2 | default: "Shop Deedap" -%}
+    <span{% if section.settings.ink_sweep %} class="dd-hink"{% endif %}>{{ l1 }}<br>{{ l2 }}</span>
+    {%- if section.settings.gold_word != blank %} <span class="dd-hword{% if section.settings.shimmer %} is-shimmer{% endif %}" style="--dd-word:{{ section.settings.word_color }}">{{ section.settings.gold_word }}</span>{% endif -%}
+  </h1>
+  {%- if section.settings.subtitle != blank -%}
+    <p class="dd-hero-subtitle" style="max-width:760px;margin:14px auto 0;font-size:15px;line-height:1.6;color:#7A7468;font-weight:500">{{ section.settings.subtitle }}</p>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="dd-hero-trust dd-heroin" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px 18px;margin-top:20px">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'trust' -%}
+          <span class="dd-hero-trust-item" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#7A5710" {{ block.shopify_attributes }}>
+            <i style="width:6px;height:6px;border-radius:50%;background:#B8923F;display:inline-block"></i>
+            {{ block.settings.text }}
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Deedap · Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Verified Multi-Category Sourcing" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Discover More" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "Shop Deedap" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "A curated multi-category shopping destination bringing together verified physical retail discoveries, specialized wholesale sourcing, and direct-to-consumer quality." },
+    { "type": "text", "id": "gold_word", "label": "Coloured word" },
+    { "type": "color", "id": "word_color", "label": "Coloured word colour", "default": "#B8860B" },
+    { "type": "checkbox", "id": "shimmer", "label": "Animated gold shine on the coloured word", "default": false },
+    { "type": "checkbox", "id": "ink_sweep", "label": "Soft glint sweeping over the black text", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "quick_jump_pill",
+      "name": "Quick Jump Pill",
+      "settings": [
+        { "type": "text", "id": "pill_label", "label": "Label", "default": "Category" },
+        { "type": "url", "id": "pill_link", "label": "Link" },
+        { "type": "color", "id": "dot_color", "label": "Dot color", "default": "#d97706" }
+      ]
+    },
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Verified retail" } ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deedap · Hero"
+    }
+  ]
+}
+{% endschema %}

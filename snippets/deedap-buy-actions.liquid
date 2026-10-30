@@ -1,0 +1,36 @@
+{% comment %}
+  Add to cart + Buy now for a Shopify product.
+  Accepts:
+    - product: Product
+    - hide_add: Boolean (default false)
+{% endcomment %}
+{%- liquid
+  assign action_product = product
+  assign action_variant = action_product.selected_or_first_available_variant
+-%}
+{%- if action_product.available and action_variant != blank -%}
+  <div class="deedap-buy-actions" data-deedap-actions>
+    {%- unless hide_add -%}
+      <button
+        type="button"
+        class="deedap-buy-actions__add"
+        data-deedap-add
+        data-variant-id="{{ action_variant.id }}"
+      >
+        Add to cart
+      </button>
+    {%- endunless -%}
+    <button
+      type="button"
+      class="deedap-buy-actions__buy"
+      data-deedap-buy
+      data-variant-id="{{ action_variant.id }}"
+    >
+      Buy now
+    </button>
+  </div>
+{%- else -%}
+  <div class="deedap-buy-actions">
+    <button type="button" class="deedap-buy-actions__add" disabled>Sold out</button>
+  </div>
+{%- endif -%}

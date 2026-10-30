@@ -1,0 +1,42 @@
+<script>
+  (function() {
+    var p = window.location.pathname.toLowerCase();
+    var dest = null;
+    if (p.indexOf('clothing-textiles') !== -1 || p.indexOf('textile') !== -1) dest = '/pages/textiles';
+    else if (p.indexOf('information-technology') !== -1 || p.indexOf('electronic') !== -1) dest = '/pages/electronics';
+    else if (p.indexOf('jeweller') !== -1 || p.indexOf('jewelry') !== -1) dest = '/pages/jewelry';
+    else if (p.indexOf('accessories') !== -1) dest = '/pages/accessories';
+    else if (p.indexOf('organic') !== -1) dest = '/#row-organic-natural';
+    else if (p.indexOf('global') !== -1) dest = '/#row-global-collections';
+    else if (p.indexOf('essential') !== -1) dest = '/#row-essentials';
+    else if (p.indexOf('cookware') !== -1) dest = '/#row-cookware';
+    else if (p.indexOf('hamper') !== -1) dest = '/#row-gift-hampers';
+    else if (p.indexOf('bag') !== -1) dest = '/#row-carryout-bags';
+    if (dest) {
+      window.location.replace(dest);
+    }
+  })();
+</script>
+<style type="text/css">
+  .template-404 .title + * {
+    margin-top: 1rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404 .title + * {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<div class="template-404 page-width page-margin center">
+  <p>
+    {{ 'templates.404.subtext' | t }}
+  </p>
+  <h1 class="title">
+    {{ 'templates.404.title' | t }}
+  </h1>
+  <a href="{{ routes.all_products_collection_url }}" class="button">
+    {{ 'general.continue_shopping' | t }}
+  </a>
+</div>

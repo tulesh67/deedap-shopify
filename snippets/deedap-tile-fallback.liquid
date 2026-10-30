@@ -1,0 +1,409 @@
+{%- comment -%}
+  Deedap Fallback Product Tile
+  Params:
+    - cat_handle: category handle or name string
+    - item_index: 0..4
+    - tag: optional badge string
+    - tint: fallback background colour
+    - show_cat: bool
+    - cat_label: string
+    - cat_color: string
+{%- endcomment -%}
+
+{%- liquid
+  assign c_key = cat_handle | downcase | default: 'clothing'
+  assign title = "Curated Discovery"
+  assign price_money = "₹1,999"
+  assign compare_money = "₹2,499"
+  assign img_url = ""
+  assign product_url = "/collections/all"
+  assign tint_color = tint | default: "#F4E4CB"
+  assign auto_tag = tag
+
+  if c_key contains 'cloth' or c_key contains 'textil'
+    assign product_url = "/pages/textiles"
+    case item_index
+      when 0
+        assign title = "Handloom Cotton Shirt"
+        assign price_money = "₹2,499"
+        assign compare_money = "₹3,299"
+        assign img_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "NEW"
+      when 1
+        assign title = "Linen Drape Kurta"
+        assign price_money = "₹3,199"
+        assign compare_money = "₹3,999"
+        assign img_url = 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "FEATURED"
+      when 2
+        assign title = "Raw Silk Dupatta"
+        assign price_money = "₹1,899"
+        assign compare_money = "₹2,499"
+        assign img_url = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=800&auto=format&fit=crop'
+      when 3
+        assign title = "Block-Print Bedsheet Set"
+        assign price_money = "₹2,799"
+        assign compare_money = "₹3,499"
+        assign img_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+      else
+        assign title = "Embroidered Silk Stole"
+        assign price_money = "₹2,199"
+        assign compare_money = "₹2,799"
+        assign img_url = 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'tech' or c_key contains 'electr' or c_key contains 'information'
+    assign product_url = "/pages/electronics"
+    case item_index
+      when 0
+        assign title = "GaN 65W Fast Charger"
+        assign price_money = "₹1,899"
+        assign compare_money = "₹2,499"
+        assign img_url = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "NEW"
+      when 1
+        assign title = "Wireless ANC Earbuds"
+        assign price_money = "₹3,499"
+        assign compare_money = "₹4,999"
+        assign img_url = 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "BESTSELLER"
+      when 2
+        assign title = "Braided 100W USB-C Cable"
+        assign price_money = "₹699"
+        assign compare_money = "₹999"
+        assign img_url = 'https://images.unsplash.com/photo-1595756630452-736bc8ef3693?q=80&w=800&auto=format&fit=crop'
+      when 3
+        assign title = "Precision Mechanical Keyboard"
+        assign price_money = "₹5,499"
+        assign compare_money = "₹6,999"
+        assign img_url = 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=800&auto=format&fit=crop'
+      else
+        assign title = "Aluminum Desktop Docking Hub"
+        assign price_money = "₹4,599"
+        assign compare_money = "₹5,999"
+        assign img_url = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=800&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'organ' or c_key contains 'honey' or c_key contains 'natur'
+    assign product_url = "/collections/organic-natural"
+    case item_index
+      when 0
+        assign title = "Raw Wild Forest Honey"
+        assign price_money = "₹850"
+        assign compare_money = "₹1,100"
+        assign img_url = 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "PURE"
+      when 1
+        assign title = "Cold-Pressed Mustard Oil"
+        assign price_money = "₹450"
+        assign compare_money = "₹550"
+        assign img_url = 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Organic Vedic Turmeric"
+        assign price_money = "₹280"
+        assign compare_money = "₹350"
+        assign img_url = 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Herbal Whole Leaf Green Tea"
+        assign price_money = "₹580"
+        assign compare_money = "₹690"
+        assign img_url = 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Virgin Cold-Pressed Coconut Oil"
+        assign price_money = "₹490"
+        assign compare_money = "₹620"
+        assign img_url = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'global' or c_key contains 'import'
+    assign product_url = "/collections/global-collections"
+    case item_index
+      when 0
+        assign title = "Artisan Ceramic Mug Set"
+        assign price_money = "₹1,999"
+        assign compare_money = "₹2,600"
+        assign img_url = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "IMPORTED"
+      when 1
+        assign title = "Aromatherapy Scented Candle Trio"
+        assign price_money = "₹1,499"
+        assign compare_money = "₹1,899"
+        assign img_url = 'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Turkish Long-Staple Towel"
+        assign price_money = "₹1,899"
+        assign compare_money = "₹2,299"
+        assign img_url = 'https://images.unsplash.com/photo-1616627547584-bf28cee262db?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Handcrafted Ceramic Rice Bowl"
+        assign price_money = "₹2,200"
+        assign compare_money = "₹2,800"
+        assign img_url = 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Engraved Moroccan Brass Tray"
+        assign price_money = "₹3,400"
+        assign compare_money = "₹4,200"
+        assign img_url = 'https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'essential' or c_key contains 'living'
+    assign product_url = "/collections/essentials"
+    case item_index
+      when 0
+        assign title = "Bamboo Fibre Towel Set"
+        assign price_money = "₹1,299"
+        assign compare_money = "₹1,699"
+        assign img_url = 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "ESSENTIAL"
+      when 1
+        assign title = "Linen Storage Organizers (Pack of 3)"
+        assign price_money = "₹1,599"
+        assign compare_money = "₹1,999"
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Stainless Vacuum Water Bottle"
+        assign price_money = "₹899"
+        assign compare_money = "₹1,199"
+        assign img_url = 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Natural Amber Reed Diffuser"
+        assign price_money = "₹1,199"
+        assign compare_money = "₹1,499"
+        assign img_url = 'https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Cedar Wood Shoe Trees"
+        assign price_money = "₹1,450"
+        assign compare_money = "₹1,800"
+        assign img_url = 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'jewel'
+    assign product_url = "/pages/jewelry"
+    case item_index
+      when 0
+        assign title = "Six-Prong Solitaire Ring"
+        assign price_money = "₹84,990"
+        assign compare_money = "₹99,000"
+        assign img_url = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "FINE GOLD"
+      when 1
+        assign title = "Diamond Halo Pendant"
+        assign price_money = "₹65,000"
+        assign compare_money = "₹78,000"
+        assign img_url = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop'
+        assign auto_tag = tag | default: "EXCLUSIVE"
+      when 2
+        assign title = "Classic Freshwater Pearl Strand"
+        assign price_money = "₹42,000"
+        assign compare_money = "₹50,000"
+        assign img_url = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop'
+      when 3
+        assign title = "18K Gold Bead Bracelet"
+        assign price_money = "₹38,000"
+        assign compare_money = "₹45,000"
+        assign img_url = 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=800&auto=format&fit=crop'
+      else
+        assign title = "South Sea Pearl Drop Earrings"
+        assign price_money = "₹29,000"
+        assign compare_money = "₹35,000"
+        assign img_url = 'https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=800&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'cook' or c_key contains 'kitchen'
+    assign product_url = "/collections/cookware"
+    case item_index
+      when 0
+        assign title = "Pre-Seasoned Cast Iron Skillet"
+        assign price_money = "₹3,200"
+        assign compare_money = "₹3,900"
+        assign img_url = 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "HEIRLOOM"
+      when 1
+        assign title = "Tri-Ply Hammered Copper Saucepan"
+        assign price_money = "₹4,500"
+        assign compare_money = "₹5,400"
+        assign img_url = 'https://images.unsplash.com/photo-1584990347449-397a06a26090?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Natural Granite Mortar & Pestle"
+        assign price_money = "₹2,100"
+        assign compare_money = "₹2,600"
+        assign img_url = 'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Handcrafted Terracotta Handi"
+        assign price_money = "₹1,600"
+        assign compare_money = "₹1,950"
+        assign img_url = 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Heavy Gauge Stainless Kadai"
+        assign price_money = "₹2,850"
+        assign compare_money = "₹3,400"
+        assign img_url = 'https://images.unsplash.com/photo-1585515320310-259814833e62?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'hamper' or c_key contains 'gift'
+    assign product_url = "/collections/gift-hampers"
+    case item_index
+      when 0
+        assign title = "Royal Festive Gourmet Hamper"
+        assign price_money = "₹2,999"
+        assign compare_money = "₹3,800"
+        assign img_url = 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "LUXURY"
+      when 1
+        assign title = "Artisan Tea & Ceramic Cup Box"
+        assign price_money = "₹2,499"
+        assign compare_money = "₹3,100"
+        assign img_url = 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Ayurvedic Self-Care Ritual Hamper"
+        assign price_money = "₹1,999"
+        assign compare_money = "₹2,499"
+        assign img_url = 'https://images.unsplash.com/photo-1608248597359-00f72390f70f?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Executive Corporate Luxe Crate"
+        assign price_money = "₹3,500"
+        assign compare_money = "₹4,200"
+        assign img_url = 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Celebration Sweets & Nuts Keepsake"
+        assign price_money = "₹2,200"
+        assign compare_money = "₹2,700"
+        assign img_url = 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  elsif c_key contains 'bag' or c_key contains 'carry'
+    assign product_url = "/collections/carryout-bags"
+    case item_index
+      when 0
+        assign title = "Heavy Jute Marketplace Tote"
+        assign price_money = "₹650"
+        assign compare_money = "₹850"
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "ECO"
+      when 1
+        assign title = "Reinforced Cotton Canvas Shopper"
+        assign price_money = "₹850"
+        assign compare_money = "₹1,100"
+        assign img_url = 'https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Foldable Ripstop Weekend Bag"
+        assign price_money = "₹450"
+        assign compare_money = "₹600"
+        assign img_url = 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Thermal Insulated Lunch Bag"
+        assign price_money = "₹950"
+        assign compare_money = "₹1,250"
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Organic Mesh Market Pouches (Set of 5)"
+        assign price_money = "₹550"
+        assign compare_money = "₹750"
+        assign img_url = 'https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?q=80&w=600&auto=format&fit=crop'
+    endcase
+
+  else
+    assign product_url = "/pages/accessories"
+    case item_index
+      when 0
+        assign title = "Full-Grain Italian Leather Belt"
+        assign price_money = "₹1,450"
+        assign compare_money = "₹1,850"
+        assign img_url = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=600&auto=format&fit=crop'
+        assign auto_tag = tag | default: "CRAFT"
+      when 1
+        assign title = "Pure Mulberry Silk Pocket Square"
+        assign price_money = "₹1,250"
+        assign compare_money = "₹1,600"
+        assign img_url = 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=600&auto=format&fit=crop'
+      when 2
+        assign title = "Classic Aviator Sunglasses"
+        assign price_money = "₹2,100"
+        assign compare_money = "₹2,800"
+        assign img_url = 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600&auto=format&fit=crop'
+      when 3
+        assign title = "Brass Money Clip & Cardholder"
+        assign price_money = "₹950"
+        assign compare_money = "₹1,200"
+        assign img_url = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=600&auto=format&fit=crop'
+      else
+        assign title = "Handcrafted Leather Key Fob"
+        assign price_money = "₹650"
+        assign compare_money = "₹850"
+        assign img_url = 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=600&auto=format&fit=crop'
+    endcase
+  endif
+
+  assign target_handle = title | handleize
+  if target_handle contains 'shirt'
+    if all_products['handloom-cotton-shirt'] != empty
+      assign target_handle = 'handloom-cotton-shirt'
+    elsif all_products['shirt'] != empty
+      assign target_handle = 'shirt'
+    endif
+  endif
+
+  assign target_prod = all_products[target_handle]
+  assign fallback_variant_id = ''
+  if target_prod != empty and target_prod.id != blank
+    assign product_url = target_prod.url
+    assign fallback_variant_id = target_prod.selected_or_first_available_variant.id
+  else
+    for prod in collections['all'].products
+      if prod.available and prod.selected_or_first_available_variant.id != blank
+        assign fallback_variant_id = prod.selected_or_first_available_variant.id
+        break
+      endif
+    endfor
+    if target_handle contains 'shirt' and all_products['shirt'] != empty
+      assign product_url = all_products['shirt'].url
+    endif
+  endif
+-%}
+
+<article
+  class="dd-sq"
+  data-qv-trigger="true"
+  data-title="{{ title | escape }}"
+  data-price="{{ price_money }}"
+  data-category="{{ cat_handle | default: 'Curated Collection' | replace: '-', ' ' | capitalize | escape }}"
+  data-color="{{ cat_color | default: '#96752C' }}"
+  data-description="Verified physical discovery inspected for structural fidelity, craftsmanship authenticity, and daily wear durability."
+  data-image="{{ img_url }}"
+  data-variant-id="{{ fallback_variant_id }}"
+  data-product-url="{{ product_url }}"
+  style="cursor: pointer;"
+>
+  <div class="dd-sqimg dd-stripe" style="background:{{ tint_color }}">
+    <a class="dd-sq-link" href="{{ product_url }}" tabindex="-1" aria-hidden="true" data-qv-trigger="true">
+      <span class="dd-zoom">
+        {%- if img_url != blank -%}
+          <img src="{{ img_url }}" loading="lazy" width="300" height="300" alt="{{ title | escape }}" style="width:100%;height:100%;object-fit:cover;display:block">
+        {%- else -%}
+          <span class="dd-ph"></span>
+        {%- endif -%}
+      </span>
+    </a>
+    {%- if auto_tag != blank -%}<span class="dd-pill">{{ auto_tag }}</span>{%- endif -%}
+    <button
+      class="dd-addb dd-sqadd"
+      type="button"
+      data-dd-add
+      data-variant-id="{{ fallback_variant_id }}"
+      data-product-url="{{ product_url }}"
+      aria-label="Add {{ title | escape }} to bag"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    </button>
+  </div>
+  <div class="dd-sq-body">
+    {%- if show_cat and cat_label != blank -%}
+      <div class="dd-sq-cat"><i style="background:{{ cat_color | default: '#B8923F' }}"></i><span>{{ cat_label }}</span></div>
+    {%- endif -%}
+    <h3><a href="{{ product_url }}" data-qv-trigger="true" style="color:inherit;text-decoration:none">{{ title }}</a></h3>
+    <div class="dd-price">
+      {{ price_money }}
+      {%- if compare_money != blank -%}<s>{{ compare_money }}</s>{%- endif -%}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,160 @@
+{% render 'deedap-assets' %}
+
+{%- liquid
+  assign show = true
+  assign now_ts = 'now' | date: '%s' | plus: 0
+  if section.settings.start_date != blank
+    assign start_ts = section.settings.start_date | date: '%s' | plus: 0
+    if now_ts < start_ts
+      assign show = false
+    endif
+  endif
+  if section.settings.end_date != blank and section.settings.hide_after_end
+    assign end_ts = section.settings.end_date | date: '%s' | plus: 86399
+    if now_ts > end_ts
+      assign show = false
+    endif
+  endif
+  if request.design_mode
+    assign show = true
+  endif
+
+  assign theme = section.settings.theme
+  case theme
+    when 'diwali'
+      assign d_a = 'Diwali'
+      assign d_b = 'Festive Edit'
+      assign d_ribbon = 'New deals unlocked'
+    when 'xmas'
+      assign d_a = 'Christmas'
+      assign d_b = 'Gift Season'
+      assign d_ribbon = 'Gifts they will love'
+    when 'eid'
+      assign d_a = 'Eid Mubarak'
+      assign d_b = 'Festive Edit'
+      assign d_ribbon = 'Celebrate in style'
+    when 'holi'
+      assign d_a = 'Holi'
+      assign d_b = 'Colour Sale'
+      assign d_ribbon = 'Colours of joy'
+    else
+      assign d_a = 'New Season'
+      assign d_b = 'Collection'
+      assign d_ribbon = 'New deals unlocked'
+  endcase
+  assign name_a = section.settings.name_a | default: d_a
+  assign name_b = section.settings.name_b | default: d_b
+  assign ribbon = section.settings.ribbon | default: d_ribbon
+
+  assign showcase = section.settings.showcase_collection
+-%}
+
+{%- if show -%}
+<section class="dd-na dd-fest-sec" aria-label="{{ name_a | escape }} {{ name_b | escape }}">
+  <div class="dd-fest dd-t-{{ theme }}">
+    <div class="dd-fbg" aria-hidden="true"></div>
+    {% render 'deedap-ornaments', theme: theme %}
+    <div class="dd-garland" aria-hidden="true">
+      <svg viewBox="0 0 100 30" preserveAspectRatio="none" width="100%" height="30"><path d="M0 4 Q 4 14 8 6 T 16 6 T 24 6 T 32 6 T 40 6 T 48 6 T 56 6 T 64 6 T 72 6 T 80 6 T 88 6 T 96 6 T 100 6" fill="none" stroke="rgba(255,236,170,.55)" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
+      {%- for i in (0..21) -%}<i class="dd-bulb" style="left:{{ i | times: 4.55 | plus: 2 }}%;top:{{ i | modulo: 2 | times: 3 | plus: 6 }}px;animation-delay:{{ i | times: 0.23 | modulo: 2 }}s"></i>{%- endfor -%}
+    </div>
+
+    <div class="dd-fin">
+      <div class="dd-fplaque">
+        <div class="dd-fplin">
+          <div class="dd-fkick">{{ section.settings.kicker }}</div>
+          <div class="dd-fname dd-disp">{{ name_a }}</div>
+          <div class="dd-fname2 dd-disp">{{ name_b }}</div>
+        </div>
+      </div>
+
+      <div class="dd-fniche">
+        <div class="dd-frib dd-disp">{{ ribbon }}</div>
+        <div class="dd-fshow">
+          {%- if showcase != blank and showcase.products_count > 0 -%}
+            {%- for product in showcase.products limit: 3 -%}
+              <a class="dd-fprod{% if forloop.index == 2 %} mid{% endif %}" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', widths: '150, 300', sizes: '120px', alt: product.title }}{%- endif -%}
+              </a>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for n in (1..3) -%}
+              {%- liquid
+                case n
+                  when 1
+                    assign im = section.settings.image_1
+                    assign fallback_asset = '4ca6f3dd244e0a5857d90dbf2378b8bc.jpg'
+                  when 2
+                    assign im = section.settings.image_2
+                    assign fallback_asset = '10f115b7be4ce2b8524f63fa2a860c79.jpg'
+                  else
+                    assign im = section.settings.image_3
+                    assign fallback_asset = '6fc6b400385b7cc501eb33e75468a6c6.jpg'
+                endcase
+              -%}
+              <div class="dd-fprod{% if n == 2 %} mid{% endif %}">
+                {%- if im != blank -%}
+                  {{ im | image_url: width: 300 | image_tag: loading: 'lazy', widths: '150, 300', sizes: '120px', alt: 'Festival Showcase' }}
+                {%- else -%}
+                  <img src="{{ fallback_asset | asset_url }}" loading="lazy" width="150" height="150" alt="Festival Showcase" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="dd-fofr">
+        <div class="dd-fupto">{{ section.settings.upto_text }}</div>
+        <div class="dd-fbig dd-disp">{{ section.settings.offer }}<b class="dd-pct">% off</b></div>
+        {%- if section.settings.button_label != blank -%}
+          <a class="dd-fcta" href="{{ section.settings.button_link | default: routes.collections_url }}">{{ section.settings.button_label }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        {%- endif -%}
+        {%- if section.settings.date_text != blank -%}<div class="dd-fdate">{{ section.settings.date_text }}</div>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Deedap · Festival banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select", "id": "theme", "label": "Festival theme",
+      "options": [
+        { "value": "diwali", "label": "Diwali" },
+        { "value": "xmas", "label": "Christmas" },
+        { "value": "eid", "label": "Eid" },
+        { "value": "holi", "label": "Holi" },
+        { "value": "brand", "label": "Everyday (black & gold)" }
+      ],
+      "default": "diwali"
+    },
+    { "type": "header", "content": "Custom Text (optional defaults apply)" },
+    { "type": "text", "id": "kicker", "label": "Small line above the name", "default": "Deedap presents" },
+    { "type": "text", "id": "name_a", "label": "Festival name" },
+    { "type": "text", "id": "name_b", "label": "Second line" },
+    { "type": "text", "id": "ribbon", "label": "Ribbon text" },
+    { "type": "header", "content": "Offer" },
+    { "type": "text", "id": "upto_text", "label": "Small text above the number", "default": "Up to" },
+    { "type": "text", "id": "offer", "label": "Discount number (without %)", "default": "50" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "date_text", "label": "Small line under the button", "default": "Offer ends 12 Nov" },
+    { "type": "header", "content": "Showcase (middle box)" },
+    { "type": "collection", "id": "showcase_collection", "label": "Show the first 3 products of a collection" },
+    { "type": "paragraph", "content": "…or leave the collection empty and pick 3 images:" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2 (larger, centre)" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "header", "content": "Schedule (optional)" },
+    { "type": "text", "id": "start_date", "label": "Show from (YYYY-MM-DD)", "info": "Leave empty to show now." },
+    { "type": "text", "id": "end_date", "label": "Show until (YYYY-MM-DD)" },
+    { "type": "checkbox", "id": "hide_after_end", "label": "Hide the banner automatically after the end date", "default": true }
+  ],
+  "presets": [ { "name": "Deedap · Festival banner" } ]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+{% comment %}
+  DEEDAP Shopify product card. All product details come from the selected Shopify product.
+{% endcomment %}
+
+{%- liquid
+  assign card_product = product
+  assign card_type = card_product.type | downcase
+  assign card_tags = card_product.tags | join: '|' | downcase
+  assign category_class = 'badge-clothing'
+  assign category_label = 'Curated quality'
+  assign category_key = 'other'
+  assign badge_color = 'var(--deedap-gold)'
+
+  if card_type contains 'cloth' or card_type contains 'apparel' or card_type contains 'fashion' or card_type contains 'textile' or card_tags contains 'clothing' or card_tags contains 'apparel' or card_tags contains 'fashion' or card_tags contains 'textile'
+    assign category_class = 'badge-clothing'
+    assign category_label = 'Clothing & Textiles'
+    assign category_key = 'textiles'
+    assign badge_color = 'var(--cat-clothing)'
+  elsif card_type contains 'electronic' or card_type contains 'technology' or card_type contains 'tech' or card_tags contains 'electronics' or card_tags contains 'technology' or card_tags contains 'tech'
+    assign category_class = 'badge-electronics'
+    assign category_label = 'Technology'
+    assign category_key = 'electronics'
+    assign badge_color = 'var(--cat-electronics)'
+  elsif card_type contains 'honey' or card_type contains 'organic' or card_type contains 'natural' or card_tags contains 'honey' or card_tags contains 'organic' or card_tags contains 'natural'
+    assign category_class = 'badge-honey'
+    assign category_label = 'Organic & Natural'
+    assign category_key = 'natural'
+    assign badge_color = 'var(--cat-honey)'
+  elsif card_type contains 'import' or card_type contains 'global' or card_tags contains 'imported' or card_tags contains 'global'
+    assign category_class = 'badge-imported'
+    assign category_label = 'Global Collections'
+    assign category_key = 'global'
+    assign badge_color = 'var(--cat-imported)'
+  elsif card_type contains 'home' or card_type contains 'essential' or card_type contains 'living' or card_tags contains 'essentials' or card_tags contains 'living'
+    assign category_class = 'badge-essentials'
+    assign category_label = 'Home & Essentials'
+    assign category_key = 'essentials'
+    assign badge_color = 'var(--cat-essentials)'
+  elsif card_type contains 'jewel' or card_tags contains 'jewelry' or card_tags contains 'jewellery'
+    assign category_class = 'badge-jewelry'
+    assign category_label = 'Jewellery'
+    assign category_key = 'jewelry'
+    assign badge_color = 'var(--cat-jewelry)'
+  elsif card_type contains 'cook' or card_type contains 'kitchen' or card_tags contains 'cookware' or card_tags contains 'kitchenware'
+    assign category_class = 'badge-cookware'
+    assign category_label = 'Cookware'
+    assign category_key = 'cookware'
+    assign badge_color = 'var(--cat-cookware)'
+  elsif card_type contains 'gift' or card_type contains 'hamper' or card_tags contains 'gift' or card_tags contains 'gifting' or card_tags contains 'hamper'
+    assign category_class = 'badge-gifting'
+    assign category_label = 'Gift Hampers'
+    assign category_key = 'gifting'
+    assign badge_color = 'var(--cat-gifting)'
+  elsif card_type contains 'carry' or card_type contains 'bag' or card_tags contains 'carryout' or card_tags contains 'bags'
+    assign category_class = 'badge-carryout'
+    assign category_label = 'Carryout Bags'
+    assign category_key = 'carry'
+    assign badge_color = 'var(--cat-carryout)'
+  elsif card_type contains 'accessor' or card_tags contains 'accessories' or card_tags contains 'accessory'
+    assign category_class = 'badge-accessories'
+    assign category_label = 'Accessories'
+    assign category_key = 'accessories'
+    assign badge_color = 'var(--cat-accessories)'
+  endif
+
+  assign first_variant = card_product.selected_or_first_available_variant
+-%}
+
+<div class="deedap-card" data-product-id="{{ card_product.id }}" data-discover-category="{{ category_key }}">
+  <div class="deedap-card-media">
+    <span class="card-category-badge {{ category_class }}" style="color: {{ badge_color }}; border-color: {{ badge_color }}4D;">
+      {{ category_label }}
+    </span>
+
+    {%- if card_product.featured_media -%}
+      <a href="{{ card_product.url }}" class="deedap-card__image-link" aria-label="{{ card_product.title | escape }}">
+        <img
+          src="{{ card_product.featured_media | image_url: width: 700 }}"
+          srcset="{{ card_product.featured_media | image_url: width: 350 }} 350w, {{ card_product.featured_media | image_url: width: 500 }} 500w, {{ card_product.featured_media | image_url: width: 700 }} 700w"
+          sizes="(max-width: 749px) 48vw, (max-width: 989px) 31vw, 23vw"
+          alt="{{ card_product.featured_media.alt | escape | default: card_product.title }}"
+          class="deedap-card-img"
+          loading="lazy"
+          width="700"
+          height="714"
+        >
+      </a>
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'deedap-card-img placeholder-svg' }}
+    {%- endif -%}
+
+    <div class="card-floating-label">
+      <span>{{ card_product.title | escape }}</span>
+      <span class="card-floating-price">
+        {%- if card_product.price_varies -%}From {{ card_product.price_min | money }}{%- else -%}{{ card_product.price | money }}{%- endif -%}
+      </span>
+    </div>
+  </div>
+
+  <div class="deedap-card-info">
+    <div class="deedap-card-sub">{{ card_product.vendor | default: 'DEEDAP sourced selection' | escape }}</div>
+    <h4 class="deedap-card-title"><a href="{{ card_product.url }}">{{ card_product.title | escape }}</a></h4>
+
+    <div class="deedap-card-chips">
+      {%- if card_product.variants.size > 1 -%}
+        {%- for variant in card_product.variants limit: 3 -%}
+          <button
+            type="button"
+            class="chip-item {% if variant.id == first_variant.id %}active{% endif %} {% unless variant.available %}sold-out{% endunless %}"
+            data-deedap-variant="{{ variant.id }}"
+            {% unless variant.available %}disabled{% endunless %}
+          >
+            {{ variant.title | escape }}
+          </button>
+        {%- endfor -%}
+        {%- if card_product.variants.size > 3 -%}<span class="chip-item">+{{ card_product.variants.size | minus: 3 }} more</span>{%- endif -%}
+      {%- elsif card_product.available -%}
+        <span class="chip-item active">In stock</span>
+        <span class="chip-item">Inspected</span>
+      {%- else -%}
+        <span class="chip-item sold-out">Sold out</span>
+      {%- endif -%}
+    </div>
+
+    {% render 'deedap-buy-actions', product: card_product %}
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEEDAP globe visual</title>
+<style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}.globe{position:absolute;top:50%;right:-12%;width:min(78vh,760px);aspect-ratio:1;transform:translateY(-50%)}svg{display:block;width:100%;height:100%;overflow:visible}.orbit{fill:none;stroke:rgba(238,192,103,.47);stroke-width:1.2;stroke-dasharray:2 12;animation:orbit 38s linear infinite;transform-origin:400px 400px}.route{fill:none;stroke:#eac16e;stroke-width:1.6;stroke-dasharray:5 10;stroke-linecap:round;opacity:.74;animation:route 12s linear infinite}.route.alt{animation-delay:-5s;opacity:.45}.pin{fill:#fff0c4;filter:drop-shadow(0 0 7px rgba(255,205,112,.75));transform-box:fill-box;transform-origin:center;animation:pulse 3.2s ease-in-out infinite}.pin.delay{animation-delay:1.2s}.rim{fill:none;stroke:rgba(238,192,103,.36);stroke-width:2}.glow{fill:none;stroke:rgba(238,192,103,.12);stroke-width:30}.dots{opacity:.9}.land-outline{fill:none;stroke:rgba(242,201,116,.5);stroke-width:1}.lat{fill:none;stroke:rgba(231,191,111,.12);stroke-width:1}.lon{fill:none;stroke:rgba(231,191,111,.17);stroke-width:1}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes route{to{stroke-dashoffset:-120}}@keyframes pulse{0%,100%{opacity:.7;transform:scale(.82)}50%{opacity:1;transform:scale(1.28)}}@media(max-width:700px){.globe{width:min(68vw,410px);top:auto;bottom:-10%;right:-8%;transform:none;opacity:.72}}@media(prefers-reduced-motion:reduce){.orbit,.route,.pin{animation:none}}
+</style>
+</head>
+<body aria-hidden="true">
+<div class="globe">
+<svg viewBox="0 0 800 800" role="presentation" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="sphere" cx="34%" cy="28%" r="76%"><stop offset="0" stop-color="#503b1b"/><stop offset=".45" stop-color="#231a0e"/><stop offset=".83" stop-color="#100d08"/><stop offset="1" stop-color="#080706"/></radialGradient>
+  <radialGradient id="shine" cx="25%" cy="18%" r="80%"><stop offset="0" stop-color="#e3b85d" stop-opacity=".28"/><stop offset=".55" stop-color="#a87325" stop-opacity=".07"/><stop offset="1" stop-color="#090806" stop-opacity="0"/></radialGradient>
+  <pattern id="mapDots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#d9a947" opacity=".82"/></pattern>
+  <clipPath id="sphereClip"><circle cx="400" cy="400" r="318"/></clipPath>
+</defs>
+<circle class="glow" cx="400" cy="400" r="334"/><circle cx="400" cy="400" r="322" fill="url(#sphere)"/><circle cx="400" cy="400" r="322" fill="url(#shine)"/><circle class="rim" cx="400" cy="400" r="322"/>
+<g clip-path="url(#sphereClip)">
+  <path class="lat" d="M78 294Q400 172 722 294M66 350Q400 248 734 350M63 400H737M66 450Q400 552 734 450M78 506Q400 628 722 506"/>
+  <ellipse class="lon" cx="400" cy="400" rx="248" ry="318"/><ellipse class="lon" cx="400" cy="400" rx="150" ry="318"/><path class="lon" d="M400 82V718"/>
+  <g class="dots">
+    <path fill="url(#mapDots)" d="M120 250l32-58 47-32 48 5 29 24 39 4 17 28-25 24-7 36-35 14-20 49-26 8-19-31-35-4-25-32-29-8-12-27z"/>
+    <path fill="url(#mapDots)" d="M260 355l29 9 24 32-6 42-18 40-5 47-23 51-17-27 6-39-15-35 8-38-15-42z"/>
+    <path fill="url(#mapDots)" d="M361 237l35-26 49 3 23 20 45-4 30 18 54-2 45 25-10 25-48 5-21 27-42 1-14 24-29-8-11 28-32 12-12 35-29-3-15-25-30-3-10-31-27-18 3-34 32-11z"/>
+    <path fill="url(#mapDots)" d="M398 348l42-12 38 22 22 49-12 37-28 23-10 43-23 30-20-24-7-42-24-37 10-35-16-27z"/>
+    <path fill="url(#mapDots)" d="M563 497l38-17 39 15 23 25-29 25-45-4-27-20z"/>
+    <path fill="url(#mapDots)" d="M667 438l14 9-10 14-12-8zM345 221l8-15 14 4-4 16zM622 548l10 6-4 13-10-8z"/>
+  </g>
+  <g class="land-outline" stroke-dasharray="1 7" stroke-linecap="round">
+    <path d="M120 250l32-58 47-32 48 5 29 24 39 4 17 28-25 24-7 36-35 14-20 49-26 8-19-31-35-4-25-32-29-8-12-27z"/>
+    <path d="M361 237l35-26 49 3 23 20 45-4 30 18 54-2 45 25-10 25-48 5-21 27-42 1-14 24-29-8-11 28-32 12-12 35-29-3-15-25-30-3-10-31-27-18 3-34 32-11z"/>
+  </g>
+  <path class="route" d="M283 356Q373 267 464 316T570 383"/><path class="route alt" d="M285 356Q351 440 425 411T565 511"/>
+  <path class="route alt" d="M464 316Q496 353 570 383"/>
+  <circle class="pin" cx="283" cy="356" r="5"/><circle class="pin delay" cx="464" cy="316" r="5"/><circle class="pin" cx="570" cy="383" r="5"/><circle class="pin delay" cx="425" cy="411" r="4"/><circle class="pin" cx="565" cy="511" r="4"/>
+</g>
+<ellipse class="orbit" cx="400" cy="400" rx="380" ry="150" transform="rotate(-18 400 400)"/>
+</svg>
+</div>
+</body>
+</html>

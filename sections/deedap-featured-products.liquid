@@ -1,0 +1,122 @@
+{{ 'deedap-discover.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'deedap-discover.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign target_collection = section.settings.collection
+  if target_collection == blank
+    assign target_collection = collections['all']
+  endif
+  assign product_limit = section.settings.products_to_show | default: 12
+  assign product_count = 0
+-%}
+
+<section class="deedap-discover page-width" id="catalog" data-deedap-discover data-section-id="{{ section.id }}">
+  <div class="deedap-discover__intro">
+    <div>
+      <div class="deedap-discover__eyebrow"><span aria-hidden="true">✦</span> Verified multi-category sourcing</div>
+      <h2 class="deedap-discover__title">Discover more<br><em>Shop Deedap</em></h2>
+    </div>
+    <div class="deedap-discover__copy">
+      <p>{{ section.settings.description | default: 'Thoughtful finds across clothing, technology, home, and fine details. Each selection is chosen for useful design, lasting quality, and everyday life.' | escape }}</p>
+      <a class="deedap-discover__shop-all" href="{{ routes.all_products_collection_url }}">
+        {{ section.settings.shop_all_label | default: 'Shop all products' | escape }}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="deedap-discover__filters" role="group" aria-label="Filter products by department">
+    <span class="deedap-discover__filter-label">Explore a department</span>
+    <div class="deedap-discover__filter-list">
+      <button class="deedap-discover__filter is-active" type="button" data-discover-filter="all" aria-pressed="true"><i style="--filter-color:#211c15"></i>All</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="textiles" aria-pressed="false"><i style="--filter-color:#c26a0a"></i>Clothing &amp; Textiles</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="electronics" aria-pressed="false"><i style="--filter-color:#0b7fbf"></i>Technology</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="natural" aria-pressed="false"><i style="--filter-color:#a2531c"></i>Organic &amp; Natural</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="global" aria-pressed="false"><i style="--filter-color:#7a3ee0"></i>Global Finds</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="essentials" aria-pressed="false"><i style="--filter-color:#0f8a63"></i>Essentials</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="jewelry" aria-pressed="false"><i style="--filter-color:#9a7412"></i>Jewellery</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="cookware" aria-pressed="false"><i style="--filter-color:#d2492a"></i>Cookware</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="gifting" aria-pressed="false"><i style="--filter-color:#c4185b"></i>Gift Hampers</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="carry" aria-pressed="false"><i style="--filter-color:#0f7d73"></i>Carryout Bags</button>
+      <button class="deedap-discover__filter" type="button" data-discover-filter="accessories" aria-pressed="false"><i style="--filter-color:#4c3fd6"></i>Accessories</button>
+    </div>
+  </div>
+
+  <div class="deedap-discover__catalog-head">
+    <div>
+      <div class="deedap-discover__kicker">{{ section.settings.kicker | default: '01 // The considered edit' | escape }}</div>
+      <h3>{{ section.settings.heading | default: 'Selected for everyday life.' | escape }}</h3>
+    </div>
+    {%- if section.settings.badge != blank -%}
+      <div class="deedap-discover__badge">{{ section.settings.badge | escape }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="deedap-discover__grid" style="--deedap-product-columns: {{ section.settings.columns_desktop | default: 4 }};">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.product != blank -%}
+          {% assign product_count = product_count | plus: 1 %}
+          {% render 'deedap-product-card', product: block.settings.product %}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- elsif target_collection != blank and target_collection.products.size > 0 -%}
+      {%- for product in target_collection.products limit: product_limit -%}
+        {% assign product_count = product_count | plus: 1 %}
+        {% render 'deedap-product-card', product: product %}
+      {%- endfor -%}
+    {%- endif -%}
+    {%- if product_count == 0 -%}
+      <div class="deedap-discover__empty">
+        <span class="deedap-discover__empty-star" aria-hidden="true">✦</span>
+        <h4>Your considered edit is taking shape.</h4>
+        <p>Add products to the selected Shopify collection and their real photos, prices, stock, and options will appear here.</p>
+        <a href="{{ routes.all_products_collection_url }}">Browse all products <span aria-hidden="true">→</span></a>
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="deedap-discover__empty deedap-discover__no-results" data-discover-no-results hidden><h4>No products in this department yet.</h4><p>Choose another department or add matching product tags in Shopify.</p></div>
+  <p class="deedap-discover__status" data-discover-status aria-live="polite">
+    Showing {{ product_count }} {% if product_count == 1 %}product{% else %}products{% endif %}.
+  </p>
+
+  {%- if section.settings.show_view_all and target_collection != blank and product_count > 0 -%}
+    <div class="deedap-discover__view-all">
+      <a href="{{ target_collection.url }}">{{ section.settings.view_all_label | default: 'View complete collection' | escape }} <span aria-hidden="true">→</span></a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "DEEDAP Discover catalog",
+  "tag": "section",
+  "class": "section-deedap-products",
+  "settings": [
+    {"type":"text","id":"kicker","label":"Catalog kicker","default":"01 // The considered edit"},
+    {"type":"text","id":"heading","label":"Catalog heading","default":"Selected for everyday life."},
+    {"type":"text","id":"badge","label":"Quality note","default":"REAL PRODUCTS · VERIFIED DETAILS"},
+    {"type":"textarea","id":"description","label":"Introductory description","default":"Thoughtful finds across clothing, technology, home, and fine details. Each selection is chosen for useful design, lasting quality, and everyday life."},
+    {"type":"text","id":"shop_all_label","label":"Shop all link label","default":"Shop all products"},
+    {"type":"collection","id":"collection","label":"Product collection","info":"Leave blank to show products from the All collection."},
+    {"type":"range","id":"products_to_show","min":4,"max":24,"step":4,"default":12,"label":"Products to show"},
+    {"type":"range","id":"columns_desktop","min":2,"max":4,"step":1,"default":4,"label":"Columns on desktop"},
+    {"type":"checkbox","id":"show_view_all","label":"Show collection link below products","default":false},
+    {"type":"text","id":"view_all_label","label":"Collection link label","default":"View complete collection"}
+  ],
+  "blocks": [
+    {
+      "type": "featured_product",
+      "name": "Curated Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Choose Product"
+        }
+      ]
+    }
+  ],
+  "presets": [{"name":"DEEDAP Discover catalog"}]
+}
+{% endschema %}

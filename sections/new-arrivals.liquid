@@ -1,0 +1,422 @@
+{{ 'new-arrivals.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'new-arrivals.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign heading_prefix = section.settings.heading_prefix | default: 'New'
+  assign heading_suffix = section.settings.heading_suffix | default: 'Arrivals'
+  assign all_new_label = section.settings.all_new_label | default: 'All New'
+  assign see_all_label = section.settings.see_all_label | default: 'See all new'
+  assign see_all_url = section.settings.see_all_url | default: '/#sourcing-departments'
+  if see_all_url == routes.all_products_collection_url or see_all_url == blank
+    assign see_all_url = '/#sourcing-departments'
+  endif
+  assign auto_rotate = section.settings.auto_rotate
+  assign interval_ms = section.settings.interval | default: 3 | times: 1000
+-%}
+
+<div
+  class="na-section"
+  id="NewArrivals-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="new-arrivals"
+  data-auto-rotate="{{ auto_rotate }}"
+  data-interval="{{ interval_ms }}"
+>
+  <div class="na-panel-wrap">
+    <!-- Header Row -->
+    <div class="na-header-row">
+      <div class="na-title-group">
+        <span class="na-live" aria-hidden="true"></span>
+        <h2 class="disp na-title">
+          {{ heading_prefix }} <span class="na-goldtxt">{{ heading_suffix }}</span>
+        </h2>
+      </div>
+
+      <!-- Live Category Indicator (Updates with Auto-Rotation) -->
+      <div class="na-cat-indicator">
+        <span class="na-rule"></span>
+        <span class="na-active-label" id="naActiveLabel">{{ all_new_label }}</span>
+      </div>
+
+      <!-- See All Link -->
+      <a
+        class="na-seeall"
+        id="naSeeAllLink"
+        href="{{ see_all_url }}"
+        data-default-url="{{ see_all_url }}"
+      >
+        <span>{{ see_all_label }}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- 2px Progress Line (Pauses on hover) -->
+    <div class="na-prog" aria-hidden="true">
+      <span class="na-bar na-bar-el"></span>
+    </div>
+
+    <!-- ======================================================================
+         PRE-RENDERED CATEGORY PANELS (Zero Layout Shift)
+         ====================================================================== -->
+
+    <!-- PANEL: ALL NEW (First newest product from each of 5 collections) -->
+    <div
+      class="na-panel na-row is-active"
+      data-panel="all"
+      data-label="{{ all_new_label }}"
+      data-url="/#sourcing-departments"
+    >
+      {%- assign all_new_count = 0 -%}
+      {%- for block in section.blocks limit: 5 -%}
+        {%- assign collection = block.settings.collection -%}
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- assign product = collection.products.first -%}
+          {%- assign all_new_count = all_new_count | plus: 1 -%}
+          {%- assign short_cat = block.settings.short_title | default: block.settings.title | default: collection.title -%}
+          {%- assign cat_color = block.settings.color | default: '#B8923F' -%}
+          {%- assign card_tint = block.settings.tint | default: '#F4E4CB' -%}
+          {%- render 'new-arrivals-card',
+            product: product,
+            index: forloop.index0,
+            show_category: true,
+            category_label: short_cat,
+            category_color: cat_color,
+            tint: card_tint
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Onboarding Fallback for "All New" -->
+      {%- if all_new_count == 0 -%}
+        {%- render 'new-arrivals-card-fallback', index: 0, show_category: true, cat_id: 'clothing', item_index: 0 -%}
+        {%- render 'new-arrivals-card-fallback', index: 1, show_category: true, cat_id: 'jewellery', item_index: 0 -%}
+        {%- render 'new-arrivals-card-fallback', index: 2, show_category: true, cat_id: 'organic', item_index: 0 -%}
+        {%- render 'new-arrivals-card-fallback', index: 3, show_category: true, cat_id: 'tech', item_index: 0 -%}
+        {%- render 'new-arrivals-card-fallback', index: 4, show_category: true, cat_id: 'cookware', item_index: 0 -%}
+      {%- endif -%}
+    </div>
+
+    <!-- PANELS: INDIVIDUAL CATEGORIES (Newest 5 products per collection) -->
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign collection = block.settings.collection
+        assign card_tint = block.settings.tint | default: '#F4E4CB'
+        assign cat_color = block.settings.color | default: '#B8923F'
+        assign block_title = block.settings.title
+        if block_title == blank and collection != blank
+          assign block_title = collection.title
+        endif
+        if block_title == blank
+          assign block_title = block.settings.short_title | default: 'Category'
+        endif
+        assign collection_url = collection.url | default: ''
+        if collection_url == blank or collection_url == routes.all_products_collection_url
+          assign bt_down = block_title | downcase
+          if bt_down contains 'cloth' or bt_down contains 'textil'
+            assign collection_url = '/pages/textiles'
+          elsif bt_down contains 'tech' or bt_down contains 'electr'
+            assign collection_url = '/pages/electronics'
+          elsif bt_down contains 'jewel'
+            assign collection_url = '/pages/jewelry'
+          elsif bt_down contains 'access'
+            assign collection_url = '/pages/accessories'
+          elsif bt_down contains 'organ' or bt_down contains 'honey' or bt_down contains 'natur'
+            assign collection_url = '/#honey'
+          elsif bt_down contains 'global' or bt_down contains 'import'
+            assign collection_url = '/#global'
+          elsif bt_down contains 'cook' or bt_down contains 'kitchen'
+            assign collection_url = '/#cookware'
+          elsif bt_down contains 'hamper' or bt_down contains 'gift'
+            assign collection_url = '/#gift-hampers'
+          elsif bt_down contains 'bag' or bt_down contains 'carry'
+            assign collection_url = '/#carryout-bags'
+          else
+            assign collection_url = '/#essentials'
+          endif
+        endif
+      -%}
+      <div
+        class="na-panel na-row"
+        data-panel="{{ block.id }}"
+        data-label="{{ block_title }}"
+        data-url="{{ collection_url }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- assign panel_rendered_count = 0 -%}
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- for product in collection.products limit: 5 -%}
+            {%- render 'new-arrivals-card',
+              product: product,
+              index: forloop.index0,
+              show_category: false,
+              category_label: '',
+              category_color: cat_color,
+              tint: card_tint
+            -%}
+            {%- assign panel_rendered_count = panel_rendered_count | plus: 1 -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for prod in collections['all'].products -%}
+            {%- if panel_rendered_count < 5 -%}
+              {%- assign p_t_low = prod.type | downcase -%}
+              {%- assign p_tag_low = prod.tags | join: ' ' | downcase -%}
+              {%- assign p_match = false -%}
+
+              {%- if bt_down contains 'cloth' or bt_down contains 'textil' -%}
+                {%- if p_t_low contains 'cloth' or p_t_low contains 'textil' or p_t_low contains 'dress' or p_tag_low contains 'clothing' or p_tag_low contains 'textil' or p_tag_low contains 'shirt' or p_tag_low contains 'kurta' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'tech' or bt_down contains 'electr' -%}
+                {%- if p_t_low contains 'tech' or p_t_low contains 'electr' or p_tag_low contains 'technology' or p_tag_low contains 'electronics' or p_tag_low contains 'charger' or p_tag_low contains 'earbuds' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'organ' or bt_down contains 'honey' or bt_down contains 'natur' -%}
+                {%- if p_t_low contains 'organ' or p_t_low contains 'honey' or p_tag_low contains 'organic' or p_tag_low contains 'honey' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'jewel' -%}
+                {%- if p_t_low contains 'jewel' or p_tag_low contains 'jewel' or p_tag_low contains 'ring' or p_tag_low contains 'necklace' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'cook' or bt_down contains 'kitchen' -%}
+                {%- if p_t_low contains 'cook' or p_tag_low contains 'cookware' or p_tag_low contains 'kitchen' or p_tag_low contains 'skillet' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'hamper' or bt_down contains 'gift' -%}
+                {%- if p_t_low contains 'hamper' or p_t_low contains 'gift' or p_tag_low contains 'hamper' or p_tag_low contains 'gift' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'bag' or bt_down contains 'carry' -%}
+                {%- if p_t_low contains 'bag' or p_tag_low contains 'bag' or p_tag_low contains 'tote' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'access' -%}
+                {%- if p_t_low contains 'access' or p_tag_low contains 'accessories' or p_tag_low contains 'belt' or p_tag_low contains 'scarf' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'global' -%}
+                {%- if p_t_low contains 'global' or p_tag_low contains 'global' or p_tag_low contains 'import' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- elsif bt_down contains 'essential' -%}
+                {%- if p_t_low contains 'essential' or p_tag_low contains 'essential' -%}
+                  {%- assign p_match = true -%}
+                {%- endif -%}
+              {%- endif -%}
+
+              {%- if p_match -%}
+                {%- render 'new-arrivals-card',
+                  product: prod,
+                  index: panel_rendered_count,
+                  show_category: false,
+                  category_label: '',
+                  category_color: cat_color,
+                  tint: card_tint
+                -%}
+                {%- assign panel_rendered_count = panel_rendered_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if panel_rendered_count == 0 -%}
+          <!-- Curated Fallbacks for Categories -->
+          {%- for i in (0..4) -%}
+            {%- render 'new-arrivals-card-fallback', index: forloop.index0, show_category: false, cat_id: block_title, item_index: i -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "New Arrivals Strip",
+  "tag": "section",
+  "class": "section-new-arrivals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading prefix",
+      "default": "New"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading suffix (Gold shimmer)",
+      "default": "Arrivals"
+    },
+    {
+      "type": "text",
+      "id": "all_new_label",
+      "label": "First label",
+      "default": "All New"
+    },
+    {
+      "type": "text",
+      "id": "see_all_label",
+      "label": "See all link label",
+      "default": "See all new"
+    },
+    {
+      "type": "url",
+      "id": "see_all_url",
+      "label": "Default See all link URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate categories",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Rotation interval (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 3,
+      "unit": "s"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Shopify Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "info": "Leave blank to use the collection title"
+        },
+        {
+          "type": "text",
+          "id": "short_title",
+          "label": "Short category name",
+          "info": "Displayed in the All New view badge"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Dot & badge accent colour",
+          "default": "#B8923F"
+        },
+        {
+          "type": "color",
+          "id": "tint",
+          "label": "Tile fallback tint",
+          "default": "#F4E4CB"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals Strip",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Clothing & Textiles",
+            "short_title": "Textiles",
+            "color": "#C2780C",
+            "tint": "#F4E4CB"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Information & Technology",
+            "short_title": "Technology",
+            "color": "#1E88C7",
+            "tint": "#DCEBF5"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Organic & Natural",
+            "short_title": "Organic",
+            "color": "#B0541A",
+            "tint": "#F1E0CE"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Global Collections",
+            "short_title": "Global",
+            "color": "#6D3FD1",
+            "tint": "#E6DEF5"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Essentials",
+            "short_title": "Essentials",
+            "color": "#0E8F6E",
+            "tint": "#D8EEE6"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Jewellery",
+            "short_title": "Jewellery",
+            "color": "#8A6416",
+            "tint": "#F0E4C8"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Cookware",
+            "short_title": "Cookware",
+            "color": "#D1334A",
+            "tint": "#F6DDE0"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Gift Hampers",
+            "short_title": "Hampers",
+            "color": "#C42B67",
+            "tint": "#F5DCE7"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Carryout Bags",
+            "short_title": "Bags",
+            "color": "#1F9D6B",
+            "tint": "#D9EFE5"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessories",
+            "short_title": "Accessories",
+            "color": "#4C3FD1",
+            "tint": "#E0DEF6"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

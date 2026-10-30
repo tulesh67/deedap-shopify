@@ -1,0 +1,127 @@
+{%- comment -%}
+  Renders a single New Arrivals portrait product card (4/5 aspect ratio, 24px radius) with QuickView support
+  Parameters:
+    - product: Product object
+    - index: Loop index
+    - show_category: Boolean
+    - category_label: String
+    - category_color: String
+    - tint: String
+{%- endcomment -%}
+
+{%- liquid
+  assign featured_image = product.featured_image
+  assign first_variant = product.selected_or_first_available_variant
+  assign anim_delay = index | times: 0.08
+  assign has_multiple_variants = false
+  if product.variants.size > 1
+    assign has_multiple_variants = true
+  endif
+  assign prod_desc = product.description | strip_html | truncatewords: 35
+  if prod_desc == blank
+    assign prod_desc = 'Verified physical discovery inspected for structural fidelity, craftsmanship authenticity, and daily wear durability.'
+  endif
+-%}
+
+<article
+  class="na-sq na-pop"
+  style="animation-delay: {{ anim_delay }}s; cursor: pointer;"
+  data-product-id="{{ product.id }}"
+  data-qv-trigger="true"
+  data-title="{{ product.title | escape }}"
+  data-price="{{ product.price | money }}"
+  data-category="{{ category_label | default: product.type | default: 'Curated Department' | escape }}"
+  data-color="{{ category_color | default: '#96752C' }}"
+  data-description="{{ prod_desc | escape }}"
+  data-image="{{ featured_image | image_url: width: 1000 }}"
+  data-variant-id="{{ first_variant.id }}"
+>
+  <div class="na-sqimg {% if featured_image == blank %}na-stripe{% endif %}" style="background-color: {{ tint | default: '#F4E4CB' }};">
+    <a href="{{ product.url }}" class="na-zoom" aria-label="{{ product.title | escape }}" data-qv-trigger="true">
+      {%- if featured_image != blank -%}
+        <img
+          src="{{ featured_image | image_url: width: 600 }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          width="600"
+          height="750"
+        >
+      {%- else -%}
+        {%- liquid
+          assign p_low = product.title | downcase
+          assign p_t_low = product.type | downcase
+          assign def_img = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+          if p_low contains 'tech' or p_low contains 'adapter' or p_t_low contains 'tech' or p_t_low contains 'electr'
+            assign def_img = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'earbud' or p_low contains 'audio'
+            assign def_img = 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'honey' or p_low contains 'oil' or p_t_low contains 'organ'
+            assign def_img = 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'ring' or p_low contains 'diamond' or p_t_low contains 'jewel'
+            assign def_img = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'skillet' or p_low contains 'pan' or p_t_low contains 'cook'
+            assign def_img = 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'bag' or p_low contains 'tote' or p_t_low contains 'bag'
+            assign def_img = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'
+          elsif p_low contains 'belt' or p_low contains 'wallet' or p_t_low contains 'access'
+            assign def_img = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop'
+          endif
+        -%}
+        <img
+          src="{{ def_img }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          width="600"
+          height="750"
+          style="width:100%;height:100%;object-fit:cover;display:block"
+        >
+      {%- endif -%}
+    </a>
+
+    <!-- NEW Pill -->
+    <span class="na-new-pill">NEW</span>
+
+    <!-- Round Floating Add to Cart Button -->
+    {%- if first_variant.available -%}
+      <button
+        type="button"
+        class="na-addb na-sqadd"
+        data-variant-id="{{ first_variant.id }}"
+        data-product-url="{{ product.url }}"
+        data-has-multiple-variants="{{ has_multiple_variants }}"
+        aria-label="Add {{ product.title | escape }} to bag"
+        aria-pressed="false"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+      </button>
+    {%- else -%}
+      <button type="button" class="na-addb na-sqadd" disabled aria-label="Sold out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+    {%- endif -%}
+  </div>
+
+  <!-- Product Info -->
+  <div class="na-meta">
+    {%- if show_category and category_label != blank -%}
+      <div class="na-cat-badge">
+        <span class="na-cat-badge-dot" style="background-color: {{ category_color | default: '#B8923F' }};"></span>
+        <span>{{ category_label }}</span>
+      </div>
+    {%- endif -%}
+
+    <h3 class="na-prod-title">
+      <a href="{{ product.url }}" data-qv-trigger="true" style="text-decoration: none; color: inherit;">
+        {{ product.title }}
+      </a>
+    </h3>
+
+    <div class="na-prod-price">
+      {{ product.price | money }}
+    </div>
+  </div>
+</article>

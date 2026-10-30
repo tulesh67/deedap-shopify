@@ -1,0 +1,121 @@
+{% render 'deedap-assets' %}
+
+{%- liquid
+  assign limit = section.settings.products_per_row
+  assign interval = section.settings.interval
+  assign all_label = section.settings.all_label | default: 'All New'
+-%}
+
+<section class="dd-na dd-sec dd-arrivals" aria-label="{{ section.settings.heading | escape }}"
+  data-dd-arrivals data-interval="{{ interval }}" style="--dd-int:{{ interval }}s">
+  <div class="dd-wrap">
+    <div class="dd-panel" data-dd-hold style="border-radius:32px;background:transparent;padding:22px 0 26px">
+
+      <div class="dd-sh">
+        <div class="dd-sh-l">
+          <span class="dd-live" style="width:10px;height:10px;border-radius:50%;background:#B8923F;display:inline-block"></span>
+          <h2 class="dd-disp">{{ section.settings.heading_1 }} <span class="dd-goldtxt">{{ section.settings.heading_2 }}</span></h2>
+          <span class="dd-rule"></span>
+          <span class="dd-sub" data-dd-label aria-live="polite">{{ all_label }}</span>
+        </div>
+        {%- if section.settings.see_all_link != blank -%}
+          <a class="dd-seeall" href="{{ section.settings.see_all_link }}">{{ section.settings.see_all_label }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        {%- endif -%}
+      </div>
+
+      <div class="dd-prog" aria-hidden="true"><span class="dd-bar2" data-dd-bar></span></div>
+
+      {%- if section.settings.show_all_panel -%}
+        <div class="dd-panelset is-active" data-dd-panel data-label="{{ all_label | escape }}">
+          <div class="dd-row">
+            {%- assign all_new_count = 0 -%}
+            {%- for block in section.blocks limit: limit -%}
+              {%- assign col = block.settings.collection -%}
+              {%- if col != blank and col.products_count > 0 -%}
+                {%- assign p = col.products.first -%}
+                {%- assign cat_name = block.settings.label | default: col.title -%}
+                {%- assign all_new_count = all_new_count | plus: 1 -%}
+                {% render 'deedap-tile', product: p, tag: section.settings.tag_text, tint: block.settings.tint, show_cat: true, cat_label: cat_name, cat_color: block.settings.color %}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if all_new_count == 0 -%}
+              {% render 'deedap-tile-fallback', cat_handle: 'clothing-textiles', item_index: 0, tag: section.settings.tag_text, tint: '#F4E4CB', show_cat: true, cat_label: 'Clothing & Textiles', cat_color: '#C2780C' %}
+              {% render 'deedap-tile-fallback', cat_handle: 'information-technology', item_index: 0, tag: section.settings.tag_text, tint: '#DCEBF5', show_cat: true, cat_label: 'Information & Technology', cat_color: '#1E88C7' %}
+              {% render 'deedap-tile-fallback', cat_handle: 'organic-natural', item_index: 0, tag: section.settings.tag_text, tint: '#F1E0CE', show_cat: true, cat_label: 'Organic & Natural', cat_color: '#B0541A' %}
+              {% render 'deedap-tile-fallback', cat_handle: 'jewellery', item_index: 0, tag: section.settings.tag_text, tint: '#F0E4C8', show_cat: true, cat_label: 'Jewellery', cat_color: '#8A6416' %}
+              {% render 'deedap-tile-fallback', cat_handle: 'cookware', item_index: 0, tag: section.settings.tag_text, tint: '#F6DDE0', show_cat: true, cat_label: 'Cookware', cat_color: '#D1334A' %}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- assign col = block.settings.collection -%}
+        {%- assign b_label = block.settings.label | default: col.title | default: 'Collection' -%}
+        <div class="dd-panelset{% unless section.settings.show_all_panel %}{% if forloop.first %} is-active{% endif %}{% endunless %}" data-dd-panel data-label="{{ b_label | escape }}" {{ block.shopify_attributes }}>
+          <div class="dd-row">
+            {%- if col != blank and col.products_count > 0 -%}
+              {%- for product in col.products limit: limit -%}
+                {% render 'deedap-tile', product: product, tag: section.settings.tag_text, tint: block.settings.tint, show_cat: false %}
+              {%- endfor -%}
+            {%- else -%}
+              {%- assign lim = limit | default: 5 | minus: 1 -%}
+              {%- for idx in (0..lim) -%}
+                {%- if idx == 0 -%}{%- assign tag = section.settings.tag_text -%}{%- else -%}{%- assign tag = '' -%}{%- endif -%}
+                {% render 'deedap-tile-fallback', cat_handle: block.settings.collection, item_index: idx, tag: tag, tint: block.settings.tint, show_cat: false %}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Deedap · New arrivals",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading_1", "label": "Heading (part 1)", "default": "New" },
+    { "type": "text", "id": "heading_2", "label": "Heading (gold)", "default": "Arrivals" },
+    { "type": "text", "id": "all_label", "label": "Label for the first panel", "default": "All New" },
+    { "type": "checkbox", "id": "show_all_panel", "label": "Show the 'All New' panel first", "default": true },
+    { "type": "range", "id": "products_per_row", "label": "Products per panel", "min": 3, "max": 10, "step": 1, "default": 5 },
+    { "type": "range", "id": "interval", "label": "Seconds per category", "min": 2, "max": 8, "step": 0.5, "default": 3 },
+    { "type": "text", "id": "tag_text", "label": "Pill on tiles", "default": "NEW" },
+    { "type": "text", "id": "see_all_label", "label": "See-all text", "default": "See all new" },
+    { "type": "url", "id": "see_all_link", "label": "See-all link" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label in the header", "info": "Leave empty to use the collection's title." },
+        { "type": "color", "id": "color", "label": "Dot colour", "default": "#B8923F" },
+        { "type": "color", "id": "tint", "label": "Placeholder colour (no product image)", "default": "#F4E4CB" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Deedap · New arrivals",
+      "blocks": [
+        { "type": "collection", "settings": { "label": "Clothing & Textiles", "color": "#C2780C", "tint": "#F4E4CB" } },
+        { "type": "collection", "settings": { "label": "Information & Technology", "color": "#1E88C7", "tint": "#DCEBF5" } },
+        { "type": "collection", "settings": { "label": "Organic & Natural", "color": "#B0541A", "tint": "#F1E0CE" } },
+        { "type": "collection", "settings": { "label": "Global Collections", "color": "#6D3FD1", "tint": "#E6DEF5" } },
+        { "type": "collection", "settings": { "label": "Essentials", "color": "#0E8F6E", "tint": "#D8EEE6" } },
+        { "type": "collection", "settings": { "label": "Jewellery", "color": "#8A6416", "tint": "#F0E4C8" } },
+        { "type": "collection", "settings": { "label": "Cookware", "color": "#D1334A", "tint": "#F6DDE0" } },
+        { "type": "collection", "settings": { "label": "Gift Hampers", "color": "#C42B67", "tint": "#F5DCE7" } },
+        { "type": "collection", "settings": { "label": "Carryout Bags", "color": "#1F9D6B", "tint": "#D9EFE5" } },
+        { "type": "collection", "settings": { "label": "Accessories", "color": "#4C3FD1", "tint": "#E0DEF6" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

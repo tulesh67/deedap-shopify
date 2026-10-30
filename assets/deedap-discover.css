@@ -1,0 +1,48 @@
+.deedap-discover{--discover-ink:#171511;--discover-muted:#69676a;--discover-gold:#9b762f;padding-top:56px;padding-bottom:76px}
+.deedap-discover__intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.8fr);align-items:end;gap:38px;margin-bottom:32px}
+.deedap-discover__eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid #e5dac1;border-radius:999px;background:#f8f2e5;color:#79591f;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.deedap-discover__eyebrow span{color:#b68c3f;font-size:13px}
+.deedap-discover__title{margin:20px 0 0;color:var(--discover-ink);font-family:var(--font-heading-family,Arial,sans-serif);font-size:clamp(42px,6vw,72px);font-weight:800;line-height:.98;letter-spacing:-.065em;text-transform:uppercase}
+.deedap-discover__title em{color:#b4893c;font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em;text-transform:none}
+.deedap-discover__copy{display:flex;flex-direction:column;align-items:flex-start;gap:19px;padding-bottom:4px}
+.deedap-discover__copy p{max-width:510px;margin:0;color:#5c5a5d;font-size:14px;line-height:1.8}
+.deedap-discover__shop-all{display:inline-flex;align-items:center;gap:12px;min-height:46px;padding:0 21px;border-radius:999px;background:#171511;color:#fff;text-decoration:none;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;transition:transform .22s ease,background .22s ease}
+.deedap-discover__shop-all:hover{transform:translateY(-2px);background:#3a2d1b;color:#fff}
+.deedap-discover__filters{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:17px 0 20px;border-top:1px solid rgba(23,21,17,.1);border-bottom:1px solid rgba(23,21,17,.1)}
+.deedap-discover__filter-label{flex:0 0 auto;padding-top:12px;color:#858078;font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.deedap-discover__filter-list{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.deedap-discover__filter{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 12px;border:1px solid #e5e0d6;border-radius:999px;background:#fff;color:#4c4a46;font-family:inherit;font-size:9px;font-weight:700;line-height:1;letter-spacing:.035em;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.deedap-discover__filter:hover{transform:translateY(-1px);border-color:#c6ac76}
+.deedap-discover__filter.is-active{border-color:#171511;background:#171511;color:#fff}
+.deedap-discover__filter i{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:var(--filter-color)}
+.deedap-discover__catalog-head{display:flex;justify-content:space-between;align-items:end;gap:22px;margin:38px 0 18px}
+.deedap-discover__kicker{margin-bottom:8px;color:#95722f;font-size:9px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+.deedap-discover__catalog-head h3{margin:0;color:#171511;font-size:clamp(25px,3.8vw,40px);font-weight:750;line-height:1.05;letter-spacing:-.045em}
+.deedap-discover__badge{color:#79746a;font-size:9px;font-weight:800;letter-spacing:.12em;text-align:right;text-transform:uppercase}
+.deedap-discover__grid{display:grid;grid-template-columns:repeat(var(--deedap-product-columns,4),minmax(0,1fr));gap:18px}
+.deedap-discover__grid>[data-discover-category][hidden]{display:none!important}
+.deedap-discover .deedap-card{min-width:0;overflow:hidden;border:1px solid rgba(30,26,20,.09);border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(36,29,17,.045);transition:transform .3s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease}
+.deedap-discover .deedap-card:hover{transform:translateY(-4px);box-shadow:0 17px 38px rgba(36,29,17,.11)}
+.deedap-discover .deedap-card-media{aspect-ratio:1/1.02;background:#f0ece3}
+.deedap-discover .deedap-card-img{width:100%;height:100%;object-fit:cover}
+.deedap-discover .deedap-card-info{padding:13px 14px 14px}
+.deedap-discover .deedap-card-title{font-size:14px;line-height:1.35}
+.deedap-discover .deedap-card-sub{font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.deedap-discover .deedap-card-chips{min-height:25px}
+.deedap-discover .card-category-badge{font-size:8px;letter-spacing:.1em}
+.deedap-discover .btn-card-quickadd,
+.deedap-discover .deedap-buy-actions__add,
+.deedap-discover .deedap-buy-actions__buy{min-height:39px;font-size:9px}
+.deedap-discover .deedap-buy-actions{margin-top:8px}
+.deedap-discover__status{margin:15px 0 0;color:#79766f;font-size:10px}
+.deedap-discover__empty{grid-column:1/-1;padding:46px 24px;border:1px dashed #d7c9ac;border-radius:19px;color:#6e685c;text-align:center}
+.deedap-discover__empty-star{color:#b4893c;font-size:22px}
+.deedap-discover__empty h4{margin:10px 0 5px;color:#26231e;font-size:17px}
+.deedap-discover__empty p{max-width:480px;margin:0 auto 14px;font-size:12px;line-height:1.7}
+.deedap-discover__empty a,.deedap-discover__view-all a{color:#79591f;font-size:10px;font-weight:800;letter-spacing:.12em;text-decoration:none;text-transform:uppercase}
+.deedap-discover__view-all{margin-top:28px;text-align:center}
+.deedap-discover__view-all a{display:inline-flex;gap:9px;align-items:center;padding:13px 20px;border:1px solid #d8c9a9;border-radius:999px}
+@media(max-width:989px){.deedap-discover{padding-top:42px;padding-bottom:58px}.deedap-discover__intro{grid-template-columns:1fr;gap:17px}.deedap-discover__copy{gap:14px}.deedap-discover__filters{display:block}.deedap-discover__filter-label{display:block;padding:0 0 11px}.deedap-discover__filter-list{justify-content:flex-start}.deedap-discover__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:749px){.deedap-discover{padding-top:32px;padding-bottom:45px}.deedap-discover__title{font-size:clamp(39px,11vw,58px)}.deedap-discover__filter-list{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px;scrollbar-width:none}.deedap-discover__filter-list::-webkit-scrollbar{display:none}.deedap-discover__filter{flex:0 0 auto}.deedap-discover__catalog-head{align-items:flex-start;flex-direction:column;gap:8px;margin-top:29px}.deedap-discover__badge{text-align:left}.deedap-discover__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.deedap-discover .deedap-card-info{padding:10px}.deedap-discover .deedap-card-title{font-size:12px}.deedap-discover .deedap-card-sub{font-size:8px}.deedap-discover .deedap-card-chips{gap:4px}.deedap-discover .chip-item{padding:3px 6px;font-size:8px}.deedap-discover .btn-card-quickadd{min-height:36px;font-size:8px}.deedap-discover .card-floating-label{left:8px;right:8px;bottom:8px;padding:7px 9px}.deedap-discover .card-floating-label span{font-size:10px!important}}
+@media(prefers-reduced-motion:reduce){.deedap-discover *{scroll-behavior:auto!important;transition:none!important}}
+.deedap-discover__no-results[hidden]{display:none!important}

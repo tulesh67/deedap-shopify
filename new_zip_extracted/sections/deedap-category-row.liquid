@@ -1,0 +1,65 @@
+{% render 'deedap-assets' %}
+
+{%- liquid
+  assign col = section.settings.collection
+  assign heading = section.settings.title | default: col.title
+  assign accent = section.settings.color
+  assign render_it = false
+  if col != blank and col.products_count > 0
+    assign render_it = true
+  endif
+  if request.design_mode
+    assign render_it = true
+  endif
+-%}
+
+{%- if render_it -%}
+<section class="dd-na dd-sec dd-catsec" aria-label="{{ heading | escape }}" style="--c:{{ accent }}">
+  <div class="dd-wrap" style="padding:18px 0 4px">
+    <div class="dd-sh">
+      <div class="dd-sh-l">
+        <span class="dd-dot"></span>
+        <h2 class="dd-disp">{{ heading | default: 'Choose a collection' }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <span class="dd-rule"></span>
+          <span class="dd-sub">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+      </div>
+      {%- if col != blank -%}
+        <a class="dd-seeall" href="{{ col.url }}">{{ section.settings.see_all_label }}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      {%- endif -%}
+    </div>
+    <div class="dd-prog dd-prog-static" aria-hidden="true"><span></span></div>
+
+    <div class="dd-row">
+      {%- if col != blank -%}
+        {%- for product in col.products limit: section.settings.limit -%}
+          {%- if forloop.first -%}{%- assign tag = section.settings.tag_first -%}{%- else -%}{%- assign tag = section.settings.tag_rest -%}{%- endif -%}
+          {% render 'deedap-tile', product: product, tag: tag, tint: section.settings.tint, show_cat: false %}
+        {%- endfor -%}
+      {%- else -%}
+        <p class="dd-empty">Pick a collection in the section settings.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Deedap · Category row",
+  "tag": "section",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "title", "label": "Title (empty = collection title)" },
+    { "type": "text", "id": "subtitle", "label": "Tagline" },
+    { "type": "color", "id": "color", "label": "Accent colour", "default": "#B8923F" },
+    { "type": "color", "id": "tint", "label": "Placeholder colour (no product image)", "default": "#F4E4CB" },
+    { "type": "range", "id": "limit", "label": "Products shown", "min": 4, "max": 12, "step": 1, "default": 5 },
+    { "type": "text", "id": "tag_first", "label": "Pill on the first tile", "default": "NEW" },
+    { "type": "text", "id": "tag_rest", "label": "Pill on the other tiles", "default": "FEATURED", "info": "Leave empty for no pill." },
+    { "type": "text", "id": "see_all_label", "label": "'See all' text", "default": "See all" }
+  ],
+  "presets": [ { "name": "Deedap · Category row" } ]
+}
+{% endschema %}

@@ -1,0 +1,330 @@
+<style>
+.fest-wrapper{padding:14px 24px 20px;background:#FAF8F3;font-family:'Manrope',sans-serif}
+.fest{
+  --b1:#7A1020;
+  --b2:#C8321C;
+  --b3:#F0882A;
+  --acc:#F4C95D;
+  --glow:rgba(255,196,90,.55);
+  position:relative;
+  height:272px;
+  border-radius:26px;
+  overflow:hidden;
+  color:#FFF6DD;
+  box-shadow:0 30px 50px -30px rgba(70,20,10,.7);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+  transition:box-shadow .6s;
+}
+.fest.t-diwali{
+  --b1:#6E0F25;
+  --b2:#C23A1B;
+  --b3:#F29A2E;
+  --acc:#F7CB63;
+  --glow:rgba(255,196,90,.55);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+}
+.fest.t-xmas{
+  --b1:#0B3B2C;
+  --b2:#136149;
+  --b3:#B3262F;
+  --acc:#F5DA8A;
+  --glow:rgba(255,230,160,.4);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+}
+.fest.t-eid{
+  --b1:#0A2A4A;
+  --b2:#0F6B73;
+  --b3:#1BA28F;
+  --acc:#F3D582;
+  --glow:rgba(200,255,240,.35);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+}
+.fest.t-holi{
+  --b1:#6B1FA8;
+  --b2:#E0348F;
+  --b3:#FF9A1F;
+  --acc:#FFE07A;
+  --glow:rgba(255,255,255,.35);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+}
+.fest.t-brand{
+  --b1:#0B0A08;
+  --b2:#1E170B;
+  --b3:#4A3813;
+  --acc:#E8C875;
+  --glow:rgba(232,200,117,.4);
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+}
+.fbg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:radial-gradient(60% 90% at 50% 120%,var(--glow),transparent 70%),linear-gradient(100deg,var(--b1),var(--b2) 52%,var(--b3));
+  pointer-events:none;
+}
+.fbg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.14) 1.2px,transparent 1.4px);
+  background-size:22px 22px;
+  mask-image:linear-gradient(180deg,#000,transparent 80%);
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 80%);
+}
+.o{position:absolute;inset:0;display:none;pointer-events:none;z-index:1}
+.t-diwali .o-diwali,.t-xmas .o-xmas,.t-eid .o-eid,.t-holi .o-holi,.t-brand .o-brand{display:block}
+.garland{position:absolute;left:0;right:0;top:0;height:30px;z-index:2;pointer-events:none}
+.garland svg{position:absolute;left:0;top:0}
+.bulb{position:absolute;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#FFE9A6;box-shadow:0 0 10px 3px rgba(255,226,140,.85);animation:twk 1.8s ease-in-out infinite}
+@keyframes twk{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.lant{position:absolute;top:0;transform-origin:50% 0;animation:sway 3.6s ease-in-out infinite alternate;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
+.lstr{display:block;width:1px;margin:0 auto;background:rgba(255,236,170,.75)}
+@keyframes sway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.flame{animation:flick 1.1s ease-in-out infinite alternate;transform-origin:center;transform-box:fill-box}
+@keyframes flick{from{opacity:.75;transform:scale(.92,.9)}to{opacity:1;transform:scale(1.05,1.12)}}
+.diyas span{position:absolute;bottom:8px;width:16px;height:7px;border-radius:0 0 16px 16px;background:var(--acc);box-shadow:0 0 18px 6px rgba(255,190,70,.55);animation:flick 1.4s ease-in-out infinite alternate}
+.diyas span:before{content:"";position:absolute;left:50%;bottom:6px;width:6px;height:11px;margin-left:-3px;border-radius:50% 50% 50% 50%/70% 70% 30% 30%;background:linear-gradient(#FFF6C8,#FFB43C);box-shadow:0 0 12px 3px rgba(255,196,80,.9)}
+.snow{position:absolute;top:-10px;border-radius:50%;background:#fff;opacity:.85;animation:fall linear infinite}
+@keyframes fall{to{transform:translate(24px,290px)}}
+.xm span{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3,#C8242F 55%,#7A0F18);box-shadow:0 0 14px rgba(255,255,255,.25);animation:swayb 3s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes swayb{from{transform:translate(-6px,0)}to{transform:translate(6px,4px)}}
+.moon{position:absolute;filter:drop-shadow(0 0 14px rgba(243,213,130,.55));animation:bob 4s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(-4px)}to{transform:translateY(8px)}}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 6px 2px rgba(255,255,255,.7);animation:twk 2.4s ease-in-out infinite}
+.blob{position:absolute;width:210px;height:210px;margin:-105px 0 0 -105px;border-radius:50%;opacity:.55;filter:blur(8px);animation:drift 7s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(-18px,-10px) scale(.9)}to{transform:translate(22px,14px) scale(1.12)}}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(232,200,117,.35);animation:rpl 5s ease-out infinite}
+.ring.r1{left:40%;top:-60px;width:360px;height:360px}
+.ring.r2{left:64%;top:-90px;width:440px;height:440px;animation-delay:2.2s}
+@keyframes rpl{from{opacity:.9;transform:scale(.8)}to{opacity:0;transform:scale(1.18)}}
+.fin{position:relative;z-index:3;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 44px 22px}
+.fplaque{flex:0 0 290px;position:relative;animation:fup .9s .1s cubic-bezier(.2,.8,.2,1) both}
+.fplin{position:relative;padding:26px 18px 24px;text-align:center;border-radius:34px;background:radial-gradient(120% 120% at 50% 0%,rgba(255,255,255,.14),transparent 60%),linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.45));border:2px solid var(--acc);outline:3px dotted rgba(255,226,140,.9);outline-offset:-10px;box-shadow:0 18px 30px -16px rgba(0,0,0,.6),0 0 40px -6px var(--glow)}
+.fkick{font-size:10.5px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--acc)}
+.fname{margin-top:8px;font-size:34px;line-height:1;letter-spacing:-.005em;background:linear-gradient(180deg,#FFF3C2,#F2C256 55%,#B9852A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35));font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase}
+.fname2{margin-top:4px;font-size:20px;line-height:1;letter-spacing:.06em;color:#FFF6DD;font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase}
+.fniche{flex:1 1 360px;max-width:430px;position:relative;align-self:stretch;margin:6px 0 0;border-radius:12px;border:2px solid var(--acc);background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.5));box-shadow:inset 0 0 40px rgba(0,0,0,.45),0 18px 30px -18px rgba(0,0,0,.7);animation:fup .9s .25s cubic-bezier(.2,.8,.2,1) both}
+.fniche:before{content:"";position:absolute;left:12%;right:12%;top:0;height:60%;background:radial-gradient(60% 100% at 50% 0,rgba(255,236,170,.5),transparent);pointer-events:none}
+.frib{position:absolute;left:50%;top:-16px;transform:translateX(-50%);white-space:nowrap;padding:8px 20px;border-radius:999px;font-size:12.5px;letter-spacing:.16em;color:#4A1E00;background:linear-gradient(180deg,#FFE9A6,#EDB84A);border:2px solid #FFF3C4;box-shadow:0 8px 16px -6px rgba(0,0,0,.5);font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase}
+.fshow{height:100%;display:flex;align-items:flex-end;justify-content:center;gap:18px;padding:28px 18px 14px}
+.fprod{width:92px;height:92px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,236,170,.85);box-shadow:0 14px 22px -8px rgba(0,0,0,.65);animation:bob 3.6s ease-in-out infinite alternate}
+.fprod.mid{width:118px;height:118px;animation-delay:-1.4s}
+.fprod:last-child{animation-delay:-2.6s}
+.fprod img{width:100%;height:100%;object-fit:cover;display:block}
+.fofr{flex:0 0 250px;text-align:center;animation:fup .9s .4s cubic-bezier(.2,.8,.2,1) both}
+.fupto{font-size:11.5px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--acc)}
+.fbig{font-size:70px;line-height:.95;background:linear-gradient(180deg,#FFF6C8 5%,#F6CC5E 50%,#C58F2C);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 rgba(90,40,0,.45));display:inline-flex;align-items:flex-end;gap:6px;font-family:'Syne',sans-serif;font-weight:800}
+.fbig .pct{font-size:24px;line-height:1.3;letter-spacing:.04em;-webkit-text-fill-color:transparent;font-weight:800}
+.fcta{display:inline-flex;align-items:center;gap:10px;margin-top:10px;min-height:44px;padding:0 24px;border-radius:999px;background:#FFF6DD;color:#3A1500;text-decoration:none;font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 12px 22px -10px rgba(0,0,0,.6);transition:transform .3s,gap .3s}
+.fcta:hover{transform:translateY(-2px);gap:16px}
+.fdate{margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.12em;color:rgba(255,246,221,.8);text-transform:uppercase}
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (max-width:1100px){.fniche{display:none}.fin{justify-content:space-around}}
+@media (max-width:700px){.fest{height:auto}.fin{flex-direction:column;padding:50px 20px 24px}.fplaque,.fofr{flex:none;width:100%}}
+@media (prefers-reduced-motion:reduce){.fest *,.fest *:before{animation:none !important}}
+</style>
+
+{%- liquid
+  assign theme = section.settings.festival_theme | default: 'diwali'
+  assign kick = section.settings.kicker | default: 'Deedap presents'
+  assign name1 = section.settings.festival_name_1
+  assign name2 = section.settings.festival_name_2
+  assign ribbon = section.settings.ribbon_text
+  assign offer = section.settings.offer_number | default: '50'
+  assign end_date = section.settings.offer_end_date
+  assign cta_url = section.settings.cta_link | default: routes.all_products_collection_url
+  assign cta_text = section.settings.cta_label | default: 'Shop now'
+
+  if name1 == blank
+    case theme
+      when 'diwali'
+        assign name1 = 'Diwali'
+        assign name2 = 'Festive Edit'
+        assign ribbon = 'New deals unlocked'
+        assign end_date = 'Offer ends Nov 15'
+      when 'xmas'
+        assign name1 = 'Christmas'
+        assign name2 = 'Gift Season'
+        assign ribbon = 'Gifts they will love'
+        assign offer = '40'
+        assign end_date = 'Offer ends Dec 25'
+      when 'eid'
+        assign name1 = 'Eid Mubarak'
+        assign name2 = 'Festive Edit'
+        assign ribbon = 'Celebrate in style'
+        assign offer = '40'
+        assign end_date = 'Limited Festive Days'
+      when 'holi'
+        assign name1 = 'Holi'
+        assign name2 = 'Colour Sale'
+        assign ribbon = 'Colours of joy'
+        assign offer = '30'
+        assign end_date = 'Special Spring Edit'
+      when 'brand'
+        assign name1 = 'New Season'
+        assign name2 = 'Collection'
+        assign ribbon = 'Curated additions'
+        assign offer = '30'
+        assign end_date = 'Limited time'
+    endcase
+  endif
+-%}
+
+<section class="fest-wrapper" aria-label="Festival offer" id="FestivalOffer-{{ section.id }}">
+  <div class="fest t-{{ theme }}" style="max-width:1290px;margin:0 auto">
+    <div class="fbg" aria-hidden="true"></div>
+
+    <!-- DIWALI PARTICLES: LANTERNS & DIYAS -->
+    <div class="o o-diwali" aria-hidden="true">
+      <div class="lant" style="left:29.5%;animation-delay:0s;transform:scale(1)"><span class="lstr" style="height:18px"></span><svg width="46" height="78" viewBox="0 0 46 78"><path d="M17 2h12l3 8H14z" fill="var(--acc)"></path><path d="M12 10h22c6 8 6 30 0 40H12c-6-10-6-32 0-40z" fill="var(--acc)" opacity=".92"></path><path d="M23 10v40M16 10c-4 10-4 30 0 40M30 10c4 10 4 30 0 40" stroke="rgba(0,0,0,.22)" fill="none"></path><ellipse cx="23" cy="30" rx="6" ry="9" fill="#FFE9A6" class="flame"></ellipse><path d="M14 50h18l-3 6H17z" fill="var(--acc)"></path><path d="M23 56v14" stroke="var(--acc)" stroke-width="2"></path><circle cx="23" cy="73" r="3.4" fill="#FFE9A6"></circle></svg></div>
+      <div class="lant" style="left:2.2%;animation-delay:0.7s;transform:scale(0.85)"><span class="lstr" style="height:52px"></span><svg width="46" height="78" viewBox="0 0 46 78"><path d="M17 2h12l3 8H14z" fill="var(--acc)"></path><path d="M12 10h22c6 8 6 30 0 40H12c-6-10-6-32 0-40z" fill="var(--acc)" opacity=".92"></path><path d="M23 10v40M16 10c-4 10-4 30 0 40M30 10c4 10 4 30 0 40" stroke="rgba(0,0,0,.22)" fill="none"></path><ellipse cx="23" cy="30" rx="6" ry="9" fill="#FFE9A6" class="flame"></ellipse><path d="M14 50h18l-3 6H17z" fill="var(--acc)"></path><path d="M23 56v14" stroke="var(--acc)" stroke-width="2"></path><circle cx="23" cy="73" r="3.4" fill="#FFE9A6"></circle></svg></div>
+      <div class="lant" style="left:72.3%;animation-delay:0.3s;transform:scale(0.95)"><span class="lstr" style="height:26px"></span><svg width="46" height="78" viewBox="0 0 46 78"><path d="M17 2h12l3 8H14z" fill="var(--acc)"></path><path d="M12 10h22c6 8 6 30 0 40H12c-6-10-6-32 0-40z" fill="var(--acc)" opacity=".92"></path><path d="M23 10v40M16 10c-4 10-4 30 0 40M30 10c4 10 4 30 0 40" stroke="rgba(0,0,0,.22)" fill="none"></path><ellipse cx="23" cy="30" rx="6" ry="9" fill="#FFE9A6" class="flame"></ellipse><path d="M14 50h18l-3 6H17z" fill="var(--acc)"></path><path d="M23 56v14" stroke="var(--acc)" stroke-width="2"></path><circle cx="23" cy="73" r="3.4" fill="#FFE9A6"></circle></svg></div>
+      <div class="lant" style="left:95.5%;animation-delay:1.1s;transform:scale(0.8)"><span class="lstr" style="height:60px"></span><svg width="46" height="78" viewBox="0 0 46 78"><path d="M17 2h12l3 8H14z" fill="var(--acc)"></path><path d="M12 10h22c6 8 6 30 0 40H12c-6-10-6-32 0-40z" fill="var(--acc)" opacity=".92"></path><path d="M23 10v40M16 10c-4 10-4 30 0 40M30 10c4 10 4 30 0 40" stroke="rgba(0,0,0,.22)" fill="none"></path><ellipse cx="23" cy="30" rx="6" ry="9" fill="#FFE9A6" class="flame"></ellipse><path d="M14 50h18l-3 6H17z" fill="var(--acc)"></path><path d="M23 56v14" stroke="var(--acc)" stroke-width="2"></path><circle cx="23" cy="73" r="3.4" fill="#FFE9A6"></circle></svg></div>
+      <div class="diyas"><span style="left:4.0%;animation-delay:0.00s"></span><span style="left:12.3%;animation-delay:0.31s"></span><span style="left:20.6%;animation-delay:0.62s"></span><span style="left:28.9%;animation-delay:0.93s"></span><span style="left:37.2%;animation-delay:1.24s"></span><span style="left:45.5%;animation-delay:1.55s"></span><span style="left:53.8%;animation-delay:0.26s"></span><span style="left:62.1%;animation-delay:0.57s"></span><span style="left:70.4%;animation-delay:0.88s"></span><span style="left:78.7%;animation-delay:1.19s"></span><span style="left:87.0%;animation-delay:1.50s"></span><span style="left:95.3%;animation-delay:0.21s"></span></div>
+    </div>
+
+    <!-- XMAS PARTICLES: SNOW & ORNAMENTS -->
+    <div class="o o-xmas" aria-hidden="true">
+      <i class="snow" style="left:10%;width:5px;height:5px;animation-duration:6s;animation-delay:0s"></i>
+      <i class="snow" style="left:25%;width:6px;height:6px;animation-duration:8s;animation-delay:1.2s"></i>
+      <i class="snow" style="left:45%;width:4px;height:4px;animation-duration:7s;animation-delay:0.5s"></i>
+      <i class="snow" style="left:65%;width:5px;height:5px;animation-duration:9s;animation-delay:2s"></i>
+      <i class="snow" style="left:80%;width:6px;height:6px;animation-duration:6.5s;animation-delay:1.5s"></i>
+      <i class="snow" style="left:92%;width:4px;height:4px;animation-duration:8.5s;animation-delay:0.8s"></i>
+      <div class="orn xm"><span style="left:34%;top:38px;--d:0.0s"></span><span style="left:52%;top:22px;--d:0.5s"></span><span style="left:74%;top:46px;--d:1.0s"></span><span style="left:90%;top:28px;--d:1.5s"></span></div>
+    </div>
+
+    <!-- EID PARTICLES: MOON & STARS -->
+    <div class="o o-eid" aria-hidden="true">
+      <div class="moon" style="left:29%;top:8px;transform:scale(0.95)"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M42 6A28 28 0 1 0 58 44 22 22 0 1 1 42 6z" fill="var(--acc)"></path><path d="M52 14l1.8 4.6 4.8.4-3.7 3.1 1.2 4.7-4.1-2.6-4.1 2.6 1.2-4.7-3.7-3.1 4.8-.4z" fill="var(--acc)"></path></svg></div>
+      <div class="moon" style="left:70%;top:0px;transform:scale(0.7);animation-delay:0.8s"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M42 6A28 28 0 1 0 58 44 22 22 0 1 1 42 6z" fill="var(--acc)"></path><path d="M52 14l1.8 4.6 4.8.4-3.7 3.1 1.2 4.7-4.1-2.6-4.1 2.6 1.2-4.7-3.7-3.1 4.8-.4z" fill="var(--acc)"></path></svg></div>
+      <i class="star" style="left:77.8%;top:46px;animation-delay:0.4s"></i>
+      <i class="star" style="left:40.0%;top:209px;animation-delay:2.4s"></i>
+      <i class="star" style="left:73.4%;top:86px;animation-delay:1.6s"></i>
+      <i class="star" style="left:58.6%;top:202px;animation-delay:2.5s"></i>
+      <i class="star" style="left:89.7%;top:101px;animation-delay:2.8s"></i>
+    </div>
+
+    <!-- HOLI PARTICLES: COLOR BLOBS -->
+    <div class="o o-holi" aria-hidden="true">
+      <i class="blob" style="left:8%;top:160px;background:radial-gradient(circle,#FF2E93,transparent 68%)"></i>
+      <i class="blob" style="left:26%;top:40px;background:radial-gradient(circle,#FFD400,transparent 68%);animation-delay:-1.3s"></i>
+      <i class="blob" style="left:44%;top:170px;background:radial-gradient(circle,#18C5FF,transparent 68%);animation-delay:-2.6s"></i>
+      <i class="blob" style="left:62%;top:60px;background:radial-gradient(circle,#8A3FFC,transparent 68%);animation-delay:-3.9s"></i>
+      <i class="blob" style="left:80%;top:150px;background:radial-gradient(circle,#FF7A00,transparent 68%);animation-delay:-5.2s"></i>
+    </div>
+
+    <!-- BRAND / EVERYDAY PARTICLES: RINGS -->
+    <div class="o o-brand" aria-hidden="true">
+      <i class="ring r1"></i><i class="ring r2"></i>
+    </div>
+
+    <!-- TOP GARLAND LIGHTS -->
+    <div class="garland" aria-hidden="true">
+      <svg viewBox="0 0 100 30" preserveAspectRatio="none" width="100%" height="30">
+        <path d="M0 4 Q 4 14 8 6 T 16 6 T 24 6 T 32 6 T 40 6 T 48 6 T 56 6 T 64 6 T 72 6 T 80 6 T 88 6 T 96 6 T 100 6" fill="none" stroke="rgba(255,236,170,.55)" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <i class="bulb" style="left:2.0%;top:6.0px;animation-delay:0.00s"></i>
+      <i class="bulb" style="left:11.1%;top:14.8px;animation-delay:0.46s"></i>
+      <i class="bulb" style="left:20.2%;top:2.0px;animation-delay:0.92s"></i>
+      <i class="bulb" style="left:29.3%;top:-1.0px;animation-delay:1.38s"></i>
+      <i class="bulb" style="left:38.4%;top:13.1px;animation-delay:1.84s"></i>
+      <i class="bulb" style="left:47.5%;top:9.7px;animation-delay:0.30s"></i>
+      <i class="bulb" style="left:56.6%;top:-2.8px;animation-delay:0.76s"></i>
+      <i class="bulb" style="left:65.7%;top:6.3px;animation-delay:1.22s"></i>
+      <i class="bulb" style="left:74.8%;top:14.7px;animation-delay:1.68s"></i>
+      <i class="bulb" style="left:83.9%;top:1.7px;animation-delay:0.14s"></i>
+      <i class="bulb" style="left:93.0%;top:-0.8px;animation-delay:0.60s"></i>
+    </div>
+
+    <!-- INNER CONTENT -->
+    <div class="fin">
+      <!-- LEFT PLAQUE -->
+      <div class="fplaque">
+        <div class="fplin">
+          <div class="fkick">{{ kick }}</div>
+          <div class="fname disp">{{ name1 }}</div>
+          <div class="fname2 disp">{{ name2 }}</div>
+        </div>
+      </div>
+
+      <!-- CENTER NICHE WITH FLOATING PRODUCTS -->
+      <div class="fniche">
+        <div class="frib disp">{{ ribbon }}</div>
+        <div class="fshow">
+          <div class="fprod">
+            {%- if section.settings.image_1 != blank -%}
+              <img src="{{ section.settings.image_1 | image_url: width: 300 }}" alt="{{ section.settings.image_1.alt | default: 'Featured product' | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ '4ca6f3dd244e0a5857d90dbf2378b8bc.jpg' | asset_url }}" alt="Diamond pendant necklace" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="fprod mid">
+            {%- if section.settings.image_2 != blank -%}
+              <img src="{{ section.settings.image_2 | image_url: width: 300 }}" alt="{{ section.settings.image_2.alt | default: 'Featured product' | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ '10f115b7be4ce2b8524f63fa2a860c79.jpg' | asset_url }}" alt="Solitaire ring" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="fprod">
+            {%- if section.settings.image_3 != blank -%}
+              <img src="{{ section.settings.image_3 | image_url: width: 300 }}" alt="{{ section.settings.image_3.alt | default: 'Featured product' | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ '6fc6b400385b7cc501eb33e75468a6c6.jpg' | asset_url }}" alt="Pearl strand" loading="lazy">
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT OFFER DETAILS -->
+      <div class="fofr">
+        <div class="fupto">Up to</div>
+        <div class="fbig disp"><span>{{ offer }}</span><b class="pct">% off</b></div>
+        <a class="fcta" href="{{ cta_url }}">
+          {{ cta_text }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <div class="fdate">{{ end_date }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DEEDAP Festival Offer",
+  "tag": "section",
+  "class": "section-deedap-festival-offer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "festival_theme",
+      "label": "Festival Theme",
+      "options": [
+        {"value": "diwali", "label": "Diwali (Lanterns & Diyas)"},
+        {"value": "xmas", "label": "Christmas (Snow & Baubles)"},
+        {"value": "eid", "label": "Eid (Moon & Stars)"},
+        {"value": "holi", "label": "Holi (Vibrant Colours)"},
+        {"value": "brand", "label": "Everyday / Brand (Gold & Black)"}
+      ],
+      "default": "diwali"
+    },
+    {"type": "text", "id": "kicker", "label": "Kicker text", "default": "Deedap presents"},
+    {"type": "text", "id": "festival_name_1", "label": "Heading Line 1", "info": "Leave blank for theme default"},
+    {"type": "text", "id": "festival_name_2", "label": "Heading Line 2", "info": "Leave blank for theme default"},
+    {"type": "text", "id": "ribbon_text", "label": "Ribbon text", "info": "Leave blank for theme default"},
+    {"type": "text", "id": "offer_number", "label": "Discount number", "default": "50"},
+    {"type": "text", "id": "offer_end_date", "label": "Offer end date", "info": "Leave blank for theme default"},
+    {"type": "text", "id": "cta_label", "label": "CTA button label", "default": "Shop now"},
+    {"type": "url", "id": "cta_link", "label": "CTA button link"},
+    {"type": "image_picker", "id": "image_1", "label": "Showcase Image 1 (Left)"},
+    {"type": "image_picker", "id": "image_2", "label": "Showcase Image 2 (Center - Featured)"},
+    {"type": "image_picker", "id": "image_3", "label": "Showcase Image 3 (Right)"}
+  ],
+  "presets": [
+    {
+      "name": "DEEDAP Festival Offer"
+    }
+  ]
+}
+{% endschema %}

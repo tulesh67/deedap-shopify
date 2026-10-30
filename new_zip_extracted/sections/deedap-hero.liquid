@@ -1,0 +1,53 @@
+{% render 'deedap-assets' %}
+
+<section class="dd-na dd-hero" aria-label="{{ section.settings.line_1 | escape }}">
+  <div class="dd-hero-glow" aria-hidden="true"></div>
+  {%- if section.settings.badge != blank -%}
+    <div class="dd-hero-badge dd-heroin">&#9733; {{ section.settings.badge }}</div>
+  {%- endif -%}
+  <h1 class="dd-disp dd-heroin">
+    <span{% if section.settings.ink_sweep %} class="dd-hink"{% endif %}>{{ section.settings.line_1 }}<br>{{ section.settings.line_2 }}</span>
+    {%- if section.settings.gold_word != blank %} <span class="dd-hword{% if section.settings.shimmer %} is-shimmer{% endif %}" style="--dd-word:{{ section.settings.word_color }}">{{ section.settings.gold_word }}</span>{% endif -%}
+  </h1>
+  {%- if section.blocks.size > 0 -%}
+    <div class="dd-hero-trust dd-heroin">
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}><i></i>{{ block.settings.text }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Deedap · Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Verified multi-category sourcing" },
+    { "type": "text", "id": "line_1", "label": "Heading line 1", "default": "Discover more" },
+    { "type": "text", "id": "line_2", "label": "Heading line 2 (before the coloured word)", "default": "Shop" },
+    { "type": "text", "id": "gold_word", "label": "Coloured word", "default": "Deedap" },
+    { "type": "color", "id": "word_color", "label": "Coloured word colour", "default": "#B8860B" },
+    { "type": "checkbox", "id": "shimmer", "label": "Animated gold shine on the coloured word", "default": false },
+    { "type": "checkbox", "id": "ink_sweep", "label": "Soft glint sweeping over the black text", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Verified retail" } ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Deedap · Hero",
+      "blocks": [
+        { "type": "trust", "settings": { "text": "Verified retail" } },
+        { "type": "trust", "settings": { "text": "Wholesale sourcing" } },
+        { "type": "trust", "settings": { "text": "Direct-to-consumer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

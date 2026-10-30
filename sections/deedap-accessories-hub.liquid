@@ -1,0 +1,848 @@
+{{ 'accessories-style.css' | asset_url | stylesheet_tag }}
+{% comment %}
+  DEEDAP Native Accessories Landing Page
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<section class="deedap-accessories-page" data-section-id="{{ section.id }}">
+  {%- liquid
+    assign men_url = routes.all_products_collection_url
+    assign women_url = routes.all_products_collection_url
+    assign everyday_url = routes.all_products_collection_url
+    if section.settings.men_collection != blank
+      assign men_url = section.settings.men_collection.url
+    endif
+    if section.settings.women_collection != blank
+      assign women_url = section.settings.women_collection.url
+    endif
+    if section.settings.everyday_collection != blank
+      assign everyday_url = section.settings.everyday_collection.url
+    endif
+  -%}
+
+  
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yyygA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yyygA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yyygA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ff5ba85a-2017-4001-b1aa-7716f51e4b1a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yyygA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yyygA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yyygA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ff5ba85a-2017-4001-b1aa-7716f51e4b1a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yyygA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yyygA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yyygA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ff5ba85a-2017-4001-b1aa-7716f51e4b1a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko70yyygA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko50yyygA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko40yyygA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("ff5ba85a-2017-4001-b1aa-7716f51e4b1a") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* greek */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2NL9Hz_.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm25L9Hz_.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("55b747c4-46ab-4969-92c0-778a47f0efba") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* greek */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2NL9Hz_.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm25L9Hz_.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("55b747c4-46ab-4969-92c0-778a47f0efba") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Ensure 100% immediate visibility on page load - no blank states or hidden overlays */
+.curtain { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+.pop, .l, .in, .rise, .fadeup, .ringIn, .clipin, .reveal, .mask > span {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  visibility: visible !important;
+}
+.mask { overflow: visible !important; }
+
+</style>
+<style>
+body{margin:0;background:#fbfaf8;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#0f1014}
+a{color:inherit;text-decoration:none}
+*{box-sizing:border-box}
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.disp{font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase}
+
+/* ============ CURTAIN INTRO ============ */
+.curtain{display:none!important;visibility:hidden!important}
+@keyframes gone{to{visibility:hidden}}
+.cT,.cB{position:absolute;left:0;width:100%;height:50%;background:#0f1014}
+.cT{top:0;animation:cTop 1s cubic-bezier(.77,0,.18,1) 1.7s forwards}
+.cB{bottom:0;animation:cBot 1s cubic-bezier(.77,0,.18,1) 1.7s forwards}
+@keyframes cTop{to{transform:translateY(-101%)}}
+@keyframes cBot{to{transform:translateY(101%)}}
+.cWord{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(40px,10vw,150px);letter-spacing:.04em;color:#fbfaf8;animation:cWord 1.7s cubic-bezier(.2,.8,.2,1) forwards}
+.cWord span{display:inline-block;animation:cLet 1.1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.08s)}
+@keyframes cLet{from{opacity:0;transform:translateY(80px) rotate(12deg)}to{opacity:1;transform:none}}
+@keyframes cWord{0%,80%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+.cLine{position:absolute;left:0;top:50%;height:2px;width:100%;background:#b8923a;transform:scaleX(0);animation:cLine 1.6s cubic-bezier(.7,0,.2,1) .2s forwards;z-index:2}
+@keyframes cLine{0%{transform:scaleX(0)}60%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+
+/* ============ HERO ============ */
+.blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+.b1{width:620px;height:620px;left:-8%;top:-12%;background:radial-gradient(circle,#ecd9b4,rgba(236,217,180,0) 70%);animation:bl1 11s ease-in-out infinite}
+.b2{width:700px;height:700px;right:-10%;top:10%;background:radial-gradient(circle,#e6c98a,rgba(230,201,138,0) 70%);animation:bl2 14s ease-in-out infinite}
+.b3{width:520px;height:520px;left:35%;bottom:-20%;background:radial-gradient(circle,#d2bd96,rgba(210,189,150,0) 70%);animation:bl1 17s ease-in-out infinite reverse;opacity:.7}
+@keyframes bl1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(160px,90px) scale(1.25)}}
+@keyframes bl2{0%,100%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-180px,70px) scale(.85)}}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(122,92,31,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(122,92,31,.13) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,transparent 72%);animation:gridmove 6s linear infinite}
+@keyframes gridmove{to{background-position:0 56px,56px 0}}
+.thread{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:.22 .78;animation:flow 6s linear infinite}
+.thread.t2{animation-duration:9s;stroke-width:1.5}
+.thread.t3{animation-duration:7.5s;animation-direction:reverse}
+@keyframes flow{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+.l{display:inline-block;transform-origin:50% 100%;animation:letIn 1s cubic-bezier(.2,1.2,.3,1) both,wave 3.2s ease-in-out infinite;animation-delay:calc(2.1s + var(--i)*.06s),calc(3.4s + var(--i)*.13s)}
+@keyframes letIn{from{opacity:0;transform:translateY(120px) rotateX(-90deg) scale(.6)}to{opacity:1;transform:none}}
+@keyframes wave{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(-2deg)}}
+.c-w{color:#0f1014}
+.c-o{color:#3a2f1e}
+.c-g{background:linear-gradient(180deg,#8a6a2a 0%,#b8923a 55%,#c9a24d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.c-g.l{filter:drop-shadow(0 0 22px rgba(122,92,31,.35))}
+
+.pop{opacity:1;transform:translateY(30px);animation:pop .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(2.6s + var(--k,0)*.2s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.glowdot{animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(184,146,58,.55)}50%{opacity:.6;box-shadow:0 0 0 12px rgba(184,146,58,0)}}
+
+/* 3D fabric ring */
+.scene{perspective:1500px;width:100%;height:600px;display:flex;align-items:center;justify-content:center;position:relative}
+.ring{position:relative;width:0;height:0;transform-style:preserve-3d;animation:ringspin 20s linear infinite,ringIn 2s cubic-bezier(.2,.8,.2,1) 2.2s both}
+@keyframes ringspin{from{transform:rotateX(-16deg) rotateY(0)}to{transform:rotateX(-16deg) rotateY(360deg)}}
+@keyframes ringIn{from{opacity:0;scale:.2}to{opacity:1;scale:1}}
+.scene:hover .ring{animation-duration:60s,2s}
+.pnl{position:absolute;left:-80px;top:-125px;width:160px;height:250px;border-radius:18px;overflow:hidden;transform:rotateY(calc(var(--n)*36deg)) translateZ(var(--r,380px));box-shadow:0 0 0 1px rgba(122,92,31,.25),0 30px 60px rgba(122,92,31,.3);backface-visibility:visible}
+.pnl::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:20px 20px;mix-blend-mode:overlay;animation:gridmove 4s linear infinite}
+.pnl::before{content:"";position:absolute;top:-20%;left:-60%;width:50%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:rotate(15deg);animation:pshine 4s ease-in-out infinite;animation-delay:calc(var(--n)*.4s);z-index:1}
+@keyframes pshine{0%,60%{left:-60%}100%{left:130%}}
+.floor{position:absolute;left:50%;bottom:30px;width:520px;height:90px;margin-left:-260px;border-radius:50%;background:radial-gradient(ellipse,rgba(184,146,58,.4),rgba(184,146,58,0) 70%);animation:floorp 4s ease-in-out infinite}
+@keyframes floorp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.25);opacity:1}}
+.core{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,.55),rgba(184,146,58,0) 70%);filter:blur(10px);animation:floorp 3s ease-in-out infinite}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 40px rgba(122,92,31,.35)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.btn:hover::after{transform:translateX(120%)}
+.arrow{display:inline-block;transition:transform .3s}
+.btn:hover .arrow,.card:hover .arrow{transform:translateX(8px)}
+.navlink{position:relative}
+.navlink::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:#b8923a;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.navlink:hover::after{transform:scaleX(1)}
+
+/* ============ GIANT MARQUEES ============ */
+.mq{overflow:hidden;white-space:nowrap}
+.mtrack{display:flex;width:max-content}
+.mtrack.a{animation:mq 28s linear infinite}
+.mtrack.b{animation:mq 34s linear infinite reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq:hover .mtrack{animation-play-state:paused}
+.out{color:transparent;-webkit-text-stroke:2px rgba(251,250,248,.85)}
+.mq span.w{padding:0 .35em;font-size:clamp(64px,11vw,170px);line-height:1.05}
+.star{display:inline-block;color:#d9b866;animation:spin 6s linear infinite;font-size:clamp(40px,7vw,100px);vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ CARDS ============ */
+.wrap{position:relative;flex:1 1 300px;border-radius:32px;padding:2px;background:conic-gradient(from var(--ang),transparent 0 55%,#b8923a 75%,#7a5c1f 90%,transparent 100%);animation:rot 5s linear infinite;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s}
+@keyframes rot{to{--ang:360deg}}
+.wrap.w1:hover{transform:perspective(1200px) rotateY(10deg) rotateX(4deg) translateY(-16px) scale(1.03)}
+.wrap.w2:hover{transform:perspective(1200px) rotateX(8deg) translateY(-20px) scale(1.04)}
+.wrap.w3:hover{transform:perspective(1200px) rotateY(-10deg) rotateX(4deg) translateY(-16px) scale(1.03)}
+.wrap:hover{filter:drop-shadow(0 30px 50px rgba(122,92,31,.35))}
+.card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:600px;border-radius:30px;overflow:hidden;background:#0c0c10;color:#fbfaf8}
+.mesh{position:absolute;border-radius:50%;filter:blur(40px)}
+.m-a{animation:bl1 8s ease-in-out infinite}
+.m-b{animation:bl2 10s ease-in-out infinite}
+.bignum{position:absolute;right:-10px;top:10px;font-size:220px;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.17);z-index:3;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.card:hover .bignum{transform:translateY(30px) scale(1.15) rotate(-6deg)}
+.cardtitle{font-size:clamp(56px,6vw,92px);line-height:.95;transition:letter-spacing .5s,transform .5s}
+.textile-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.textile-photo-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,11,.08) 0%,rgba(7,8,11,.08) 25%,rgba(7,8,11,.56) 58%,rgba(7,8,11,.94) 100%),linear-gradient(90deg,rgba(7,8,11,.2),transparent 76%)}
+.card:hover .textile-photo{transform:scale(1.045)}
+.textile-photo-kids{object-position:center 0%}
+.card .cardtitle{color:#fbfaf8;-webkit-text-fill-color:#fbfaf8;text-shadow:0 3px 26px rgba(0,0,0,.55)}
+
+.card:hover .cardtitle{letter-spacing:.05em;transform:translateX(8px)}
+.go{width:56px;height:56px;border-radius:50%;border:1.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:22px;transition:transform .6s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.card:hover .go{transform:rotate(360deg) scale(1.15);background:#fbfaf8;color:#0f1014;border-color:#fbfaf8}
+.sheen{position:absolute;top:-10%;left:-70%;width:50%;height:130%;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:rotate(14deg);animation:sh 5s ease-in-out infinite}
+@keyframes sh{0%,55%{left:-70%}100%{left:140%}}
+
+/* ============ SCROLL FILL WORDS ============ */
+.fillw{font-size:clamp(70px,14vw,230px);line-height:.98;background:linear-gradient(90deg,#7a5c1f 0%,#b8923a 40%,rgba(15,16,20,.1) 55%);background-size:250% 100%;background-position:0% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* ============ CTA ============ */
+.orb{position:relative;width:240px;height:240px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0f1014;color:#fbfaf8;font-size:15px;font-weight:800;letter-spacing:.14em;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;box-shadow:0 0 80px rgba(122,92,31,.35)}
+.orb:hover{transform:scale(1.15) rotate(-6deg);box-shadow:0 0 140px rgba(122,92,31,.35)}
+.ripple{position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;border:2px solid #b8923a;animation:rip 3.6s ease-out infinite;animation-delay:calc(var(--i)*1.2s);opacity:0}
+@keyframes rip{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+.fl{position:absolute;width:var(--s,40px);height:var(--s,40px);border:2px solid #b8923a;transform:rotate(45deg);animation:flt var(--d,9s) ease-in-out infinite;opacity:.6}
+.fl.f{background:linear-gradient(135deg,#b8923a,#7a5c1f);border:0;opacity:.85}
+@keyframes flt{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(-70px) rotate(225deg)}}
+
+/* ============ SCROLL-DRIVEN (Chromium / Brave) ============ */
+@supports (animation-timeline: view()){
+  .reveal{animation:rev linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  @keyframes rev{from{opacity:0;transform:translateY(90px) scale(.96)}to{opacity:1;transform:none}}
+  .clipin{animation:clipin linear both;animation-timeline:view();animation-range:entry 0% entry 80%}
+  @keyframes clipin{from{clip-path:inset(0 0 0 0 round 32px);opacity:.2;transform:translateY(80px) rotate(var(--r0,3deg))}to{clip-path:inset(0 0 0 0 round 32px);opacity:1;transform:none}}
+  .fillw{animation:fillscroll linear both;animation-timeline:view();animation-range:entry 20% cover 55%}
+  @keyframes fillscroll{from{background-position:100% 0}to{background-position:0% 0}}
+  .par{animation:par linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes par{from{transform:translateY(120px)}to{transform:translateY(-120px)}}
+  .parx{animation:parx linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes parx{from{transform:translateX(-14%)}to{transform:translateX(14%)}}
+  .zoom{animation:zoom linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+  @keyframes zoom{from{transform:scale(.55) rotate(-6deg);opacity:.2}to{transform:none;opacity:1}}
+}
+@media (max-width:760px){
+  .scene{height:420px}
+  .ring{scale:.62}
+  .mq span.w{font-size:56px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .curtain{display:none!important;visibility:hidden!important}
+  .l,.pop,.ring{opacity:1!important;transform:none!important}
+}
+
+/* Ensure 100% immediate visibility on page load - no blank states or hidden overlays */
+.curtain { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+.pop, .l, .in, .rise, .fadeup, .ringIn, .clipin, .reveal, .mask > span {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  visibility: visible !important;
+}
+.mask { overflow: visible !important; }
+
+</style>
+
+
+<div style="position:relative;width:100%;background:#fbfaf8;overflow:hidden" data-canvas-width="1440" data-canvas-height="3900" data-document-role="page" data-label="Deedap Accessories">
+
+  <!-- CURTAIN INTRO -->
+  <div class="curtain" aria-hidden="true">
+    <div class="cT"></div><div class="cB"></div>
+    <div class="cLine"></div>
+    <div class="cWord disp">
+      <span style="--i:0">D</span><span style="--i:1">E</span><span style="--i:2">E</span><span style="--i:3">D</span><span style="--i:4">A</span><span style="--i:5">P</span>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="position:relative;min-height:980px;overflow:hidden">
+    <div class="gridbg" aria-hidden="true"></div>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="blob b3" aria-hidden="true"></div>
+
+    <svg aria-hidden="true" sc-camel-view-box="0 0 1440 980" sc-camel-preserve-aspect-ratio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+      <defs>
+        <linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#b8923a"></stop><stop offset="1" stop-color="#7a5c1f"></stop></linearGradient>
+      </defs>
+      <path class="thread" sc-camel-path-length="1" stroke="url(#tg)" d="M-20,780 C220,560 420,980 700,720 S1180,380 1460,560"></path>
+      <path class="thread t2" sc-camel-path-length="1" stroke="#0f1014" d="M-20,300 C260,120 520,520 760,300 S1200,60 1460,260"></path>
+      <path class="thread t3" sc-camel-path-length="1" stroke="url(#tg)" d="M-20,900 C300,700 640,940 900,820 S1280,620 1460,760"></path>
+      <path class="thread t2" sc-camel-path-length="1" stroke="#b8923a" d="M200,-20 C360,300 120,520 380,760 S620,920 640,1000"></path>
+    </svg>
+
+    <!-- nav -->
+    <div class="pop" data-deedap-scroll-header style="--k:0;position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:32px 40px 0;display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between">
+      <a href="#top" class="navlink" style="font-size:12px;font-weight:800;letter-spacing:.18em;color:#4a4f5c">← DEEDAP HOME</a>
+      <nav aria-label="Collections" style="display:flex;flex-wrap:wrap;gap:28px;font-size:12px;font-weight:800;letter-spacing:.18em">
+        <a href="#fit" class="navlink">MEN</a>
+        <a href="#fit" class="navlink">WOMEN</a>
+        <a href="#fit" class="navlink">EVERYDAY</a>
+      </nav>
+    </div>
+
+    <div style="position:relative;z-index:4;max-width:1320px;margin:0 auto;padding:90px 40px 60px;display:flex;flex-wrap:wrap;gap:20px 20px;align-items:center">
+
+      <div style="flex:1 1 560px;min-width:0">
+        <div class="pop" style="--k:0;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.18em;color:#7a5c1f;margin-bottom:24px">
+          <span class="glowdot" style="width:10px;height:10px;border-radius:50%;background:#b8923a;display:inline-block"></span>
+          DEEDAP ACCESSORIES / THE EVERYDAY EDIT
+        </div>
+
+        <h1 class="disp" style="margin:0;font-size:clamp(46px,7.6vw,112px);line-height:.96;letter-spacing:-.01em;perspective:900px">
+          <span style="display:block;white-space:nowrap"><span class="l c-w" style="--i:0">W</span><span class="l c-w" style="--i:1">E</span><span class="l c-w" style="--i:2">A</span><span class="l c-w" style="--i:3">R</span></span>
+          <span style="display:block;white-space:nowrap"><span class="l c-w" style="--i:4">W</span><span class="l c-w" style="--i:5">H</span><span class="l c-w" style="--i:6">A</span><span class="l c-w" style="--i:7">T</span></span>
+          <span style="display:block;white-space:nowrap"><span class="l c-o" style="--i:8">F</span><span class="l c-o" style="--i:9">E</span><span class="l c-o" style="--i:10">E</span><span class="l c-o" style="--i:11">L</span><span class="l c-o" style="--i:12">S</span></span>
+          <span style="display:block;white-space:nowrap"><span class="l c-g" style="--i:13">L</span><span class="l c-g" style="--i:14">I</span><span class="l c-g" style="--i:15">K</span><span class="l c-g" style="--i:16">E</span></span>
+          <span style="display:block;white-space:nowrap"><span class="l c-g" style="--i:17">Y</span><span class="l c-g" style="--i:18">O</span><span class="l c-g" style="--i:19">U</span><span class="l c-g" style="--i:20">.</span></span>
+        </h1>
+
+        <p class="pop" style="--k:1;margin:32px 0 0;max-width:460px;font-size:18px;line-height:1.65;color:#4a4f5c">Thoughtful accessories for the way you move through every day. Explore considered pieces for men, women, and everyday life.</p>
+        <div class="pop" style="--k:2;margin-top:36px">
+          <a href="#fit" class="btn" style="display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 34px;border-radius:999px;background:#0f1014;color:#fff;font-size:13px;font-weight:800;letter-spacing:.1em">EXPLORE THE COLLECTION <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- 3D ring -->
+      <div style="flex:1 1 440px;min-width:0">
+        <div class="scene" role="img" aria-label="A rotating ring of woven fabric swatches">
+          <div class="floor" aria-hidden="true"></div>
+          <div class="core" aria-hidden="true"></div>
+          <div class="ring" aria-hidden="true">
+            <div class="pnl" style="--n:0;background:linear-gradient(160deg,#f6efe2,#d2bd96)"></div>
+            <div class="pnl" style="--n:1;background:linear-gradient(160deg,#e6d6b8,#a8864a)"></div>
+            <div class="pnl" style="--n:2;background:linear-gradient(160deg,#fbf5ea,#c9b48a)"></div>
+            <div class="pnl" style="--n:3;background:linear-gradient(160deg,#c9a24d,#6b5121)"></div>
+            <div class="pnl" style="--n:4;background:linear-gradient(160deg,#4a3b20,#15110a)"></div>
+            <div class="pnl" style="--n:5;background:linear-gradient(160deg,#d9c49a,#8a6a2a)"></div>
+            <div class="pnl" style="--n:6;background:linear-gradient(160deg,#f1ebdf,#b89c6a)"></div>
+            <div class="pnl" style="--n:7;background:linear-gradient(160deg,#b8923a,#4a3510)"></div>
+            <div class="pnl" style="--n:8;background:linear-gradient(160deg,#ecd9b4,#b8923a)"></div>
+            <div class="pnl" style="--n:9;background:linear-gradient(160deg,#8a6a2a,#2a1f0c)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pop" style="--k:3;position:relative;z-index:4;max-width:1320px;margin:0 auto;padding:0 40px 40px;display:flex;flex-wrap:wrap;gap:12px 28px;font-size:12px;font-weight:800;letter-spacing:.16em;color:#4a4f5c">
+      <span style="color:#7a5c1f">01</span><span>SELECTED WITH CARE</span><span>MADE FOR EVERY DAY</span>
+    </div>
+  </section>
+
+  <!-- ============ GIANT MARQUEES ============ -->
+  <section aria-hidden="true" style="position:relative;padding:60px 0;transform:rotate(-2.5deg);margin:0 -40px;background:#0f1014;color:#fbfaf8">
+    <div class="mq disp">
+      <div class="mtrack a">
+        <div><span class="w out">Men</span><span class="star">✦</span><span class="w">Women</span><span class="star">✦</span><span class="w out">Everyday</span><span class="star">✦</span><span class="w">Accessories</span><span class="star">✦</span></div>
+        <div><span class="w out">Men</span><span class="star">✦</span><span class="w">Women</span><span class="star">✦</span><span class="w out">Everyday</span><span class="star">✦</span><span class="w">Accessories</span><span class="star">✦</span></div>
+      </div>
+    </div>
+    <div class="mq disp">
+      <div class="mtrack b">
+        <div><span class="w">Soft</span><span class="star">✦</span><span class="w out">Durable</span><span class="star">✦</span><span class="w">Everyday</span><span class="star">✦</span><span class="w out">Yours</span><span class="star">✦</span></div>
+        <div><span class="w">Soft</span><span class="star">✦</span><span class="w out">Durable</span><span class="star">✦</span><span class="w">Everyday</span><span class="star">✦</span><span class="w out">Yours</span><span class="star">✦</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIND YOUR FIT ============ -->
+  <section id="fit" style="position:relative;max-width:1320px;margin:0 auto;padding:180px 40px 140px">
+    <div aria-hidden="true" class="blob" style="width:600px;height:600px;right:-10%;top:10%;background:radial-gradient(circle,rgba(201,162,77,.3),rgba(201,162,77,0) 70%)"></div>
+    <div class="reveal" style="position:relative;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-end;justify-content:space-between;margin-bottom:64px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.18em;color:#7a5c1f;margin-bottom:20px">
+          <span class="glowdot" style="width:10px;height:10px;border-radius:50%;background:#b8923a;display:inline-block"></span>THE ACCESSORY COLLECTION
+        </div>
+        <h2 class="disp" style="margin:0;font-size:clamp(48px,8vw,128px);line-height:.95">Made for <span class="c-g">every day.</span></h2>
+      </div>
+      <p style="margin:0;max-width:260px;font-size:15px;line-height:1.6;color:#4a4f5c">Thoughtful essentials and finishing touches, chosen for the way you move through every day.</p>
+    </div>
+
+    <div style="position:relative;display:flex;flex-wrap:wrap;gap:28px;align-items:stretch">
+
+      <!-- MEN -->
+      <div class="wrap w1 clipin" style="--r0:-4deg">
+        <a href="{{ men_url }}" class="card">
+          <img class="textile-photo" src="{{ 'luxury_chronograph_black_1792491100706.jpg' | asset_url }}" alt="Black chronograph watch with gold details on dark stone" loading="lazy" decoding="async">
+          <div class="textile-photo-shade" aria-hidden="true"></div>
+          <div class="sheen" aria-hidden="true"></div>
+          <div class="bignum disp" aria-hidden="true">01</div>
+          <div style="position:absolute;top:24px;left:24px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(7,7,10,.4);font-size:11px;font-weight:800;letter-spacing:.14em;z-index:4">01 / ACCESSORIES</div>
+          <div style="position:relative;z-index:4;padding:32px">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.16em;margin-bottom:12px;color:#e6d6b8">CARRY THE DETAILS</div>
+            <div class="cardtitle disp">Men</div>
+            <p style="margin:16px 0 26px;max-width:300px;font-size:15px;line-height:1.55;color:#e8e5dc">Versatile watches, bags, and everyday pieces selected to move with you.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;font-weight:800;letter-spacing:.14em">SHOP MEN'S ACCESSORIES</span><span class="go arrow" style="transition:transform .6s cubic-bezier(.2,.8,.2,1),background .3s,color .3s">→</span></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- WOMEN -->
+      <div class="wrap w2 clipin" style="--r0:0deg">
+        <a href="{{ women_url }}" class="card">
+          <img class="textile-photo" src="{{ 'jewelry-necklaces-premium.png' | asset_url }}" alt="Gold necklace arranged on a warm, neutral backdrop" loading="lazy" decoding="async">
+          <div class="textile-photo-shade" aria-hidden="true"></div>
+          <div class="sheen" aria-hidden="true" style="animation-delay:-1.6s"></div>
+          <div class="bignum disp" aria-hidden="true">02</div>
+          <div style="position:absolute;top:24px;left:24px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(7,7,10,.4);font-size:11px;font-weight:800;letter-spacing:.14em;z-index:4">02 / ACCESSORIES</div>
+          <div style="position:relative;z-index:4;padding:32px">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.16em;margin-bottom:12px;color:#e6d6b8">A LITTLE ROOM TO SHINE</div>
+            <div class="cardtitle disp">Women</div>
+            <p style="margin:16px 0 26px;max-width:300px;font-size:15px;line-height:1.55;color:#e8e5dc">Bags, fine details, and expressive finishing touches chosen to feel like you.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;font-weight:800;letter-spacing:.14em">SHOP WOMEN'S ACCESSORIES</span><span class="go arrow" style="transition:transform .6s cubic-bezier(.2,.8,.2,1),background .3s,color .3s">→</span></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- EVERYDAY -->
+      <div class="wrap w3 clipin" style="--r0:4deg">
+        <a href="{{ everyday_url }}" class="card">
+          <img class="textile-photo textile-photo-kids" src="{{ 'luxury_fragrance_flacon_1792491140555.jpg' | asset_url }}" alt="A clear fragrance flacon with a warm amber glow" loading="lazy" decoding="async">
+          <div class="textile-photo-shade" aria-hidden="true"></div>
+          <div class="sheen" aria-hidden="true" style="animation-delay:-3.2s"></div>
+          <div class="bignum disp" aria-hidden="true">03</div>
+          <div style="position:absolute;top:24px;left:24px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(7,7,10,.4);font-size:11px;font-weight:800;letter-spacing:.14em;z-index:4">03 / ACCESSORIES</div>
+          <div style="position:relative;z-index:4;padding:32px">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.16em;margin-bottom:12px;color:#e6d6b8">THE EVERYDAY EDIT</div>
+            <div class="cardtitle disp">Everyday</div>
+            <p style="margin:16px 0 26px;max-width:300px;font-size:15px;line-height:1.55;color:#e8e5dc">Small essentials and considered extras for busy days, travel, and gifting.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;font-weight:800;letter-spacing:.14em">EXPLORE EVERYDAY</span><span class="go arrow" style="transition:transform .6s cubic-bezier(.2,.8,.2,1),background .3s,color .3s">→</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCROLL-FILL STATEMENT ============ -->
+  <section style="position:relative;max-width:1320px;margin:0 auto;padding:60px 40px 160px;overflow:hidden">
+    <div class="disp fillw">Soft.</div>
+    <div class="disp fillw" style="padding-left:12%">Durable.</div>
+    <div class="disp fillw" style="padding-left:24%">Yours.</div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section style="position:relative;overflow:hidden;background:#f1ebdf;border-top:1px solid rgba(15,16,20,.1)">
+    <div class="blob" aria-hidden="true" style="width:800px;height:800px;left:50%;top:50%;margin:-400px 0 0 -400px;background:radial-gradient(circle,rgba(122,92,31,.35),rgba(255,150,60,0) 65%);animation:bl1 10s ease-in-out infinite"></div>
+    <div class="fl" aria-hidden="true" style="left:8%;top:22%;--s:46px;--d:8s"></div>
+    <div class="fl f" aria-hidden="true" style="left:18%;top:64%;--s:24px;--d:6s"></div>
+    <div class="fl" aria-hidden="true" style="left:30%;top:14%;--s:28px;--d:10s"></div>
+    <div class="fl f" aria-hidden="true" style="right:10%;top:18%;--s:30px;--d:7s"></div>
+    <div class="fl" aria-hidden="true" style="right:20%;top:66%;--s:54px;--d:11s"></div>
+    <div class="fl f" aria-hidden="true" style="right:32%;top:80%;--s:20px;--d:5s"></div>
+
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:160px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:48px">
+      <h2 class="disp zoom" style="margin:0;font-size:clamp(52px,10vw,160px);line-height:.95">Carry the<br><span class="c-g">everyday.</span></h2>
+      <div style="position:relative;width:240px;height:240px">
+        <div class="ripple" style="--i:0" aria-hidden="true"></div>
+        <div class="ripple" style="--i:1" aria-hidden="true"></div>
+        <div class="ripple" style="--i:2" aria-hidden="true"></div>
+        <a href="{{ routes.all_products_collection_url }}" class="orb">SHOP THE EDIT &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1320px;margin:0 auto;padding:28px 40px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:12px;font-weight:700;letter-spacing:.14em;color:#4a4f5c">
+    <span>© DEEDAP ACCESSORIES</span>
+    <a href="#top" class="navlink">BACK TO THE TOP ↑</a>
+  </footer>
+
+</div>
+
+
+
+
+
+
+
+</section>
+
+<style>
+  .deedap-accessories-page {
+    width: 100%;
+    position: relative;
+    background: #fbfaf8;
+    overflow-x: hidden;
+    color: #0f1014;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  .deedap-accessories-page img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* cyrillic-ext */
+
+/* vietnamese */
+
+/* latin-ext */
+
+/* latin */
+
+/* greek */
+
+/* latin-ext */
+
+/* latin */
+
+/* greek */
+
+/* latin-ext */
+
+/* latin */
+
+
+
+
+.deedap-accessories-page a { color: inherit; text-decoration: none; }
+.deedap-accessories-page * { box-sizing: border-box; }
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.disp{font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase}
+
+/* ============ CURTAIN INTRO ============ */
+.curtain{display:none!important;visibility:hidden!important}
+@keyframes gone{to{visibility:hidden}}
+.cT,.cB{position:absolute;left:0;width:100%;height:50%;background:#0f1014}
+.cT{top:0;animation:cTop 1s cubic-bezier(.77,0,.18,1) 1.7s forwards}
+.cB{bottom:0;animation:cBot 1s cubic-bezier(.77,0,.18,1) 1.7s forwards}
+@keyframes cTop{to{transform:translateY(-101%)}}
+@keyframes cBot{to{transform:translateY(101%)}}
+.cWord{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(40px,10vw,150px);letter-spacing:.04em;color:#fbfaf8;animation:cWord 1.7s cubic-bezier(.2,.8,.2,1) forwards}
+.cWord span{display:inline-block;animation:cLet 1.1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.08s)}
+@keyframes cLet{from{opacity:0;transform:translateY(80px) rotate(12deg)}to{opacity:1;transform:none}}
+@keyframes cWord{0%,80%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+.cLine{position:absolute;left:0;top:50%;height:2px;width:100%;background:#b8923a;transform:scaleX(0);animation:cLine 1.6s cubic-bezier(.7,0,.2,1) .2s forwards;z-index:2}
+@keyframes cLine{0%{transform:scaleX(0)}60%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+
+/* ============ HERO ============ */
+.blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+.b1{width:620px;height:620px;left:-8%;top:-12%;background:radial-gradient(circle,#ecd9b4,rgba(236,217,180,0) 70%);animation:bl1 11s ease-in-out infinite}
+.b2{width:700px;height:700px;right:-10%;top:10%;background:radial-gradient(circle,#e6c98a,rgba(230,201,138,0) 70%);animation:bl2 14s ease-in-out infinite}
+.b3{width:520px;height:520px;left:35%;bottom:-20%;background:radial-gradient(circle,#d2bd96,rgba(210,189,150,0) 70%);animation:bl1 17s ease-in-out infinite reverse;opacity:.7}
+@keyframes bl1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(160px,90px) scale(1.25)}}
+@keyframes bl2{0%,100%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-180px,70px) scale(.85)}}
+.gridbg{position:absolute;inset:0;background-image:linear-gradient(rgba(122,92,31,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(122,92,31,.13) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 40%,#000 0%,transparent 72%);animation:gridmove 6s linear infinite}
+@keyframes gridmove{to{background-position:0 56px,56px 0}}
+.thread{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:.22 .78;animation:flow 6s linear infinite}
+.thread.t2{animation-duration:9s;stroke-width:1.5}
+.thread.t3{animation-duration:7.5s;animation-direction:reverse}
+@keyframes flow{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+.l{display:inline-block;transform-origin:50% 100%;animation:letIn 1s cubic-bezier(.2,1.2,.3,1) both,wave 3.2s ease-in-out infinite;animation-delay:calc(2.1s + var(--i)*.06s),calc(3.4s + var(--i)*.13s)}
+@keyframes letIn{from{opacity:0;transform:translateY(120px) rotateX(-90deg) scale(.6)}to{opacity:1;transform:none}}
+@keyframes wave{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(-2deg)}}
+.c-w{color:#0f1014}
+.c-o{color:#3a2f1e}
+.c-g{background:linear-gradient(180deg,#8a6a2a 0%,#b8923a 55%,#c9a24d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.c-g.l{filter:drop-shadow(0 0 22px rgba(122,92,31,.35))}
+
+.pop{opacity:1;transform:translateY(30px);animation:pop .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(2.6s + var(--k,0)*.2s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.glowdot{animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(184,146,58,.55)}50%{opacity:.6;box-shadow:0 0 0 12px rgba(184,146,58,0)}}
+
+/* 3D fabric ring */
+.scene{perspective:1500px;width:100%;height:600px;display:flex;align-items:center;justify-content:center;position:relative}
+.ring{position:relative;width:0;height:0;transform-style:preserve-3d;animation:ringspin 20s linear infinite,ringIn 2s cubic-bezier(.2,.8,.2,1) 2.2s both}
+@keyframes ringspin{from{transform:rotateX(-16deg) rotateY(0)}to{transform:rotateX(-16deg) rotateY(360deg)}}
+@keyframes ringIn{from{opacity:0;scale:.2}to{opacity:1;scale:1}}
+.scene:hover .ring{animation-duration:60s,2s}
+.pnl{position:absolute;left:-80px;top:-125px;width:160px;height:250px;border-radius:18px;overflow:hidden;transform:rotateY(calc(var(--n)*36deg)) translateZ(var(--r,380px));box-shadow:0 0 0 1px rgba(122,92,31,.25),0 30px 60px rgba(122,92,31,.3);backface-visibility:visible}
+.pnl::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:20px 20px;mix-blend-mode:overlay;animation:gridmove 4s linear infinite}
+.pnl::before{content:"";position:absolute;top:-20%;left:-60%;width:50%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:rotate(15deg);animation:pshine 4s ease-in-out infinite;animation-delay:calc(var(--n)*.4s);z-index:1}
+@keyframes pshine{0%,60%{left:-60%}100%{left:130%}}
+.floor{position:absolute;left:50%;bottom:30px;width:520px;height:90px;margin-left:-260px;border-radius:50%;background:radial-gradient(ellipse,rgba(184,146,58,.4),rgba(184,146,58,0) 70%);animation:floorp 4s ease-in-out infinite}
+@keyframes floorp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.25);opacity:1}}
+.core{position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,.55),rgba(184,146,58,0) 70%);filter:blur(10px);animation:floorp 3s ease-in-out infinite}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 40px rgba(122,92,31,.35)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.btn:hover::after{transform:translateX(120%)}
+.arrow{display:inline-block;transition:transform .3s}
+.btn:hover .arrow,.card:hover .arrow{transform:translateX(8px)}
+.navlink{position:relative}
+.navlink::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:100%;background:#b8923a;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.navlink:hover::after{transform:scaleX(1)}
+
+/* ============ GIANT MARQUEES ============ */
+.mq{overflow:hidden;white-space:nowrap}
+.mtrack{display:flex;width:max-content}
+.mtrack..deedap-accessories-page a { color: inherit; text-decoration: none; }
+.mtrack.b{animation:mq 34s linear infinite reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mq:hover .mtrack{animation-play-state:paused}
+.out{color:transparent;-webkit-text-stroke:2px rgba(251,250,248,.85)}
+.mq span.w{padding:0 .35em;font-size:clamp(64px,11vw,170px);line-height:1.05}
+.star{display:inline-block;color:#d9b866;animation:spin 6s linear infinite;font-size:clamp(40px,7vw,100px);vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ CARDS ============ */
+.wrap{position:relative;flex:1 1 300px;border-radius:32px;padding:2px;background:conic-gradient(from var(--ang),transparent 0 55%,#b8923a 75%,#7a5c1f 90%,transparent 100%);animation:rot 5s linear infinite;transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .4s}
+@keyframes rot{to{--ang:360deg}}
+.wrap.w1:hover{transform:perspective(1200px) rotateY(10deg) rotateX(4deg) translateY(-16px) scale(1.03)}
+.wrap.w2:hover{transform:perspective(1200px) rotateX(8deg) translateY(-20px) scale(1.04)}
+.wrap.w3:hover{transform:perspective(1200px) rotateY(-10deg) rotateX(4deg) translateY(-16px) scale(1.03)}
+.wrap:hover{filter:drop-shadow(0 30px 50px rgba(122,92,31,.35))}
+.card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:600px;border-radius:30px;overflow:hidden;background:#0c0c10;color:#fbfaf8}
+.mesh{position:absolute;border-radius:50%;filter:blur(40px)}
+.m-.deedap-accessories-page a { color: inherit; text-decoration: none; }
+.m-b{animation:bl2 10s ease-in-out infinite}
+.bignum{position:absolute;right:-10px;top:10px;font-size:220px;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.17);z-index:3;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.card:hover .bignum{transform:translateY(30px) scale(1.15) rotate(-6deg)}
+.cardtitle{font-size:clamp(56px,6vw,92px);line-height:.95;transition:letter-spacing .5s,transform .5s}
+.textile-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.textile-photo-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,11,.08) 0%,rgba(7,8,11,.08) 25%,rgba(7,8,11,.56) 58%,rgba(7,8,11,.94) 100%),linear-gradient(90deg,rgba(7,8,11,.2),transparent 76%)}
+.card:hover .textile-photo{transform:scale(1.045)}
+.textile-photo-kids{object-position:center 0%}
+.card .cardtitle{color:#fbfaf8;-webkit-text-fill-color:#fbfaf8;text-shadow:0 3px 26px rgba(0,0,0,.55)}
+
+.card:hover .cardtitle{letter-spacing:.05em;transform:translateX(8px)}
+.go{width:56px;height:56px;border-radius:50%;border:1.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:22px;transition:transform .6s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.card:hover .go{transform:rotate(360deg) scale(1.15);background:#fbfaf8;color:#0f1014;border-color:#fbfaf8}
+.sheen{position:absolute;top:-10%;left:-70%;width:50%;height:130%;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:rotate(14deg);animation:sh 5s ease-in-out infinite}
+@keyframes sh{0%,55%{left:-70%}100%{left:140%}}
+
+/* ============ SCROLL FILL WORDS ============ */
+.fillw{font-size:clamp(70px,14vw,230px);line-height:.98;background:linear-gradient(90deg,#7a5c1f 0%,#b8923a 40%,rgba(15,16,20,.1) 55%);background-size:250% 100%;background-position:0% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* ============ CTA ============ */
+.orb{position:relative;width:240px;height:240px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0f1014;color:#fbfaf8;font-size:15px;font-weight:800;letter-spacing:.14em;transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;box-shadow:0 0 80px rgba(122,92,31,.35)}
+.orb:hover{transform:scale(1.15) rotate(-6deg);box-shadow:0 0 140px rgba(122,92,31,.35)}
+.ripple{position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;border:2px solid #b8923a;animation:rip 3.6s ease-out infinite;animation-delay:calc(var(--i)*1.2s);opacity:0}
+@keyframes rip{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+.fl{position:absolute;width:var(--s,40px);height:var(--s,40px);border:2px solid #b8923a;transform:rotate(45deg);animation:flt var(--d,9s) ease-in-out infinite;opacity:.6}
+.fl.f{background:linear-gradient(135deg,#b8923a,#7a5c1f);border:0;opacity:.85}
+@keyframes flt{0%,100%{transform:translateY(0) rotate(45deg)}50%{transform:translateY(-70px) rotate(225deg)}}
+
+/* ============ SCROLL-DRIVEN (Chromium / Brave) ============ */
+@supports (animation-timeline: view()){
+  .reveal{animation:rev linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  @keyframes rev{from{opacity:0;transform:translateY(90px) scale(.96)}to{opacity:1;transform:none}}
+  .clipin{animation:clipin linear both;animation-timeline:view();animation-range:entry 0% entry 80%}
+  @keyframes clipin{from{clip-path:inset(0 0 0 0 round 32px);opacity:.2;transform:translateY(80px) rotate(var(--r0,3deg))}to{clip-path:inset(0 0 0 0 round 32px);opacity:1;transform:none}}
+  .fillw{animation:fillscroll linear both;animation-timeline:view();animation-range:entry 20% cover 55%}
+  @keyframes fillscroll{from{background-position:100% 0}to{background-position:0% 0}}
+  .par{animation:par linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes par{from{transform:translateY(120px)}to{transform:translateY(-120px)}}
+  .parx{animation:parx linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes parx{from{transform:translateX(-14%)}to{transform:translateX(14%)}}
+  .zoom{animation:zoom linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+  @keyframes zoom{from{transform:scale(.55) rotate(-6deg);opacity:.2}to{transform:none;opacity:1}}
+}
+@media (max-width:760px){
+  .scene{height:420px}
+  .ring{scale:.62}
+  .mq span.w{font-size:56px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .curtain{display:none!important;visibility:hidden!important}
+  .l,.pop,.ring{opacity:1!important;transform:none!important}
+}
+
+
+/* Ensure 100% immediate visibility on page load - no blank states or hidden overlays */
+.curtain { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+.pop, .l, .in, .rise, .fadeup, .ringIn, .clipin, .reveal, .mask > span {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  visibility: visible !important;
+}
+.mask { overflow: visible !important; }
+
+</style>
+
+{% schema %}
+{
+  "name": "DEEDAP Accessories",
+  "tag": "section",
+  "class": "section-deedap-accessories",
+  "settings": [
+    {"type":"collection","id":"men_collection","label":"Men collection"},
+    {"type":"collection","id":"women_collection","label":"Women collection"},
+    {"type":"collection","id":"everyday_collection","label":"Everyday accessories collection"}
+  ],
+  "presets": [{"name":"DEEDAP Accessories"}]
+}
+{% endschema %}

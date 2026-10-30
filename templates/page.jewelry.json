@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "jewelry_page": {
+      "type": "deedap-jewelry-hub",
+      "settings": {}
+    }
+  },
+  "order": [
+    "jewelry_page"
+  ]
+}

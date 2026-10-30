@@ -1,0 +1,161 @@
+<section class="page-width" id="sourcing-story-{{ section.id }}" style="margin-bottom: 140px;">
+  <div class="deedap-section-header">
+    <div>
+      <div class="deedap-kicker">{{ section.settings.kicker | default: '03 // The Sourcing Standard' }}</div>
+      <h2 class="deedap-heading-xl">{{ section.settings.heading | default: 'How DEEDAP Discovers & Curates' }}</h2>
+    </div>
+    {%- if section.settings.badge != blank -%}
+      <div style="font-size: 13px; font-weight: 700; color: var(--deedap-gold);">{{ section.settings.badge }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="deedap-trust-grid" style="--deedap-trust-columns: {{ section.settings.columns_desktop | default: 4 }};">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div class="deedap-trust-cell" {{ block.shopify_attributes }}>
+          <div class="trust-icon-box">
+            {%- if block.settings.custom_icon_image != blank -%}
+              <img src="{{ block.settings.custom_icon_image | image_url: width: 80 }}" alt="{{ block.settings.title | escape }}" style="width: 24px; height: 24px; object-fit: contain;">
+            {%- else -%}
+              {{ block.settings.icon | default: '✓' }}
+            {%- endif -%}
+          </div>
+          <h3 class="trust-title">{{ block.settings.title }}</h3>
+          <p class="trust-desc">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <!-- Default 4-Pillar Standard -->
+      <div class="deedap-trust-cell">
+        <div class="trust-icon-box">🔍</div>
+        <h3 class="trust-title">Physical Store Discovery</h3>
+        <p class="trust-desc">We personally evaluate products across physical retail stores, artisanal workshops, and certified wholesalers before listing them on our storefront.</p>
+      </div>
+
+      <div class="deedap-trust-cell">
+        <div class="trust-icon-box">✓</div>
+        <h3 class="trust-title">Pre-Dispatch Inspection</h3>
+        <p class="trust-desc">No blind dropshipping. Every product is physically inspected for sizing fidelity, technical safety, or harvest purity prior to courier dispatch.</p>
+      </div>
+
+      <div class="deedap-trust-cell">
+        <div class="trust-icon-box">⚡</div>
+        <h3 class="trust-title">Realistic Fulfillment</h3>
+        <p class="trust-desc">Transparent fulfillment models tailored to each supplier partner: standard warehouse inventory or verified direct supplier dispatch within 24–48 hours.</p>
+      </div>
+
+      <div class="deedap-trust-cell">
+        <div class="trust-icon-box">🛡️</div>
+        <h3 class="trust-title">The DEEDAP Guarantee</h3>
+        <p class="trust-desc">30-day dedicated customer assurance. If any fabric, gadget, or natural harvest does not meet expectations, our team handles prompt exchanges or refunds.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DEEDAP Sourcing Standard",
+  "tag": "section",
+  "class": "section-deedap-trust",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Section Kicker",
+      "default": "03 // The Sourcing Standard"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "How DEEDAP Discovers & Curates"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Header Badge",
+      "default": "SOURCING ARCHITECTURE"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on desktop"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_pillar",
+      "name": "Trust Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji or Symbol)",
+          "default": "🔍"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_image",
+          "label": "Custom Icon Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Title",
+          "default": "Physical Store Discovery"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Pillar Description",
+          "default": "We personally evaluate products across physical retail stores, artisanal workshops, and certified wholesalers before listing them on our storefront."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DEEDAP Sourcing Standard",
+      "blocks": [
+        {
+          "type": "trust_pillar",
+          "settings": {
+            "icon": "🔍",
+            "title": "Physical Store Discovery",
+            "description": "We personally evaluate products across physical retail stores, artisanal workshops, and certified wholesalers before listing them on our storefront."
+          }
+        },
+        {
+          "type": "trust_pillar",
+          "settings": {
+            "icon": "✓",
+            "title": "Pre-Dispatch Inspection",
+            "description": "No blind dropshipping. Every product is physically inspected for sizing fidelity, technical safety, or harvest purity prior to courier dispatch."
+          }
+        },
+        {
+          "type": "trust_pillar",
+          "settings": {
+            "icon": "⚡",
+            "title": "Realistic Fulfillment",
+            "description": "Transparent fulfillment models tailored to each supplier partner: standard warehouse inventory or verified direct supplier dispatch within 24–48 hours."
+          }
+        },
+        {
+          "type": "trust_pillar",
+          "settings": {
+            "icon": "🛡️",
+            "title": "The DEEDAP Guarantee",
+            "description": "30-day dedicated customer assurance. If any fabric, gadget, or natural harvest does not meet expectations, our team handles prompt exchanges or refunds."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

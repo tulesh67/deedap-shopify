@@ -1,0 +1,467 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | default: 36 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 48 }}px;
+  }
+
+  .fk-similar-sec {
+    background: #f1f2f4;
+    padding: 24px 0 36px 0;
+    margin-top: 30px;
+    border-top: 1px solid #e0e0e0;
+  }
+  .fk-similar-wrap {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .fk-similar-box {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px 24px;
+  }
+  .fk-similar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 20px;
+  }
+  .fk-similar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #212121;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .fk-similar-sub {
+    font-size: 13px;
+    color: #878787;
+    margin-left: 10px;
+    font-weight: 500;
+  }
+  .fk-similar-viewall {
+    color: #2874f0;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .fk-similar-viewall:hover {
+    text-decoration: underline;
+  }
+  .fk-similar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1024px) {
+    .fk-similar-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .fk-similar-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  }
+  .fk-card {
+    border: 2.5px solid #14110C !important;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .fk-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    border-color: #c2c2c2;
+  }
+  .fk-card-media {
+    width: 100%;
+    height: 220px;
+    background: #fafafa;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .fk-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+  }
+  .fk-card:hover .fk-card-media img {
+    transform: scale(1.05);
+  }
+  .fk-card-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #388e3c;
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .fk-card-cat {
+    font-size: 11px;
+    font-weight: 700;
+    color: #878787;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .fk-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #212121;
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 38px;
+  }
+  .fk-card-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #388e3c;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 8px;
+  }
+  .fk-card-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .fk-card-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+  }
+  .fk-card-mrp {
+    font-size: 13px;
+    color: #878787;
+    text-decoration: line-through;
+  }
+  .fk-card-discount {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #388e3c;
+  }
+  .fk-card-delivery {
+    font-size: 11px;
+    color: #666666;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign cat_label = product.type
+  if cat_label == blank and product.collections.size > 0
+    assign cat_label = product.collections.first.title
+  endif
+  if cat_label == blank
+    assign cat_label = 'Similar Department'
+  endif
+
+  # Find actual products in the same collection
+  assign related_col = product.collections.first
+  if related_col == blank or related_col.products_count <= 1
+    assign related_col = collections['all']
+  endif
+
+  assign rendered_count = 0
+-%}
+
+<section class="fk-similar-sec">
+  <div class="fk-similar-wrap">
+    <div class="fk-similar-box">
+      <div class="fk-similar-head">
+        <div>
+          <h2 class="fk-similar-title">
+            Similar Products
+            <span class="fk-similar-sub">in {{ cat_label }}</span>
+          </h2>
+        </div>
+        <a href="/collections/all" class="fk-similar-viewall">View All &rarr;</a>
+      </div>
+
+      <div class="fk-similar-grid">
+        <!-- 1. Real Products from Same Collection/Store -->
+        {%- if related_col != blank and related_col.products.size > 0 -%}
+          {%- for rel_prod in related_col.products limit: 8 -%}
+            {%- if rel_prod.id != product.id and rendered_count < 4 -%}
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+              {%- assign rel_image = rel_prod.featured_image | default: product.featured_image -%}
+              {%- assign rel_price = rel_prod.price | money -%}
+              {%- assign rel_compare = rel_prod.compare_at_price | money -%}
+
+              <a href="{{ rel_prod.url }}" class="fk-card">
+                <div class="fk-card-media">
+                  {%- if rel_image != blank -%}
+                    <img src="{{ rel_image | image_url: width: 500 }}" alt="{{ rel_prod.title | escape }}" loading="lazy">
+                  {%- else -%}
+                    <img src="{{ 'home-textiles-premium.png' | asset_url }}" alt="{{ rel_prod.title | escape }}" loading="lazy">
+                  {%- endif -%}
+                  <span class="fk-card-badge">HOT DEAL</span>
+                </div>
+                <div class="fk-card-cat">{{ rel_prod.type | default: cat_label }}</div>
+                <h3 class="fk-card-title">{{ rel_prod.title }}</h3>
+                <div class="fk-card-rating">4.8 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">{{ rel_price }}</span>
+                  {%- if rel_prod.compare_at_price > rel_prod.price -%}
+                    <span class="fk-card-mrp">{{ rel_compare }}</span>
+                    <span class="fk-card-discount">35% off</span>
+                  {%- endif -%}
+                </div>
+                <div class="fk-card-delivery">Free delivery available</div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        <!-- 2. Curated Fallback Department Products (Ensures Flipkart Grid is Always Full) -->
+        {%- if rendered_count < 4 -%}
+          {%- assign p_type = product.type | downcase -%}
+          {%- if p_type contains 'tech' or p_type contains 'electr' -%}
+            <!-- Tech Similar Items -->
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['fast-charge-gan-adapter'] -%}
+              <a href="{{ f_prod.url | default: '/products/fast-charge-gan-adapter' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'tech-gan-adapter.jpg' | asset_url }}" alt="Fast-Charge GaN Adapter" loading="lazy">
+                  <span class="fk-card-badge">65W FAST</span>
+                </div>
+                <div class="fk-card-cat">Technology</div>
+                <h3 class="fk-card-title">Fast-Charge GaN Dual Adapter</h3>
+                <div class="fk-card-rating">4.9 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 1,899.00</span>
+                  <span class="fk-card-mrp">Rs. 2,999.00</span>
+                  <span class="fk-card-discount">36% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery by Tomorrow</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['wireless-earbuds-pro'] -%}
+              <a href="{{ f_prod.url | default: '/products/wireless-earbuds-pro' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'electronics-earbuds-premium.png' | asset_url }}" alt="Wireless Earbuds Pro" loading="lazy">
+                  <span class="fk-card-badge">TOP RATED</span>
+                </div>
+                <div class="fk-card-cat">Technology</div>
+                <h3 class="fk-card-title">Wireless Active Noise Cancelling Earbuds</h3>
+                <div class="fk-card-rating">4.7 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 3,499.00</span>
+                  <span class="fk-card-mrp">Rs. 4,999.00</span>
+                  <span class="fk-card-discount">30% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery by Tomorrow</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['braided-usbc-cable'] -%}
+              <a href="{{ f_prod.url | default: '/products/braided-usbc-cable' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'tech-usbc-cable.jpg' | asset_url }}" alt="Braided USB-C Cable" loading="lazy">
+                  <span class="fk-card-badge">100W PD</span>
+                </div>
+                <div class="fk-card-cat">Technology</div>
+                <h3 class="fk-card-title">Double-Braided Nylon USB-C Cable</h3>
+                <div class="fk-card-rating">4.8 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 699.00</span>
+                  <span class="fk-card-mrp">Rs. 1,199.00</span>
+                  <span class="fk-card-discount">41% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery available</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['desktop-dock-hub'] -%}
+              <a href="{{ f_prod.url | default: '/products/desktop-dock-hub' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'tech-dock-hub.jpg' | asset_url }}" alt="Desktop Dock Hub" loading="lazy">
+                  <span class="fk-card-badge">8-IN-1</span>
+                </div>
+                <div class="fk-card-cat">Technology</div>
+                <h3 class="fk-card-title">Desktop Multiport USB-C Hub 4K</h3>
+                <div class="fk-card-rating">4.6 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 4,599.00</span>
+                  <span class="fk-card-mrp">Rs. 6,999.00</span>
+                  <span class="fk-card-discount">34% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery by Tomorrow</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+          {%- else -%}
+            <!-- Textiles / Apparel Similar Items (Default for Shirts & Clothing) -->
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['linen-drape-kurta'] -%}
+              <a href="{{ f_prod.url | default: '/products/linen-drape-kurta' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'textiles-women-premium.png' | asset_url }}" alt="Linen Drape Kurta" loading="lazy">
+                  <span class="fk-card-badge">PURE LINEN</span>
+                </div>
+                <div class="fk-card-cat">Textiles</div>
+                <h3 class="fk-card-title">Pure French Flax Linen Drape Kurta</h3>
+                <div class="fk-card-rating">4.8 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 3,199.00</span>
+                  <span class="fk-card-mrp">Rs. 4,299.00</span>
+                  <span class="fk-card-discount">25% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery by Tomorrow</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['handloom-cotton-shirt'] -%}
+              <a href="{{ f_prod.url | default: '/products/handloom-cotton-shirt' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'home-textiles-premium.png' | asset_url }}" alt="Handloom Cotton Shirt" loading="lazy">
+                  <span class="fk-card-badge">HANDLOOM</span>
+                </div>
+                <div class="fk-card-cat">Textiles</div>
+                <h3 class="fk-card-title">Unbleached Handloom Organic Cotton Shirt</h3>
+                <div class="fk-card-rating">4.9 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 2,499.00</span>
+                  <span class="fk-card-mrp">Rs. 3,499.00</span>
+                  <span class="fk-card-discount">28% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery by Tomorrow</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['raw-silk-dupatta'] -%}
+              <a href="{{ f_prod.url | default: '/products/raw-silk-dupatta' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'textiles-silk-dupatta.jpg' | asset_url }}" alt="Raw Silk Dupatta" loading="lazy">
+                  <span class="fk-card-badge">ARTISAN</span>
+                </div>
+                <div class="fk-card-cat">Textiles</div>
+                <h3 class="fk-card-title">Handwoven Tussar Raw Silk Dupatta</h3>
+                <div class="fk-card-rating">4.7 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 1,899.00</span>
+                  <span class="fk-card-mrp">Rs. 2,499.00</span>
+                  <span class="fk-card-discount">24% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery available</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+
+            {%- if rendered_count < 4 -%}
+              {%- assign f_prod = all_products['cotton-lungi-set'] -%}
+              <a href="{{ f_prod.url | default: '/products/cotton-lungi-set' }}" class="fk-card">
+                <div class="fk-card-media">
+                  <img src="{{ 'textiles-men-premium.png' | asset_url }}" alt="Cotton Lungi Set" loading="lazy">
+                  <span class="fk-card-badge">SPECIAL</span>
+                </div>
+                <div class="fk-card-cat">Textiles</div>
+                <h3 class="fk-card-title">Fine Combed Traditional Cotton Lungi Set</h3>
+                <div class="fk-card-rating">4.6 &#9733;</div>
+                <div class="fk-card-price-row">
+                  <span class="fk-card-price">Rs. 1,299.00</span>
+                  <span class="fk-card-mrp">Rs. 1,899.00</span>
+                  <span class="fk-card-discount">31% off</span>
+                </div>
+                <div class="fk-card-delivery">Free delivery available</div>
+              </a>
+              {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Similar Products",
+  "tag": "section",
+  "class": "section-similar-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Similar Products"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Similar Products"
+    }
+  ]
+}
+{% endschema %}

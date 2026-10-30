@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deedap Jewellery</title>
+<script src="./deedap-jewelry-react.js"></script>
+<script src="./deedap-jewelry-react-dom.js"></script>
+<script src="./deedap-jewelry-support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0A08}
+.dd{font-family:'Manrope',system-ui,sans-serif;color:#F4EEDF;position:relative;overflow-x:clip}
+.dd *{box-sizing:border-box}
+.dd a{color:inherit}
+.disp{font-family:'Syne','Arial Black',sans-serif;font-weight:800;text-transform:uppercase}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+
+/* ---------- entrance ---------- */
+.mask{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.rise{display:block;animation:rise 1.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{
+from{transform:translateY(112%)}
+to{transform:translateY(0)}
+}
+.fadeup{animation:fadeup 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fadeup{
+from{opacity:0;transform:translateY(26px)}
+to{opacity:1;transform:none}
+}
+.ringIn{animation:ringIn 1.8s cubic-bezier(.2,.8,.2,1) 1.8s both}
+@keyframes ringIn{
+from{opacity:0;transform:scale(.82) rotate(-8deg)}
+to{opacity:1;transform:none}
+}
+
+/* ---------- ambient loops ---------- */
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-18px)}
+}
+.spin{animation:spin 56s linear infinite;transform-box:view-box;transform-origin:50% 50%}
+.spinRev{animation:spin 40s linear infinite reverse;transform-box:view-box;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glow{animation:glow 6s ease-in-out infinite}
+@keyframes glow{
+0%,100%{opacity:.55;transform:scale(1)}
+50%{opacity:1;transform:scale(1.1)}
+}
+.spark{animation:twinkle 3.8s ease-in-out infinite}
+@keyframes twinkle{
+0%,100%{opacity:.1;transform:scale(.4) rotate(0deg)}
+50%{opacity:1;transform:scale(1) rotate(45deg)}
+}
+.gemf{animation:facet 3.6s ease-in-out infinite}
+@keyframes facet{
+0%,100%{opacity:.74}
+50%{opacity:1}
+}
+.f2{animation-delay:-.4s}.f3{animation-delay:-.9s}.f4{animation-delay:-1.3s}.f5{animation-delay:-1.8s}
+.f6{animation-delay:-2.2s}.f7{animation-delay:-2.6s}.f8{animation-delay:-3s}.f9{animation-delay:-.7s}.f10{animation-delay:-1.6s}
+.shine{animation:shineRun 5.5s linear infinite}
+@keyframes shineRun{to{stroke-dashoffset:-1000}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 3.4s cubic-bezier(.3,.7,.2,1) .5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.sway{animation:sway 5s ease-in-out infinite alternate;transform-box:view-box}
+@keyframes sway{
+from{transform:rotate(-4deg)}
+to{transform:rotate(4deg)}
+}
+.goldtxt{background:linear-gradient(100deg,#8F6B1F 0%,#D9B65C 22%,#FFF1BE 40%,#C9A24B 58%,#8F6B1F 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 4.5s ease-in-out infinite alternate}
+@keyframes shimmer{
+from{background-position:0% 0}
+to{background-position:100% 0}
+}
+.pulseDot{animation:pulseDot 2.2s ease-out infinite}
+@keyframes pulseDot{
+0%{box-shadow:0 0 0 0 rgba(217,182,92,.6)}
+100%{box-shadow:0 0 0 12px rgba(217,182,92,0)}
+}
+.scrollLine{animation:scrollLine 2.4s ease-in-out infinite;transform-origin:top}
+@keyframes scrollLine{
+0%{transform:scaleY(0);opacity:0}
+40%{transform:scaleY(1);opacity:1}
+100%{transform:scaleY(1);opacity:0}
+}
+.drift{animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{
+from{transform:translate(0,0)}
+to{transform:translate(40px,-30px)}
+}
+
+/* ---------- marquee ---------- */
+.mq{display:flex;width:max-content;animation:mq 42s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- nav ---------- */
+.nl{position:relative;color:#D8CDB6;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 0;transition:color .3s}
+.nl:after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:#D9B65C;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.nl:hover{color:#F4D98F}
+.nl:hover:after,.nl.on:after{transform:scaleX(1)}
+.nl.on{color:#E8C875}
+.btn{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,translate .25s ease-out}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px -12px rgba(217,182,92,.55)}
+.ghost{color:#F4EEDF;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 4px;border-bottom:1px solid rgba(244,238,223,.4);transition:color .3s,border-color .3s}
+.ghost:hover{color:#F4D98F;border-color:#F4D98F}
+
+/* ---------- category cards ---------- */
+.card{top:0;transform:perspective(1100px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));transition:transform .45s cubic-bezier(.2,.8,.2,1),top .7s cubic-bezier(.2,.8,.2,1),box-shadow .7s;will-change:transform}
+.card:hover{top:-14px;box-shadow:0 50px 80px -30px rgba(20,17,12,.6),0 0 0 1px rgba(217,182,92,.55)}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px circle at var(--px,50%) var(--py,50%),rgba(255,236,176,.34),transparent 62%);opacity:0;transition:opacity .5s;pointer-events:none;z-index:2}
+.card:hover:before{opacity:1}
+.card .art{translate:calc(var(--nx,0)*-14px) calc(var(--ny,0)*-9px);transition:transform .9s cubic-bezier(.2,.8,.2,1),translate .35s ease-out}
+.card:hover .art{transform:scale(1.07) rotate(-2deg)}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.3) 50%,transparent 65%);transform:translateX(-130%);transition:transform 1.1s ease;pointer-events:none}
+.card:hover:after{transform:translateX(130%)}
+.card .go{transition:background .4s,color .4s,transform .5s,border-color .4s}
+.card:hover .go{background:#C9A24B;color:#14110C;border-color:#C9A24B;transform:rotate(-45deg)}
+.card:focus-visible{outline:3px solid #C9A24B;outline-offset:4px}
+
+/* ---------- metal chooser ---------- */
+.mbtn{transition:background .3s,border-color .3s,transform .3s;cursor:pointer;font-family:inherit}
+.mbtn:hover{transform:translateY(-2px)}
+.mbtn:focus-visible{outline:3px solid #F4D98F;outline-offset:3px}
+
+/* ---------- scroll driven (progressive) ---------- */
+@keyframes reveal{
+from{opacity:0;translate:0 90px;scale:.94;filter:blur(10px)}
+to{opacity:1;translate:0 0;scale:1;filter:blur(0)}
+}
+@keyframes fillup{
+from{background-position:0 100%}
+to{background-position:0 0}
+}
+@keyframes lineGrow{
+from{transform:scaleX(0)}
+to{transform:scaleX(1)}
+}
+.fill{color:#14110C}
+.growline{transform-origin:left}
+@supports (animation-timeline: view()){
+.reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 42%}
+.growline{animation:lineGrow linear both;animation-timeline:view();animation-range:entry 10% entry 80%}
+.fill{background:linear-gradient(180deg,#14110C 0%,#14110C 42%,rgba(20,17,12,.16) 58%,rgba(20,17,12,.16) 100%);background-size:100% 260%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fillup linear both;animation-timeline:view();animation-range:entry 35% cover 52%}
+}
+
+/* ---------- cinematic intro curtain ---------- */
+.curtain{position:absolute;inset:0;z-index:30;pointer-events:none;overflow:hidden;background:#0B0A08;animation:cOut .6s ease 1.7s forwards,cHide 0s linear 2.4s forwards}
+@keyframes cOut{to{opacity:0}}
+@keyframes cHide{to{visibility:hidden}}
+.iBg{position:absolute;inset:0;background:radial-gradient(circle at 50% calc(50% - 85px),rgba(201,162,75,.2),transparent 52%);animation:fadeup 1.6s ease .2s both}
+.iLine{position:absolute;left:0;right:0;top:calc(50% - 85px);height:1px;background:linear-gradient(90deg,transparent,#E8C875 28%,#FFF1BE 50%,#E8C875 72%,transparent);transform-origin:center;animation:iLine 1.2s cubic-bezier(.7,0,.2,1) both}
+@keyframes iLine{
+0%{transform:scaleX(0);opacity:0}
+18%{opacity:1}
+45%{transform:scaleX(1)}
+100%{transform:scaleX(.02);opacity:0}
+}
+.iStage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;transform-origin:50% calc(50% - 85px);animation:dive .75s cubic-bezier(.75,0,.2,1) 1.5s forwards}
+@keyframes dive{to{transform:scale(5.5);opacity:0}}
+.iGem{width:260px;height:229px;overflow:visible;filter:drop-shadow(0 0 36px rgba(255,226,150,.32))}
+.ig{fill-opacity:0;stroke:#E8C875;stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:igDraw .65s cubic-bezier(.4,0,.2,1) calc(.1s + var(--i)*.05s) forwards,igFill .5s ease calc(.7s + var(--i)*.03s) forwards}
+@keyframes igDraw{to{stroke-dashoffset:0}}
+@keyframes igFill{to{fill-opacity:1}}
+.iGlint{position:absolute;top:calc(50% - 85px);left:50%;width:1000px;height:2px;margin-left:-500px;background:linear-gradient(90deg,transparent,#fff 50%,transparent);box-shadow:0 0 30px 6px rgba(255,236,176,.6);opacity:0;animation:glint .8s ease-out 1s both}
+@keyframes glint{
+0%{opacity:0;transform:scaleX(0)}
+30%{opacity:1;transform:scaleX(1)}
+100%{opacity:0;transform:scaleX(1.25)}
+}
+.iFlare{position:absolute;left:calc(50% - 54px);top:calc(50% - 150px);width:220px;height:220px;margin:-110px 0 0 -110px;opacity:0;animation:flare .9s ease-out .95s both}
+@keyframes flare{
+0%{opacity:0;transform:scale(0) rotate(0deg)}
+35%{opacity:1;transform:scale(1) rotate(45deg)}
+100%{opacity:0;transform:scale(.3) rotate(100deg)}
+}
+.iWord{display:flex;gap:.3em;padding-left:.3em;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(40px,6vw,76px);line-height:1;color:#F4EEDF}
+.lt{display:inline-block;opacity:0;animation:lt .7s cubic-bezier(.2,.8,.2,1) calc(.85s + var(--i)*.05s) forwards}
+@keyframes lt{
+from{opacity:0;filter:blur(16px);transform:translateY(34px) scale(1.25)}
+to{opacity:1;filter:blur(0);transform:none}
+}
+.iSub{display:flex;align-items:center;gap:16px;margin-top:-12px;font-size:11px;font-weight:800;letter-spacing:.38em;color:#E3BE5E;animation:fadeup .6s ease 1.2s both}
+.iSub i{display:block;width:60px;height:1px;background:#C9A24B}
+.iCorner{position:absolute;font-size:11px;font-weight:800;letter-spacing:.26em;color:#B9AE98;text-transform:uppercase;animation:fadeup .7s ease .1s both}
+.iFlash{position:absolute;inset:0;background:radial-gradient(circle at 50% calc(50% - 85px),rgba(255,244,205,.95),rgba(255,226,150,0) 58%);opacity:0;animation:flash .7s ease-out 1.35s both}
+@keyframes flash{
+0%{opacity:0}
+30%{opacity:1}
+100%{opacity:0}
+}
+
+/* ---------- cursor, spotlight, tilt ---------- */
+.spot{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(460px circle at var(--hx,72%) var(--hy,38%),rgba(255,226,150,.17),transparent 70%)}
+.tilt{transform:perspective(1300px) rotateY(calc(var(--rx,0)*16deg)) rotateX(calc(var(--ry,0)*-12deg));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.cursor{position:fixed;left:0;top:0;width:44px;height:44px;margin:-22px 0 0 -22px;border:1px solid rgba(217,182,92,.85);border-radius:50%;pointer-events:none;z-index:99;opacity:0;transition:width .35s,height .35s,margin .35s,background .35s,opacity .35s}
+.cursor.big{width:86px;height:86px;margin:-43px 0 0 -43px;background:rgba(217,182,92,.14)}
+.cursor:after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#F4D98F}
+
+/* ---------- gold dust + rays ---------- */
+.ptc{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle,#FFF1BE,#D9B65C 55%,rgba(217,182,92,0) 72%);opacity:0;animation:ptc linear infinite;pointer-events:none}
+@keyframes ptc{
+0%{transform:translate(0,0) scale(.6);opacity:0}
+15%{opacity:.95}
+100%{transform:translate(var(--dx,30px),-880px) scale(1.15);opacity:0}
+}
+.rays{position:absolute;left:50%;top:50%;width:1000px;height:1000px;margin:-500px 0 0 -500px;background:repeating-conic-gradient(from 0deg,rgba(255,233,168,.14) 0deg 3deg,transparent 3deg 15deg);-webkit-mask-image:radial-gradient(circle,#000 0,transparent 64%);mask-image:radial-gradient(circle,#000 0,transparent 64%);animation:raySpin 90s linear infinite;pointer-events:none}
+@keyframes raySpin{to{transform:rotate(360deg)}}
+.turn{animation:turn 8s ease-in-out infinite alternate}
+@keyframes turn{
+from{transform:perspective(900px) rotateY(-24deg)}
+to{transform:perspective(900px) rotateY(24deg)}
+}
+.mq.rev{animation-direction:reverse;animation-duration:58s}
+.mq:hover{animation-play-state:paused}
+.outline{color:transparent;-webkit-text-stroke:1px #C9A24B;font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+
+/* ---------- scroll progress, sticky nav, parallax ---------- */
+.prog{position:sticky;top:0;height:3px;margin-bottom:-3px;z-index:60;background:linear-gradient(90deg,#8F6B1F,#F4D98F,#C9A24B);transform-origin:left;transform:scaleX(0)}
+@keyframes progress{to{transform:scaleX(1)}}
+@keyframes plx{
+from{translate:0 160px;rotate:-12deg}
+to{translate:0 -160px;rotate:14deg}
+}
+@keyframes heroOut{
+from{opacity:1;translate:0 0;scale:1}
+to{opacity:0;translate:0 -90px;scale:.95}
+}
+@supports (animation-timeline: view()){
+.prog{animation:progress linear both;animation-timeline:scroll()}
+.plx{animation:plx linear both;animation-timeline:view();animation-range:cover}
+}
+html.ddready .curtain{display:none !important}
+html.ddready .fadeup,html.ddready .rise:not(.goldtxt),html.ddready .ringIn{animation:none !important;opacity:1 !important;transform:none !important}
+
+@media (max-width:1000px){
+.navlinks{display:none !important}
+}
+@media (hover:none){
+.cursor{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+.dd *,.dd *:before,.dd *:after{animation:none !important;transition:none !important}
+.curtain,.cursor{display:none !important}
+}
+</style>
+</helmet>
+
+<div class="dd" style="background:#0B0A08">
+<div class="prog" aria-hidden="true"></div>
+
+<!-- shared SVG definitions: gem symbol + metal gradients -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<linearGradient id="goldG" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#F6E2A4"></stop>
+<stop offset=".45" stop-color="#C9A24B"></stop>
+<stop offset="1" stop-color="#7A5710"></stop>
+</linearGradient>
+<radialGradient id="pearlG" cx=".35" cy=".3" r=".8">
+<stop offset="0" stop-color="#FFFFFF"></stop>
+<stop offset=".55" stop-color="#E9DFC7"></stop>
+<stop offset="1" stop-color="#B9A67E"></stop>
+</radialGradient>
+<symbol id="gem" viewBox="30 50 340 300">
+<polygon class="gemf f1" points="40,150 130,60 120,150" fill="#E9DDBF" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f2" points="130,60 200,60 120,150" fill="#FFFFFF" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f3" points="200,60 120,150 200,150" fill="#D9C79A" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f4" points="200,60 200,150 280,150" fill="#F6EED8" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f5" points="200,60 270,60 280,150" fill="#CDB985" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f6" points="270,60 360,150 280,150" fill="#EFE3C3" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f7" points="40,150 120,150 200,340" fill="#BFA970" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f8" points="120,150 200,150 200,340" fill="#EADCB0" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f9" points="200,150 280,150 200,340" fill="#AD9558" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon class="gemf f10" points="280,150 360,150 200,340" fill="#DAC68C" stroke="#9C7B2E" stroke-opacity=".55" stroke-width="1.4" stroke-linejoin="round"></polygon>
+</symbol>
+<symbol id="star" viewBox="-1 -1 2 2">
+<path d="M0,-1 C0.1,-0.28 0.28,-0.1 1,0 C0.28,0.1 0.1,0.28 0,1 C-0.1,0.28 -0.28,0.1 -1,0 C-0.28,-0.1 -0.1,-0.28 0,-1Z" fill="#F4D98F"></path>
+</symbol>
+</defs>
+</svg>
+
+<!-- =====================  HERO  ===================== -->
+<section id="top" class="hero" style="--rx:0;--ry:0;position:relative;min-height:940px;overflow:hidden;background:#0B0A08">
+
+<div class="curtain" aria-hidden="true">
+<div class="iBg"></div>
+<div class="iLine"></div>
+<span class="iCorner" style="top:110px;left:40px">Deedap · Fine Jewellery</span>
+<span class="iCorner" style="top:110px;right:40px">The Fine Edit</span>
+<span class="iCorner" style="bottom:56px;right:40px">Gold · Diamonds · Pearls</span>
+<div class="iStage">
+<svg class="iGem" viewBox="30 50 340 300" aria-hidden="true">
+<polygon class="ig" style="--i:0" pathLength="1" points="40,150 130,60 120,150" fill="#E9DDBF"></polygon>
+<polygon class="ig" style="--i:1" pathLength="1" points="130,60 200,60 120,150" fill="#FFFFFF"></polygon>
+<polygon class="ig" style="--i:2" pathLength="1" points="200,60 120,150 200,150" fill="#D9C79A"></polygon>
+<polygon class="ig" style="--i:3" pathLength="1" points="200,60 200,150 280,150" fill="#F6EED8"></polygon>
+<polygon class="ig" style="--i:4" pathLength="1" points="200,60 270,60 280,150" fill="#CDB985"></polygon>
+<polygon class="ig" style="--i:5" pathLength="1" points="270,60 360,150 280,150" fill="#EFE3C3"></polygon>
+<polygon class="ig" style="--i:6" pathLength="1" points="40,150 120,150 200,340" fill="#BFA970"></polygon>
+<polygon class="ig" style="--i:7" pathLength="1" points="120,150 200,150 200,340" fill="#EADCB0"></polygon>
+<polygon class="ig" style="--i:8" pathLength="1" points="200,150 280,150 200,340" fill="#AD9558"></polygon>
+<polygon class="ig" style="--i:9" pathLength="1" points="280,150 360,150 200,340" fill="#DAC68C"></polygon>
+</svg>
+<div class="iWord" aria-hidden="true">
+<span class="lt" style="--i:0">D</span><span class="lt" style="--i:1">E</span><span class="lt" style="--i:2">E</span><span class="lt" style="--i:3">D</span><span class="lt" style="--i:4">A</span><span class="lt" style="--i:5">P</span>
+</div>
+<div class="iSub"><i></i>FINE JEWELLERY<i></i></div>
+</div>
+<div class="iGlint"></div>
+<svg class="iFlare" viewBox="-1 -1 2 2" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;top:calc(50% - 250px);left:calc(50% + 150px);width:30px;height:30px;animation-delay:.9s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;top:calc(50% - 60px);left:calc(50% - 200px);width:22px;height:22px;animation-delay:1.1s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;top:calc(50% - 40px);left:calc(50% + 180px);width:36px;height:36px;animation-delay:1s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<div class="iFlash"></div>
+</div>
+<div class="spot" aria-hidden="true"></div>
+<div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1" aria-hidden="true">
+<sc-for list="{{particles}}" as="p" hint-placeholder-count="20">
+<span class="ptc" style="{{ p.style }}"></span>
+</sc-for>
+</div>
+
+<div class="drift" style="position:absolute;top:-160px;left:-200px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.20),rgba(201,162,75,0) 65%);pointer-events:none"></div>
+<div class="glow" style="position:absolute;top:80px;right:-120px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(217,182,92,.30),rgba(217,182,92,0) 62%);pointer-events:none"></div>
+
+<svg viewBox="0 0 1440 940" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" aria-hidden="true">
+<path class="draw" pathLength="1" d="M-40 760 C 300 900, 760 820, 1010 560" fill="none" stroke="#C9A24B" stroke-opacity=".55" stroke-width="1.5"></path>
+<path class="draw" pathLength="1" d="M900 -20 C 1180 60, 1400 220, 1480 420" fill="none" stroke="#F4D98F" stroke-opacity=".4" stroke-width="1.2"></path>
+</svg>
+
+<!-- nav -->
+<nav aria-label="Primary" data-deedap-scroll-header style="position:fixed;top:20px;left:0;right:0;padding:0 24px;z-index:40;pointer-events:none">
+<div class="fadeup" style="pointer-events:auto;animation-delay:2.4s;max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 14px 12px 32px;border-radius:999px;background:rgba(22,18,12,.62);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(217,182,92,.28)">
+<a href="index.html#storefront" class="serif" style="font-size:26px;font-weight:600;letter-spacing:.34em;color:#F4EEDF;text-decoration:none">DEEDAP<span style="color:#D9B65C"> ·</span></a>
+<div class="navlinks" style="display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:center">
+<a class="nl" href="textiles.html">Clothing &amp; Textiles</a>
+<a class="nl" href="electronics.html">Electronics</a>
+<a class="nl on" href="#top" aria-current="page">Jewellery</a>
+<a class="nl" href="index.html#honey">Raw Honey</a>
+<a class="nl" href="index.html#imported">Imported Goods</a>
+<a class="nl" href="index.html#essentials">Essentials</a>
+</div>
+<a class="btn magnet" href="#collections" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 10px 0 22px;border-radius:999px;background:linear-gradient(135deg,#F6E2A4,#C9A24B);color:#14110C;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.16em">BAG<span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#14110C;color:#F4D98F;font-size:12px">1</span></a>
+</div>
+</nav>
+
+<!-- hero content -->
+<div class="hc" style="position:relative;z-index:3;max-width:1240px;margin:0 auto;padding:176px 24px 130px;display:flex;flex-wrap:wrap;align-items:center;gap:32px 40px">
+
+<div style="flex:1 1 520px;min-width:0">
+<div class="fadeup" style="display:inline-flex;align-items:center;gap:12px;padding:9px 18px 9px 12px;border-radius:999px;border:1px solid rgba(217,182,92,.4);background:rgba(217,182,92,.08);animation-delay:1.8s">
+<span class="pulseDot" style="width:10px;height:10px;border-radius:50%;background:#D9B65C;display:inline-block"></span>
+<span style="font-size:12px;font-weight:800;letter-spacing:.2em;color:#E8C875;text-transform:uppercase">Deedap Jewellery / The Fine Edit</span>
+</div>
+
+<h1 class="disp" style="margin:34px 0 0;font-size:clamp(44px,5.9vw,88px);line-height:1;letter-spacing:-.01em;color:#F4EEDF;transform:translate(calc(var(--rx,0)*-12px),calc(var(--ry,0)*-7px));transition:transform .5s ease-out">
+<span class="mask"><span class="rise" style="animation-delay:1.85s">Made to</span></span>
+<span class="mask"><span class="rise" style="animation-delay:1.97s">Outshine</span></span>
+<span class="mask"><span class="rise goldtxt" style="animation-delay:2.09s">Time.</span></span>
+</h1>
+
+<p class="fadeup" style="margin:34px 0 0;max-width:470px;font-size:19px;line-height:1.65;color:#C9BEA6;animation-delay:2.3s;text-wrap:pretty">Gold, diamonds and pearls chosen for the moments you keep. Rings, necklaces, earrings and bracelets made to be worn daily, gifted proudly and passed on.</p>
+
+<div class="fadeup" style="margin-top:42px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 34px;animation-delay:2.45s">
+<a class="btn magnet" href="#collections" style="display:inline-flex;align-items:center;gap:14px;min-height:60px;padding:0 34px;border-radius:999px;background:linear-gradient(135deg,#F6E2A4,#C9A24B 55%,#A9812F);color:#14110C;text-decoration:none;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase">
+Explore the collection
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<a class="ghost" href="#bespoke">Book a consultation</a>
+</div>
+</div>
+
+<!-- ring -->
+<div style="flex:1 1 440px;min-width:0;position:relative;max-width:580px;margin:0 auto;width:100%">
+<div class="rays" aria-hidden="true"></div>
+<div class="tilt">
+<div class="ringIn">
+<div class="float" style="position:relative">
+<div class="hfr2" aria-hidden="true"></div>
+<figure class="hfig" style="position:relative;margin:0 auto;width:100%;max-width:500px">
+<div class="hframe" role="img" aria-label="Fine jewelry worn by real models: gold solitaire ring on hand, diamond pendant on neck, wedding bands, pearl strand, gold bead bracelet on wrist" style="position:relative;aspect-ratio:4/5;border-radius:250px 250px 28px 28px;overflow:hidden;border:1px solid rgba(217,182,92,.6);box-shadow:0 50px 100px -30px rgba(0,0,0,.85),0 0 100px -10px rgba(217,182,92,.4);background:#14110C">
+<img class="sl" src="./jewelry-rings-premium.png" alt="Solitaire ring worn on hand" style="animation-delay:2s">
+<img class="sl" src="./jewelry-necklaces-premium.png" alt="Diamond pendant worn on neckline" style="animation-delay:8s">
+<img class="sl" src="./jewelry-bridal-premium.png" alt="Wedding bands worn on hands" style="animation-delay:14s">
+<img class="sl" src="./jewelry-pearls-premium.png" alt="Pearl strand worn on model" style="animation-delay:20s">
+<img class="sl" src="./jewelry-bracelets-premium.png" alt="Gold bead bracelet worn on wrist" style="animation-delay:26s">
+<div class="hvig" aria-hidden="true"></div>
+<div class="hsheen" aria-hidden="true"></div>
+<div class="hcap" aria-hidden="true">
+  <div class="cp" style="animation-delay:2s"><span class="cpn">01 / 05</span><span class="cpt serif">Solitaire Rings</span><span class="cps">Cut to catch every light</span></div>
+  <div class="cp" style="animation-delay:8s"><span class="cpn">02 / 05</span><span class="cpt serif">Diamond Pendants</span><span class="cps">One stone, worn close</span></div>
+  <div class="cp" style="animation-delay:14s"><span class="cpn">03 / 05</span><span class="cpt serif">Wedding Bands</span><span class="cps">Begin the story beautifully</span></div>
+  <div class="cp" style="animation-delay:20s"><span class="cpn">04 / 05</span><span class="cpt serif">Pearl Strands</span><span class="cps">A soft, living glow</span></div>
+  <div class="cp" style="animation-delay:26s"><span class="cpn">05 / 05</span><span class="cpt serif">Gold Bracelets</span><span class="cps">Light on the wrist</span></div>
+  <span class="pbar"></span>
+</div>
+</div>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;z-index:5;left:-6%;top:22%;width:44px;height:44px;animation-delay:2.6s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;z-index:5;right:-5%;top:12%;width:34px;height:34px;animation-delay:3.4s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<svg class="spark" viewBox="-1 -1 2 2" style="position:absolute;z-index:5;right:-7%;bottom:30%;width:52px;height:52px;animation-delay:4.2s" aria-hidden="true"><use href="#star" x="-1" y="-1" width="2" height="2"></use></svg>
+<div class="hseal" aria-hidden="true"><svg viewBox="0 0 140 140" class="spin" style="position:absolute;inset:0;width:100%;height:100%;animation-duration:26s"><defs><path id="hSealPath" d="M70 70 m-52 0 a52 52 0 1 1 104 0 a52 52 0 1 1 -104 0" fill="none"></path></defs><text font-family="Manrope, sans-serif" font-size="10" font-weight="800" letter-spacing="4.3" fill="#E8C875"><textPath href="#hSealPath">DEEDAP  ·  FINE JEWELRY  ·  DEEDAP  ·  FINE JEWELRY  · </textPath></text></svg><svg viewBox="0 0 140 140" style="position:absolute;inset:0;width:100%;height:100%"><use href="#gem" x="46" y="48" width="48" height="42"></use></svg></div>
+</figure>

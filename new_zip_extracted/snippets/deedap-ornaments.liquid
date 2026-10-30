@@ -1,0 +1,49 @@
+{%- comment -%} Decorations for the festival banner. Param: theme (diwali | xmas | eid | holi | brand) {%- endcomment -%}
+{%- case theme -%}
+  {%- when 'diwali' -%}
+    <div class="dd-o dd-o-diwali" aria-hidden="true">
+      {%- assign lpos = '29.5,2.2,72.3,95.5' | split: ',' -%}
+      {%- assign llen = '18,52,26,60' | split: ',' -%}
+      {%- assign lsc = '1,.85,.95,.8' | split: ',' -%}
+      {%- for p in lpos -%}
+        <div class="dd-lant" style="left:{{ p }}%;animation-delay:{{ forloop.index0 | times: 0.35 }}s;--sc:{{ lsc[forloop.index0] }}">
+          <span class="dd-lstr" style="height:{{ llen[forloop.index0] }}px"></span>
+          <svg width="46" height="78" viewBox="0 0 46 78"><path d="M17 2h12l3 8H14z" fill="var(--acc)"/><path d="M12 10h22c6 8 6 30 0 40H12c-6-10-6-32 0-40z" fill="var(--acc)" opacity=".92"/><path d="M23 10v40M16 10c-4 10-4 30 0 40M30 10c4 10 4 30 0 40" stroke="rgba(0,0,0,.22)" fill="none"/><ellipse cx="23" cy="30" rx="6" ry="9" fill="#FFE9A6" class="dd-flame"/><path d="M14 50h18l-3 6H17z" fill="var(--acc)"/><path d="M23 56v14" stroke="var(--acc)" stroke-width="2"/><circle cx="23" cy="73" r="3.4" fill="#FFE9A6"/></svg>
+        </div>
+      {%- endfor -%}
+      <div class="dd-diyas">{%- for i in (0..11) -%}<span style="left:{{ i | times: 8.3 | plus: 4 }}%;animation-delay:{{ i | times: 0.31 | modulo: 1.6 }}s"></span>{%- endfor -%}</div>
+    </div>
+  {%- when 'xmas' -%}
+    <div class="dd-o dd-o-xmas" aria-hidden="true">
+      {%- for i in (1..46) -%}
+        {%- assign sz = i | modulo: 4 | plus: 3 -%}
+        <i class="dd-snow" style="left:{{ i | times: 37 | modulo: 100 }}%;width:{{ sz }}px;height:{{ sz }}px;animation-duration:{{ i | times: 7 | modulo: 6 | plus: 5 }}s;animation-delay:-{{ i | times: 13 | modulo: 9 }}s"></i>
+      {%- endfor -%}
+      <div class="dd-xm">
+        <span style="left:34%;top:38px;--d:0s"></span><span style="left:52%;top:22px;--d:.5s"></span><span style="left:74%;top:46px;--d:1s"></span><span style="left:90%;top:28px;--d:1.5s"></span>
+      </div>
+    </div>
+  {%- when 'eid' -%}
+    <div class="dd-o dd-o-eid" aria-hidden="true">
+      {%- assign mpos = '29,70,96' | split: ',' -%}
+      {%- assign mtop = '8,0,10' | split: ',' -%}
+      {%- assign msc = '.95,.7,.85' | split: ',' -%}
+      {%- for p in mpos -%}
+        <div class="dd-moon" style="left:{{ p }}%;top:{{ mtop[forloop.index0] }}px;scale:{{ msc[forloop.index0] }};animation-delay:{{ forloop.index0 | times: 0.7 }}s"><svg width="64" height="64" viewBox="0 0 64 64"><path d="M42 6A28 28 0 1 0 58 44 22 22 0 1 1 42 6z" fill="var(--acc)"/><path d="M52 14l1.8 4.6 4.8.4-3.7 3.1 1.2 4.7-4.1-2.6-4.1 2.6 1.2-4.7-3.7-3.1 4.8-.4z" fill="var(--acc)"/></svg></div>
+      {%- endfor -%}
+      {%- for i in (1..26) -%}
+        <i class="dd-star" style="left:{{ i | times: 29 | modulo: 66 | plus: 30 }}%;top:{{ i | times: 53 | modulo: 220 | plus: 8 }}px;animation-delay:{{ i | times: 17 | modulo: 30 | divided_by: 10.0 }}s"></i>
+      {%- endfor -%}
+    </div>
+  {%- when 'holi' -%}
+    <div class="dd-o dd-o-holi" aria-hidden="true">
+      {%- assign hx = '8,26,44,62,80,94' | split: ',' -%}
+      {%- assign hy = '160,40,170,60,150,30' | split: ',' -%}
+      {%- assign hc = '#FF2E93,#FFD400,#18C5FF,#8A3FFC,#FF7A00,#2EE6A6' | split: ',' -%}
+      {%- for x in hx -%}
+        <i class="dd-blob" style="left:{{ x }}%;top:{{ hy[forloop.index0] }}px;background:radial-gradient(circle,{{ hc[forloop.index0] }},transparent 68%);animation-delay:-{{ forloop.index0 | times: 1.3 }}s"></i>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="dd-o dd-o-brand" aria-hidden="true"><i class="dd-ring r1"></i><i class="dd-ring r2"></i></div>
+{%- endcase -%}

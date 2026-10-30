@@ -1,0 +1,9 @@
+{%- comment -%}
+  Loads fonts, CSS and JS for the Deedap sections. Rendered at the top of every Deedap section;
+  the browser only downloads each file once.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+{{ 'deedap.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'deedap.js' | asset_url }}" defer></script>

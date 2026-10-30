@@ -1,0 +1,51 @@
+{%- comment -%}
+  One product tile (portrait card).
+  Params: product, tag (pill text), tint (placeholder colour), show_cat (bool), cat_label, cat_color
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign alt_text = product.featured_image.alt | default: product.title
+  assign tint_color = tint | default: '#F4E4CB'
+-%}
+<article class="dd-sq">
+  <div class="dd-sqimg{% unless product.featured_image %} dd-stripe{% endunless %}" style="background:{{ tint_color }}">
+    <a class="dd-sq-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+      <span class="dd-zoom">
+        {%- if product.featured_image -%}
+          {{ product.featured_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 480, 640', sizes: '(min-width: 1290px) 235px, (min-width: 750px) 22vw, 60vw', alt: alt_text }}
+        {%- else -%}
+          <span class="dd-ph"></span>
+        {%- endif -%}
+      </span>
+    </a>
+    {%- if product.available -%}
+      {%- if tag != blank -%}<span class="dd-pill">{{ tag }}</span>{%- endif -%}
+    {%- else -%}
+      <span class="dd-pill is-sold">Sold out</span>
+    {%- endif -%}
+    {%- if product.available and product.has_only_default_variant -%}
+      <button class="dd-addb dd-sqadd" type="button" data-dd-add data-variant-id="{{ variant.id }}" data-product-url="{{ product.url }}" aria-pressed="false" aria-label="Add {{ product.title | escape }} to bag">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      </button>
+    {%- elsif product.available -%}
+      <a class="dd-addb dd-sqadd" href="{{ product.url }}" aria-label="Choose options for {{ product.title | escape }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+      </a>
+    {%- else -%}
+      <button class="dd-addb dd-sqadd" type="button" disabled aria-label="{{ product.title | escape }} is sold out">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    {%- endif -%}
+  </div>
+  <div class="dd-sq-body">
+    {%- if show_cat and cat_label != blank -%}
+      <div class="dd-sq-cat"><i style="background:{{ cat_color | default: '#B8923F' }}"></i><span>{{ cat_label }}</span></div>
+    {%- endif -%}
+    <h3><a href="{{ product.url }}" style="color:inherit;text-decoration:none">{{ product.title }}</a></h3>
+    <div class="dd-price">
+      {%- if product.price_varies -%}From {% endif -%}
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}
+    </div>
+  </div>
+</article>

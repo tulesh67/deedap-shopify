@@ -1,0 +1,484 @@
+{%- comment -%}
+  Fallback card matching New Arrivals Redesign specification with QuickView support
+  Parameters:
+    - index: Loop index for staggered animation delay
+    - show_category: Boolean
+    - cat_id: String ('all', 'clothing', 'tech', 'organic', 'global', 'essentials', 'jewellery', 'cookware', 'hampers', 'bags', 'accessories')
+    - item_index: Number (0..5)
+{%- endcomment -%}
+
+{%- liquid
+  assign anim_delay = index | times: 0.08
+  assign name = "Curated Arrival"
+  assign cat = "Essentials"
+  assign color = "#B8923F"
+  assign tint = "#FAF8F3"
+  assign price_cents = 199900
+  assign img_url = ''
+  assign desc = 'Handcrafted physical discovery inspected for structural fidelity, craftsmanship authenticity, and daily wear durability.'
+
+  assign c_key = cat_id | downcase
+
+  if c_key contains 'cloth' or c_key contains 'textil'
+    assign cat = "Textiles"
+    assign color = "#C2780C"
+    assign tint = "#F4E4CB"
+    case item_index
+      when 0
+        assign name = "Handloom cotton shirt"
+        assign price_cents = 249900
+        assign img_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Woven by generational handloom weavers from unbleached organic combed cotton. Breathable, relaxed tailored fit with natural mother-of-pearl buttons.'
+      when 1
+        assign name = "Linen drape kurta"
+        assign price_cents = 319900
+        assign img_url = 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Pure French flax linen crafted with a relaxed silhouette and clean Mandarin collar. Naturally temperature-regulating for all-day comfort.'
+      when 2
+        assign name = "Raw silk dupatta"
+        assign price_cents = 189900
+        assign img_url = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Handwoven Tussar raw silk featuring subtle natural slubs and fine zari border detailing. Sourced from certified master artisan clusters.'
+      when 3
+        assign name = "Block-print bedsheet set"
+        assign price_cents = 279900
+        assign img_url = 'https://images.unsplash.com/photo-1631483143232-ce807c87960f?q=80&w=800&auto=format&fit=crop'
+        assign desc = '300 thread count percale cotton hand-stamped with traditional wooden blocks using non-toxic botanical dyes. Includes 2 matching pillowcases.'
+      when 4
+        assign name = "Cotton lungi set"
+        assign price_cents = 129900
+        assign img_url = 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Fine combed cotton woven with traditional selvedge borders. Lightweight, breathable, and softened for immediate ease of wear.'
+      when 5
+        assign name = "Embroidered stole"
+        assign price_cents = 219900
+        assign img_url = 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Soft wool-blend stole with artisanal Kashida crewel embroidery. An elegant layering piece for seasonal transitions.'
+    endcase
+
+  elsif c_key contains 'tech' or c_key contains 'electr'
+    assign cat = "Technology"
+    assign color = "#1E88C7"
+    assign tint = "#DCEBF5"
+    case item_index
+      when 0
+        assign name = "Fast-charge GaN adapter"
+        assign price_cents = 189900
+        assign img_url = 'https://images.unsplash.com/photo-1603899122911-27c0cb85824a?q=80&w=800&auto=format&fit=crop'
+        assign desc = '65W Gallium Nitride (GaN) dual USB-C + USB-A fast charger. Over-voltage and temperature protection with universal multi-device fast delivery.'
+      when 1
+        assign name = "Wireless earbuds"
+        assign price_cents = 349900
+        assign img_url = 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Active noise-canceling wireless earbuds featuring custom 11mm dynamic neodymium drivers, 36-hour total battery case, and IPX5 water resistance.'
+      when 2
+        assign name = "Braided USB-C cable"
+        assign price_cents = 69900
+        assign img_url = 'https://images.unsplash.com/photo-1595756630452-736bc8ef3693?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Double-braided nylon 100W PD fast-charging cable with aluminum alloy housing and reinforced strain-relief collars tested for 25,000+ bends.'
+      when 3
+        assign name = "Desktop dock hub"
+        assign price_cents = 459900
+        assign img_url = 'https://images.unsplash.com/photo-1544652478-6653e09f18a2?q=80&w=800&auto=format&fit=crop'
+        assign desc = '8-in-1 aerospace aluminum USB-C hub with 4K HDMI @ 60Hz, 100W Power Delivery pass-through, dual USB 3.2 ports, and UHS-I SD/MicroSD readers.'
+      when 4
+        assign name = "Smart plug"
+        assign price_cents = 119900
+        assign img_url = 'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=800&auto=format&fit=crop'
+        assign desc = '16A high-power Wi-Fi smart plug with real-time energy monitoring, scheduling, and surge protection. Compatible with Google Home and Alexa.'
+      when 5
+        assign name = "Mechanical keyboard"
+        assign price_cents = 549900
+        assign img_url = 'https://images.unsplash.com/photo-1544652478-6653e09f18a2?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Hot-swappable 75% mechanical keyboard with factory-lubed linear switches, sound-dampening silicone foam, and CNC aluminum frame.'
+    endcase
+
+  elsif c_key contains 'organ' or c_key contains 'honey' or c_key contains 'natur'
+    assign cat = "Organic"
+    assign color = "#B0541A"
+    assign tint = "#F1E0CE"
+    case item_index
+      when 0
+        assign name = "Raw forest honey"
+        assign price_cents = 85000
+        assign img_url = 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Unpasteurized, unprocessed multi-floral forest honey harvested from wild hives in deep reserve forest belts. Lab-tested with zero artificial syrup.'
+      when 1
+        assign name = "Cold-pressed mustard oil"
+        assign price_cents = 45000
+        assign img_url = 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Traditional wooden kachi-ghani cold-pressed from first-grade black mustard seeds. Rich in pungency, antioxidants, and authentic culinary aroma.'
+      when 2
+        assign name = "Unrefined jaggery"
+        assign price_cents = 32000
+        assign img_url = 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Chemical-free traditional jaggery blocks slow-clarified with plant mucilage. Retains natural iron, magnesium, and mineral complexity.'
+      when 3
+        assign name = "Herbal tea blend"
+        assign price_cents = 58000
+        assign img_url = 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Whole-leaf organic green tea blended with whole cardamom pods, tulsi, and Himalayan dried ginger. Packaged in airtight UV-shield tin.'
+      when 4
+        assign name = "Cold-pressed coconut oil"
+        assign price_cents = 49000
+        assign img_url = 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Extra virgin cold-pressed coconut oil made from fresh mature coconut kernel. 100% pure, unbleached, and chemical-free.'
+      when 5
+        assign name = "Stone-ground turmeric"
+        assign price_cents = 28000
+        assign img_url = 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'High-curcumin (5.2%) single-origin Salem turmeric root, slow stone-milled to retain essential volatile oils and vibrant golden purity.'
+    endcase
+
+  elsif c_key contains 'global' or c_key contains 'import'
+    assign cat = "Global"
+    assign color = "#6D3FD1"
+    assign tint = "#E6DEF5"
+    case item_index
+      when 0
+        assign name = "Imported ceramic mug set"
+        assign price_cents = 199900
+        assign img_url = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Hand-thrown stoneware mug set with reactive glaze finish. Microwave and dishwasher safe, crafted by artisanal potters.'
+      when 1
+        assign name = "Scented candle trio"
+        assign price_cents = 149900
+        assign img_url = 'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Hand-poured 100% soy wax candles infused with cedarwood, amber, and vetiver. Lead-free cotton wicks offering 45 hours clean burn.'
+      when 2
+        assign name = "Turkish cotton towel"
+        assign price_cents = 189900
+        assign img_url = 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=800&auto=format&fit=crop'
+        assign desc = '100% Aegean Turkish cotton woven in flat-weave peshtemal style. Extra absorbent, quick-drying, and luxuriously compact.'
+      when 3
+        assign name = "Market-find tote"
+        assign price_cents = 165000
+        assign img_url = 'https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Heavyweight 16oz rinsed duck canvas tote with bridle leather carry handles and reinforced brass rivets.'
+      when 4
+        assign name = "Japanese ceramic bowl"
+        assign price_cents = 220000
+        assign img_url = 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Mino-ware ceramic ramen bowl crafted with authentic tenmoku iron glaze. Elegant silhouette designed for daily dining.'
+      when 5
+        assign name = "Moroccan brass tray"
+        assign price_cents = 340000
+        assign img_url = 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Hand-hammered solid brass serving platter featuring intricate geometric floral repousse engraving.'
+    endcase
+
+  elsif c_key contains 'jewel'
+    assign cat = "Jewellery"
+    assign color = "#8A6416"
+    assign tint = "#F0E4C8"
+    case item_index
+      when 0
+        assign name = "Six-prong solitaire ring"
+        assign price_cents = 8499000
+        assign img_url = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Precision-cut lab-grown VVS1 diamond set in handcrafted 18k yellow gold with six tapered prongs engineered to maximize brilliant optical fire.'
+      when 1
+        assign name = "Diamond pendant necklace"
+        assign price_cents = 6500000
+        assign img_url = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Brilliant-cut solitaire diamond floating on a delicate 18k solid gold diamond-cut cable chain with adjustable 16-18 inch clasp.'
+      when 2
+        assign name = "Classic pearl strand"
+        assign price_cents = 4200000
+        assign img_url = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Hand-knotted 7.5-8.0mm AAA round freshwater cultured pearls finished with a custom 18k fluted safety clasp.'
+      when 3
+        assign name = "Gold bead bracelet"
+        assign price_cents = 3800000
+        assign img_url = 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Sculpted solid 18k yellow gold high-polish beads strung on durable memory core with signature DEEDAP hallmark charm.'
+      when 4
+        assign name = "Gold wedding bands"
+        assign price_cents = 7200000
+        assign img_url = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Comfort-fit court profile wedding bands in lustrous 22k gold, hand-finished with brushed satin center and mirror-polished bevels.'
+      when 5
+        assign name = "Pearl drop earrings"
+        assign price_cents = 2900000
+        assign img_url = 'https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Baroque cultured pearls suspended from 18k solid gold lever-back ear wires with pave diamond accent tops.'
+    endcase
+
+  elsif c_key contains 'cook' or c_key contains 'kitchen'
+    assign cat = "Cookware"
+    assign color = "#D1334A"
+    assign tint = "#F6DDE0"
+    case item_index
+      when 0
+        assign name = "Cast-iron skillet"
+        assign price_cents = 320000
+        assign img_url = 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Pre-seasoned heavy-gauge cast iron with dual pour spouts and ergonomic helper handle. Unmatched heat retention for searing and baking.'
+      when 1
+        assign name = "Copper saucepan"
+        assign price_cents = 450000
+        assign img_url = 'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Solid 2.5mm copper exterior with food-grade non-reactive stainless steel interior lining and cast-iron stay-cool handle.'
+      when 2
+        assign name = "Stone mortar & pestle"
+        assign price_cents = 210000
+        assign img_url = 'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Solid unpolished black granite hand-hewn for grinding whole spices, pestos, and paste with maximum essential oil release.'
+      when 3
+        assign name = "Clay handi"
+        assign price_cents = 160000
+        assign img_url = 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Natural terracotta clay pot crafted by master potters. Infuses dishes with authentic earthy taste through slow porous cooking.'
+      when 4
+        assign name = "Non-stick tawa"
+        assign price_cents = 185000
+        assign img_url = 'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Forged extra-thick aluminum flat griddle with 5-layer granite-reinforced non-stick coating for crispy dosas and rotis.'
+      when 5
+        assign name = "Steel pressure cooker"
+        assign price_cents = 390000
+        assign img_url = 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Tri-ply food-grade 304 stainless steel pressure cooker with impact-bonded encapsulated base for rapid, uniform heat diffusion.'
+    endcase
+
+  elsif c_key contains 'hamper' or c_key contains 'gift'
+    assign cat = "Hampers"
+    assign color = "#C42B67"
+    assign tint = "#F5DCE7"
+    case item_index
+      when 0
+        assign name = "Festive dry-fruit hamper"
+        assign price_cents = 299900
+        assign img_url = 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Rigid luxury keepsake box containing jumbo California almonds, Afghan walnuts, roasted salted pistachios, and Medjool dates.'
+      when 1
+        assign name = "Tea & ceramics gift set"
+        assign price_cents = 249900
+        assign img_url = 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Two handcrafted ceramic tea cups paired with single-estate Darjeeling Muscatel First Flush in embossed caddy.'
+      when 2
+        assign name = "Self-care ritual box"
+        assign price_cents = 199900
+        assign img_url = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Handmade cold-process shea butter soap, botanical bath salts, brass incense burner, and pure sandalwood dhoop sticks.'
+      when 3
+        assign name = "Corporate gift set"
+        assign price_cents = 350000
+        assign img_url = 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Full-grain leather passport wallet, brass mechanical pen, and artisanal single-origin dark chocolate bar in bespoke foil box.'
+      when 4
+        assign name = "Wellness hamper"
+        assign price_cents = 220000
+        assign img_url = 'https://images.unsplash.com/photo-1512290900672-1f55a153835e?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Ayurvedic copper water carafe, organic forest honey jar, brass measuring spoon, and calming chamomile flower infusion.'
+      when 5
+        assign name = "Return-gift box"
+        assign price_cents = 145000
+        assign img_url = 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Chic compact gift hamper filled with roasted cashew brittles and artisanal terracotta votive candles.'
+    endcase
+
+  elsif c_key contains 'bag' or c_key contains 'carry'
+    assign cat = "Bags"
+    assign color = "#1F9D6B"
+    assign tint = "#D9EFE5"
+    case item_index
+      when 0
+        assign name = "Jute market tote"
+        assign price_cents = 65000
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'
+        assign desc = '100% natural biodegradable Golden Jute with water-resistant lamination, cushioned cotton webbing handles, and 20kg carry load.'
+      when 1
+        assign name = "Canvas shopper"
+        assign price_cents = 85000
+        assign img_url = 'https://images.unsplash.com/photo-1597484662317-9bd7bdda2907?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Heavyweight 14oz organic cotton canvas tote featuring deep gusset base and internal secure zip pocket for phone and keys.'
+      when 2
+        assign name = "Foldable carry bag"
+        assign price_cents = 45000
+        assign img_url = 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Ripstop recycled nylon shopper that folds into a 3-inch palm-sized pouch. Ultra-lightweight yet holds up to 15kg groceries.'
+      when 3
+        assign name = "Insulated lunch tote"
+        assign price_cents = 95000
+        assign img_url = 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Food-grade aluminum thermal insulated carry bag with water-repellent Oxford canvas exterior. Keeps meals warm for 4+ hours.'
+      when 4
+        assign name = "Fold-flat shopper"
+        assign price_cents = 55000
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Structured collapsible shopper bag with reinforced bottom baseboard and extra-long shoulder straps.'
+      when 5
+        assign name = "Cotton produce bags"
+        assign price_cents = 75000
+        assign img_url = 'https://images.unsplash.com/photo-1610444583715-7798c8c27cf3?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Set of 6 breathable organic mesh cotton drawstring bags for farmers market vegetables, fruits, and bulk pantry grains.'
+    endcase
+
+  elsif c_key contains 'access'
+    assign cat = "Accessories"
+    assign color = "#4C3FD1"
+    assign tint = "#E0DEF6"
+    case item_index
+      when 0
+        assign name = "Full-grain leather belt"
+        assign price_cents = 145000
+        assign img_url = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Vegetable-tanned full-grain Italian leather belt with solid brushed brass buckle. Hand-burnished edges that develop rich patina.'
+      when 1
+        assign name = "Printed silk scarf"
+        assign price_cents = 125000
+        assign img_url = 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=800&auto=format&fit=crop'
+        assign desc = '100% Mulberry twill silk scarf featuring hand-rolled edges and hand-drawn geometric botanical motif.'
+      when 2
+        assign name = "Canvas cap"
+        assign price_cents = 85000
+        assign img_url = 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Six-panel washed cotton twill baseball cap with antique brass adjuster buckle and embroidered DEEDAP crest.'
+      when 3
+        assign name = "Slim card wallet"
+        assign price_cents = 95000
+        assign img_url = 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Ultra-slim 4-slot cardholder in bridle leather with RFID-blocking middle currency pocket. Fits unobtrusively in front pockets.'
+      when 4
+        assign name = "Woven leather wallet"
+        assign price_cents = 185000
+        assign img_url = 'https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Intrecciato hand-woven lambskin bifold wallet with 8 credit card slots and dual cash compartments.'
+      when 5
+        assign name = "Wool beanie"
+        assign price_cents = 65000
+        assign img_url = 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?q=80&w=800&auto=format&fit=crop'
+        assign desc = '100% Extra-fine Merino wool ribbed knit watch cap. Itch-free, moisture-wicking, and naturally insulating.'
+    endcase
+
+  else
+    # Default Essentials
+    assign cat = "Essentials"
+    assign color = "#0E8F6E"
+    assign tint = "#D8EEE6"
+    case item_index
+      when 0
+        assign name = "Everyday desk organiser"
+        assign price_cents = 129900
+        assign img_url = 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Solid American walnut desk tray with CNC-milled compartments for stationery, phone, and daily EDC accessories.'
+      when 1
+        assign name = "Steel water bottle"
+        assign price_cents = 99900
+        assign img_url = 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Double-wall vacuum insulated 18/8 stainless steel flask. Keeps beverages ice cold for 24 hours or piping hot for 12 hours.'
+      when 2
+        assign name = "Bamboo storage set"
+        assign price_cents = 159900
+        assign img_url = 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Stackable sustainable bamboo storage containers with airtight silicone-sealed lids for dry pantry goods.'
+      when 3
+        assign name = "Compact travel kit"
+        assign price_cents = 89900
+        assign img_url = 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Waterproof TPU Dopp kit containing TSA-approved leakproof silicone bottles, bamboo toothbrush, and pill case.'
+      when 4
+        assign name = "Cotton laundry bag"
+        assign price_cents = 75000
+        assign img_url = 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Heavyweight 12oz breathable unbleached cotton laundry hamper bag with heavy-duty drawstring closure.'
+      when 5
+        assign name = "Pocket sewing kit"
+        assign price_cents = 45000
+        assign img_url = 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?q=80&w=800&auto=format&fit=crop'
+        assign desc = 'Handy embossed tin with stainless steel folding scissors, multi-shade threads, needles, and spare horn buttons.'
+    endcase
+  endif
+
+  assign target_handle = name | handleize
+  if target_handle contains 'shirt'
+    if all_products['handloom-cotton-shirt'] != empty
+      assign target_handle = 'handloom-cotton-shirt'
+    elsif all_products['shirt'] != empty
+      assign target_handle = 'shirt'
+    endif
+  endif
+
+  assign target_prod = all_products[target_handle]
+  assign fallback_variant_id = ''
+  if target_prod != empty and target_prod.id != blank
+    assign fallback_product_url = target_prod.url
+    assign fallback_variant_id = target_prod.selected_or_first_available_variant.id
+  else
+    for prod in collections['all'].products
+      if prod.available and prod.selected_or_first_available_variant.id != blank
+        assign fallback_variant_id = prod.selected_or_first_available_variant.id
+        break
+      endif
+    endfor
+
+    if c_key contains 'cloth' or c_key contains 'textil'
+      if target_handle contains 'shirt' and all_products['shirt'] != empty
+        assign fallback_product_url = all_products['shirt'].url
+      else
+        assign fallback_product_url = '/pages/textiles'
+      endif
+    elsif c_key contains 'tech' or c_key contains 'electr'
+      assign fallback_product_url = '/pages/electronics'
+    elsif c_key contains 'jewel'
+      assign fallback_product_url = '/pages/jewelry'
+    elsif c_key contains 'access'
+      assign fallback_product_url = '/pages/accessories'
+    elsif c_key contains 'cook'
+      assign fallback_product_url = '/#cookware'
+    elsif c_key contains 'organic'
+      assign fallback_product_url = '/#organic'
+    elsif c_key contains 'hamper'
+      assign fallback_product_url = '/#hampers'
+    elsif c_key contains 'bag'
+      assign fallback_product_url = '/#bags'
+    else
+      assign fallback_product_url = '/collections/all'
+    endif
+  endif
+-%}
+
+<article
+  class="na-sq na-pop"
+  style="animation-delay: {{ anim_delay }}s; cursor: pointer;"
+  data-title="{{ name | escape }}"
+  data-price="{{ price_cents | money }}"
+  data-category="{{ cat | escape }}"
+  data-color="{{ color }}"
+  data-description="{{ desc | escape }}"
+  data-image="{{ img_url }}"
+  data-variant-id="{{ fallback_variant_id }}"
+  data-product-url="{{ fallback_product_url }}"
+>
+  <div class="na-sqimg" style="background-color: {{ tint }};">
+    <a href="{{ fallback_product_url }}" class="na-zoom" aria-label="{{ name | escape }}">
+      {%- if img_url != blank -%}
+        <img src="{{ img_url }}" alt="{{ name | escape }}" loading="lazy" width="600" height="600">
+      {%- endif -%}
+    </a>
+    <span class="na-new-pill">NEW</span>
+    <button
+      type="button"
+      class="na-addb na-sqadd"
+      data-variant-id="{{ fallback_variant_id }}"
+      data-product-url="{{ fallback_product_url }}"
+      aria-label="Add {{ name | escape }} to bag"
+      aria-pressed="false"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+    </button>
+  </div>
+  <div class="na-meta">
+    {%- if show_category -%}
+      <div class="na-cat-badge">
+        <span class="na-cat-badge-dot" style="background-color: {{ color }};"></span>
+        <span>{{ cat }}</span>
+      </div>
+    {%- endif -%}
+    <h3 class="na-prod-title">
+      <a href="{{ fallback_product_url }}" style="text-decoration:none;color:inherit;">{{ name }}</a>
+    </h3>
+    <div class="na-prod-price">{{ price_cents | money }}</div>
+  </div>
+</article>

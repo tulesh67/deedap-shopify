@@ -1,0 +1,402 @@
+{%- comment -%}
+  DEEDAP Luxury Quick View & Direct Buy Modal
+  Enables 1-click Direct Checkout ("Buy Now") or AJAX Add to Bag directly from the home page.
+{%- endcomment -%}
+
+<div id="deedapQuickViewModal" class="dd-qv-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="dd-qv-backdrop" data-qv-close></div>
+  <div class="dd-qv-dialog">
+    <button type="button" class="dd-qv-close" data-qv-close aria-label="Close preview">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="dd-qv-body">
+      <!-- Big High-Resolution Image View -->
+      <div class="dd-qv-media">
+        <img id="qvImage" src="" alt="Product photo" loading="eager">
+        <span class="dd-qv-pill">VERIFIED PHYSICAL DISCOVERY</span>
+      </div>
+
+      <!-- Detailed Product Information & Actions -->
+      <div class="dd-qv-content">
+        <div class="dd-qv-cat">
+          <span class="dd-qv-dot" id="qvDot"></span>
+          <span id="qvCategory">Category</span>
+        </div>
+
+        <h2 class="dd-qv-title" id="qvTitle">Product Title</h2>
+        <div class="dd-qv-price" id="qvPrice">Rs. 0.00</div>
+
+        <div class="dd-qv-desc-wrap">
+          <h4 class="dd-qv-subhead">Detailed Description & Specifications</h4>
+          <p class="dd-qv-desc" id="qvDesc">Detailed product description and material specifications will appear here.</p>
+        </div>
+
+        <div class="dd-qv-assurance">
+          <div class="dd-qv-ass-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Verified Physical Sourcing & Quality Inspection</span>
+          </div>
+          <div class="dd-qv-ass-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Express Courier Delivery with Inspected Packaging</span>
+          </div>
+        </div>
+
+        <!-- Quantity Selector -->
+        <div class="dd-qv-qty-row">
+          <span class="dd-qv-qty-label">Quantity:</span>
+          <div class="dd-qv-qty-control">
+            <button type="button" class="dd-qv-qty-btn" id="qvQtyMinus" aria-label="Decrease quantity">&minus;</button>
+            <input type="number" id="qvQtyInput" value="1" min="1" max="99" aria-label="Product quantity" readonly>
+            <button type="button" class="dd-qv-qty-btn" id="qvQtyPlus" aria-label="Increase quantity">&plus;</button>
+          </div>
+        </div>
+
+        <!-- Direct Actions: Buy Now & Add to Bag -->
+        <div class="dd-qv-actions">
+          <button type="button" class="dd-qv-buynow" id="qvBuyNowButton">
+            <span>⚡ BUY NOW &bull; Direct Checkout</span>
+          </button>
+          <button type="button" class="dd-qv-addb" id="qvAddButton">
+            <span>👜 Add to Bag</span>
+          </button>
+        </div>
+
+        <div class="dd-qv-msg" id="qvSuccessMsg" style="display:none;"></div>
+
+        <div class="dd-qv-foot">
+          <a href="#" id="qvProductLink" class="dd-qv-prod-link">View Full Product Page &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.dd-qv-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.dd-qv-modal.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.dd-qv-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 16, 21, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dd-qv-dialog {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border: 1px solid rgba(20, 17, 12, 0.12);
+  border-radius: 28px;
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.4);
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+.dd-qv-modal.is-active .dd-qv-dialog {
+  transform: scale(1) translateY(0);
+}
+.dd-qv-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f5f4f0;
+  border: 1px solid rgba(20, 17, 12, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #14110C;
+  transition: all 0.25s ease;
+}
+.dd-qv-close:hover {
+  background: #14110C;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+.dd-qv-body {
+  display: flex;
+  flex-direction: row;
+  min-height: 520px;
+}
+.dd-qv-media {
+  flex: 1 1 50%;
+  background: #f5f4f0;
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 460px;
+}
+.dd-qv-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dd-qv-media:hover img {
+  transform: scale(1.04);
+}
+.dd-qv-pill {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(20, 17, 12, 0.75);
+  backdrop-filter: blur(8px);
+  color: #F4D98F;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  border: 1px solid rgba(244, 217, 143, 0.25);
+}
+.dd-qv-content {
+  flex: 1 1 50%;
+  padding: 44px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.dd-qv-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #14110C;
+  margin-bottom: 12px;
+}
+.dd-qv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #96752C;
+  display: inline-block;
+}
+.dd-qv-title {
+  font-family: inherit;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #14110C;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+.dd-qv-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: #96752C;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.dd-qv-desc-wrap {
+  border-top: 1px solid rgba(20, 17, 12, 0.08);
+  border-bottom: 1px solid rgba(20, 17, 12, 0.08);
+  padding: 16px 0;
+  margin-bottom: 18px;
+}
+.dd-qv-subhead {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A7A5A;
+  margin: 0 0 6px 0;
+}
+.dd-qv-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4A463F;
+  margin: 0;
+}
+.dd-qv-assurance {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.dd-qv-ass-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12.5px;
+  color: #14110C;
+  font-weight: 600;
+}
+.dd-qv-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.dd-qv-qty-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #14110C;
+}
+.dd-qv-qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid rgba(20, 17, 12, 0.15);
+  border-radius: 999px;
+  background: #FAF8F3;
+  padding: 3px 6px;
+}
+.dd-qv-qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #14110C;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.dd-qv-qty-btn:hover {
+  background: rgba(20, 17, 12, 0.08);
+}
+.dd-qv-qty-control input {
+  width: 44px;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #14110C;
+  outline: none;
+}
+.dd-qv-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.dd-qv-buynow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #14110C 0%, #2A2418 100%);
+  color: #F4D98F;
+  border: 1.5px solid #C9A24B;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 24px -6px rgba(201, 162, 75, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.dd-qv-buynow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -6px rgba(201, 162, 75, 0.6);
+}
+.dd-qv-addb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  border-radius: 999px;
+  background: #FAF6EC;
+  border: 1.5px solid rgba(20, 17, 12, 0.18);
+  color: #14110C;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.dd-qv-addb:hover {
+  background: #F1ECE0;
+  border-color: #14110C;
+}
+.dd-qv-msg {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #EBF8F2;
+  border: 1px solid #7AD7B3;
+  color: #0E6B47;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.dd-qv-foot {
+  text-align: center;
+  margin-top: 4px;
+}
+.dd-qv-prod-link {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #8A7A5A;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.dd-qv-prod-link:hover {
+  color: #14110C;
+}
+
+@media (max-width: 768px) {
+  .dd-qv-body {
+    flex-direction: column;
+  }
+  .dd-qv-media {
+    border-radius: 28px 28px 0 0;
+    min-height: 280px;
+    max-height: 320px;
+  }
+  .dd-qv-content {
+    padding: 24px 20px;
+  }
+  .dd-qv-title {
+    font-size: 21px;
+  }
+}
+</style>

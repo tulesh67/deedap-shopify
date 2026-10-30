@@ -1,0 +1,471 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "new_arrivals": {
+      "type": "new-arrivals",
+      "blocks": {
+        "cat_textiles": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Clothing & Textiles",
+            "short_title": "Textiles",
+            "color": "#c2780c",
+            "tint": "#f4e4cb"
+          }
+        },
+        "cat_tech": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Information & Technology",
+            "short_title": "Technology",
+            "color": "#1e88c7",
+            "tint": "#dcebf5"
+          }
+        },
+        "cat_organic": {
+          "type": "category",
+          "settings": {
+            "collection": "raw-honey",
+            "title": "Organic & Natural",
+            "short_title": "Organic",
+            "color": "#b0541a",
+            "tint": "#f1e0ce"
+          }
+        },
+        "cat_global": {
+          "type": "category",
+          "settings": {
+            "collection": "imported",
+            "title": "Global Collections",
+            "short_title": "Global",
+            "color": "#6d3fd1",
+            "tint": "#e6def5"
+          }
+        },
+        "cat_essentials": {
+          "type": "category",
+          "settings": {
+            "collection": "essentials",
+            "title": "Essentials",
+            "short_title": "Essentials",
+            "color": "#0e8f6e",
+            "tint": "#d8eee6"
+          }
+        },
+        "cat_jewellery": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Jewellery",
+            "short_title": "Jewellery",
+            "color": "#8a6416",
+            "tint": "#f0e4c8"
+          }
+        },
+        "cat_cookware": {
+          "type": "category",
+          "settings": {
+            "collection": "cookware",
+            "title": "Cookware",
+            "short_title": "Cookware",
+            "color": "#d1334a",
+            "tint": "#f6dde0"
+          }
+        },
+        "cat_hampers": {
+          "type": "category",
+          "settings": {
+            "collection": "gift-hampers",
+            "title": "Gift Hampers",
+            "short_title": "Hampers",
+            "color": "#c42b67",
+            "tint": "#f5dce7"
+          }
+        },
+        "cat_bags": {
+          "type": "category",
+          "settings": {
+            "collection": "carryout-bags",
+            "title": "Carryout Bags",
+            "short_title": "Bags",
+            "color": "#1f9d6b",
+            "tint": "#d9efe5"
+          }
+        },
+        "cat_accessories": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Accessories",
+            "short_title": "Accessories",
+            "color": "#4c3fd1",
+            "tint": "#e0def6"
+          }
+        }
+      },
+      "block_order": [
+        "cat_textiles",
+        "cat_tech",
+        "cat_organic",
+        "cat_global",
+        "cat_essentials",
+        "cat_jewellery",
+        "cat_cookware",
+        "cat_hampers",
+        "cat_bags",
+        "cat_accessories"
+      ],
+      "settings": {
+        "heading_prefix": "New",
+        "heading_suffix": "Arrivals",
+        "all_new_label": "All New",
+        "see_all_label": "See all new",
+        "see_all_url": "/collections/all",
+        "auto_rotate": true,
+        "interval": 3
+      }
+    },
+    "row-clothing-textiles": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "clothing-textiles",
+        "title": "Clothing & Textiles",
+        "subtitle": "Everyday weaves & home textiles",
+        "color": "#c2780c",
+        "tint": "#f4e4cb",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-information-technology": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "information-technology",
+        "title": "Information & Technology",
+        "subtitle": "Gadgets, chargers & accessories",
+        "color": "#1e88c7",
+        "tint": "#dcebf5",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-organic-natural": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "organic-natural",
+        "title": "Organic & Natural",
+        "subtitle": "Pure, unprocessed & small-batch",
+        "color": "#b0541a",
+        "tint": "#f1e0ce",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-global-collections": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "global-collections",
+        "title": "Global Collections",
+        "subtitle": "Finds from around the world",
+        "color": "#6d3fd1",
+        "tint": "#e6def5",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-essentials": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "essentials",
+        "title": "Essentials",
+        "subtitle": "Daily needs, done well",
+        "color": "#0e8f6e",
+        "tint": "#d8eee6",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-jewellery": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "jewellery",
+        "title": "Jewellery",
+        "subtitle": "Gold, diamonds & pearls",
+        "color": "#8a6416",
+        "tint": "#f0e4c8",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-cookware": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "cookware",
+        "title": "Cookware",
+        "subtitle": "Built for the Indian kitchen",
+        "color": "#d1334a",
+        "tint": "#f6dde0",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-gift-hampers": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "gift-hampers",
+        "title": "Gift Hampers",
+        "subtitle": "Ready-to-gift, beautifully boxed",
+        "color": "#c42b67",
+        "tint": "#f5dce7",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-carryout-bags": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "carryout-bags",
+        "title": "Carryout Bags",
+        "subtitle": "Strong, reusable & stylish",
+        "color": "#1f9d6b",
+        "tint": "#d9efe5",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "row-accessories": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "accessories",
+        "title": "Accessories",
+        "subtitle": "Finishing touches",
+        "color": "#4c3fd1",
+        "tint": "#e0def6",
+        "limit": 5,
+        "tag_first": "NEW",
+        "tag_rest": "FEATURED",
+        "see_all_label": "See all"
+      }
+    },
+    "deedap_categories": {
+      "type": "deedap-categories",
+      "blocks": {
+        "cat_fashion": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/clothing.jpg",
+            "custom_image": "shopify://shop_images/clothing-textiles-3f3d30d4.png",
+            "custom_title": "Clothing & Fine Textiles",
+            "custom_description": "Men's and women's apparel, casual wear, traditional craftsmanship, raw fabrics, and home textiles with comprehensive measurement guides.",
+            "custom_url": "/pages/textiles",
+            "anchor_id": "clothing",
+            "badge_text": "Department 01 // Apparel",
+            "badge_color": "#d97706",
+            "column_span": "pod-span-7",
+            "cta_text": "Explore Apparel & Fabrics"
+          }
+        },
+        "cat_tech": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/premium-electronics-smartphone-earphones-pods.png",
+            "custom_title": "Information & Technology",
+            "custom_description": "Tested mobile peripherals, fast chargers, acoustic hardware, and desktop gadgets with verified compatibility and warranty specifications.",
+            "custom_url": "/pages/electronics",
+            "anchor_id": "electronics",
+            "badge_text": "Department 02 // Information & Technology",
+            "badge_color": "#0284c7",
+            "column_span": "pod-span-5",
+            "cta_text": "Explore Information & Technology"
+          }
+        },
+        "cat_honey": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/organic-honey-natural-products.png",
+            "custom_title": "Organic and Natural Products",
+            "custom_description": "Authentic unpasteurized harvests, seasonal single-source honeys, and gift packages with verified harvest origins and zero artificial additives.",
+            "custom_url": "/collections/raw-honey",
+            "anchor_id": "honey",
+            "badge_text": "Department 03 // Pure Harvest",
+            "badge_color": "#b45309",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Organic Products"
+          }
+        },
+        "cat_global": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/global-collections-no-text.png",
+            "custom_title": "Global Collections",
+            "custom_description": "Globally inspired fashion accessories, foreign market home finds, and curated gift pieces with clear distinction between authentic imports and styling.",
+            "custom_url": "/collections/imported",
+            "anchor_id": "imported",
+            "badge_text": "Department 04 // Global Curation",
+            "badge_color": "#7c3aed",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Global Collections"
+          }
+        },
+        "cat_essentials": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/photo-1513519245088-0e12902e5a38.jpg",
+            "custom_title": "Home & Everyday Essentials",
+            "custom_description": "Durable homeware, kitchen utilities, organizational tools, and daily practical discoveries designed for longevity and everyday convenience.",
+            "custom_url": "/collections/essentials",
+            "anchor_id": "essentials",
+            "badge_text": "Department 05 // Living",
+            "badge_color": "#059669",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Essentials"
+          }
+        },
+        "cat_jewelry": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/jewellery.jpg",
+            "custom_title": "Jewellery",
+            "custom_description": "Sculptural gold and silver pieces, delicate everyday chains, expressive earrings, and keepsake gifts selected for lasting wear.",
+            "custom_url": "/pages/jewelry",
+            "anchor_id": "jewelry",
+            "badge_text": "Department 06 // Fine Adornment",
+            "badge_color": "#96752c",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Jewellery"
+          }
+        },
+        "cat_cookware": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/cookware.jpg",
+            "custom_title": "Cookware & Kitchenware",
+            "custom_description": "Well-made pots, pans, and kitchen tools selected for dependable everyday cooking, easy care, and lasting use.",
+            "custom_url": "/collections/cookware",
+            "anchor_id": "cookware",
+            "badge_text": "Department 07 // Kitchen & Dining",
+            "badge_color": "#c2410c",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Cookware"
+          }
+        },
+        "cat_gifting": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/gift_hamper.jpg",
+            "custom_title": "Gift Hampers",
+            "custom_description": "Thoughtfully assembled hampers for celebrations, thank-yous, and special occasions, finished with a polished presentation.",
+            "custom_url": "/collections/gift-hampers",
+            "anchor_id": "gift-hampers",
+            "badge_text": "Department 08 // Thoughtful Gifting",
+            "badge_color": "#be185d",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Gift Hampers"
+          }
+        },
+        "cat_carryout": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/colourful-carryout-bags-luggage.png",
+            "custom_title": "Carryout Bags",
+            "custom_description": "Sturdy, reusable bags for shopping, gifting, and daily errands, selected for practical carry and dependable convenience.",
+            "custom_url": "/collections/carryout-bags",
+            "anchor_id": "carryout-bags",
+            "badge_text": "Department 09 // Everyday Carry",
+            "badge_color": "#0f766e",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Carryout Bags"
+          }
+        },
+        "cat_accessories": {
+          "type": "category_card",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/luxury-accessories.png",
+            "custom_title": "Accessories",
+            "custom_description": "Thoughtfully selected everyday accessories with versatile styles, practical details, and refined finishing touches.",
+            "custom_url": "/pages/accessories",
+            "anchor_id": "accessories",
+            "badge_text": "Department 10 // Finishing Touches",
+            "badge_color": "#4f46e5",
+            "column_span": "pod-span-4",
+            "cta_text": "Explore Accessories"
+          }
+        }
+      },
+      "block_order": [
+        "cat_fashion",
+        "cat_tech",
+        "cat_honey",
+        "cat_global",
+        "cat_essentials",
+        "cat_jewelry",
+        "cat_cookware",
+        "cat_gifting",
+        "cat_carryout",
+        "cat_accessories"
+      ],
+      "settings": {
+        "kicker": "01 // Sourcing Directory",
+        "heading": "Curated Departments",
+        "badge": "10 CURATED CATEGORIES"
+      }
+    },
+    "deedap_3d_hero": {
+      "type": "deedap-3d-hero",
+      "settings": {}
+    }
+  },
+  "order": [
+    "deedap_3d_hero",
+    "new_arrivals",
+    "row-clothing-textiles",
+    "row-information-technology",
+    "row-organic-natural",
+    "row-global-collections",
+    "row-essentials",
+    "row-jewellery",
+    "row-cookware",
+    "row-gift-hampers",
+    "row-carryout-bags",
+    "row-accessories",
+    "deedap_categories"
+  ]
+}

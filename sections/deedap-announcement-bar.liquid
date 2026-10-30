@@ -1,0 +1,80 @@
+<style>
+.section-deedap-announcement {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+.ann {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg,#050505,#1A140A 50%,#050505);
+  color: #F4D98F;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+.ann-m{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ann:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,#C9A24B,#FFF3C4,#C9A24B,transparent);background-size:200% 100%;animation:annSh 4s linear infinite}
+.ann-t{display:flex;width:max-content;animation:annMv 38s linear infinite}
+.ann:hover .ann-t{animation-play-state:paused}
+.ann-g{display:flex;flex-shrink:0}
+.ann-i{display:inline-flex;align-items:center;gap:12px;padding:0 34px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;font-family:'Manrope',sans-serif}
+.ann-i:nth-child(odd){color:#FAF8F3}
+@keyframes annMv{to{transform:translateX(-50%)}}
+@keyframes annSh{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.ann-t,.ann:after{animation:none}}
+</style>
+
+{%- capture sparkle_svg -%}<svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 0l1.4 3.6L10 5 6.4 6.4 5 10 3.6 6.4 0 5l3.6-1.4z" fill="#E8C875"></path></svg>{%- endcapture -%}
+
+<div class="ann" role="region" aria-label="Announcements">
+  <div class="ann-m">
+    <div class="ann-t">
+      {%- capture items_content -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <span class="ann-i" {{ block.shopify_attributes }}>
+              {{ sparkle_svg }}{{ block.settings.text | escape }}
+            </span>
+          {%- endfor -%}
+        {%- else -%}
+          <span class="ann-i">{{ sparkle_svg }}Deedap sourcing: verified physical retail &amp; wholesale discoveries</span>
+          <span class="ann-i">{{ sparkle_svg }}Complimentary inspected courier over $75</span>
+          <span class="ann-i">{{ sparkle_svg }}New arrivals added every week</span>
+          <span class="ann-i">{{ sparkle_svg }}Direct-to-consumer quality</span>
+        {%- endif -%}
+      {%- endcapture -%}
+      <div class="ann-g">{{ items_content }}</div>
+      <div class="ann-g" aria-hidden="true">{{ items_content }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "DEEDAP Marquee Banner",
+  "tag": "section",
+  "class": "section-deedap-announcement",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Announcement Message",
+      "settings": [
+        {"type": "text", "id": "text", "label": "Text", "default": "Deedap sourcing: verified physical retail & wholesale discoveries"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DEEDAP Marquee Banner"
+    }
+  ]
+}
+{% endschema %}

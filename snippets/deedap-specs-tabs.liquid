@@ -1,0 +1,106 @@
+{% comment %}
+  DEEDAP Multi-Attribute Specifications Accordion
+  Synthesized from Medusa product-tabs/index.tsx + Horizon accordion blocks
+{% endcomment %}
+
+<div class="deedap-specs-tabs" id="deedapSpecsSection">
+  <!-- Tab 1: Category Technical Specifications -->
+  <div class="specs-accordion-item">
+    <button type="button" class="specs-accordion-trigger" onclick="toggleDeedapSpec(this)">
+      <span>Category Specifications & Verification</span>
+      <span class="specs-indicator">+</span>
+    </button>
+    <div class="specs-accordion-content open">
+      <div class="specs-data-grid">
+        <div class="specs-data-row">
+          <span class="specs-label">Sourcing Classification</span>
+          <span class="specs-val">{{ product.type | default: 'Multi-Category Curated' }}</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Supplier Verification</span>
+          <span class="specs-val">DEEDAP Direct Partner // Inspected</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Material & Composition</span>
+          <span class="specs-val">Verified Organic Cotton / Tested Aluminum / Pure Raw Harvest</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Quality Assurance</span>
+          <span class="specs-val">100% Pre-Dispatch Physical Verification</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: Sourcing Architecture & Authenticity -->
+  <div class="specs-accordion-item">
+    <button type="button" class="specs-accordion-trigger" onclick="toggleDeedapSpec(this)">
+      <span>Sourcing Provenance & Standards</span>
+      <span class="specs-indicator">+</span>
+    </button>
+    <div class="specs-accordion-content">
+      <div class="specs-data-grid">
+        <div class="specs-data-row">
+          <span class="specs-label">Sourcing Channel</span>
+          <span class="specs-val">Physical Retail Atelier & Direct Wholesaler Network</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Batch Integrity</span>
+          <span class="specs-val">Direct inspection before cataloging and final packaging</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Origin Transparency</span>
+          <span class="specs-val">Clearly segregated between genuine imports and domestic crafted goods</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Certification Status</span>
+          <span class="specs-val">Lab-tested for safety and non-hazardous compliance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: Transparent Fulfillment & Delivery -->
+  <div class="specs-accordion-item">
+    <button type="button" class="specs-accordion-trigger" onclick="toggleDeedapSpec(this)">
+      <span>Realistic Fulfillment & Delivery Timelines</span>
+      <span class="specs-indicator">+</span>
+    </button>
+    <div class="specs-accordion-content">
+      <div class="specs-data-grid">
+        <div class="specs-data-row">
+          <span class="specs-label">Dispatch Protocol</span>
+          <span class="specs-val">24–48 Hours (Sourced, inspected, and packaged per order arrangement)</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Estimated Transit</span>
+          <span class="specs-val">3–5 Business Days with live tracking</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Return Window</span>
+          <span class="specs-val">30-Day Hassle-Free Sourcing Satisfaction Guarantee</span>
+        </div>
+        <div class="specs-data-row">
+          <span class="specs-label">Packaging Integrity</span>
+          <span class="specs-val">Shock-proof reinforced multi-layer protective packaging</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDeedapSpec(trigger) {
+    const content = trigger.nextElementSibling;
+    const indicator = trigger.querySelector('.specs-indicator');
+    const isOpen = content.classList.contains('open');
+    
+    if (isOpen) {
+      content.classList.remove('open');
+      indicator.textContent = '+';
+    } else {
+      content.classList.add('open');
+      indicator.textContent = '—';
+    }
+  }
+</script>

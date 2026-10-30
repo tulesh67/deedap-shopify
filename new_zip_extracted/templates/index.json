@@ -1,0 +1,296 @@
+{
+  "sections": {
+    "announcement": {
+      "type": "deedap-announcement",
+      "blocks": {
+        "m0": {
+          "type": "message",
+          "settings": {
+            "text": "Deedap sourcing: verified physical retail & wholesale discoveries"
+          }
+        },
+        "m1": {
+          "type": "message",
+          "settings": {
+            "text": "Complimentary inspected courier over $75"
+          }
+        },
+        "m2": {
+          "type": "message",
+          "settings": {
+            "text": "New arrivals added every week"
+          }
+        },
+        "m3": {
+          "type": "message",
+          "settings": {
+            "text": "Direct-to-consumer quality"
+          }
+        }
+      },
+      "block_order": [
+        "m0",
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "settings": {}
+    },
+    "header": {
+      "type": "deedap-header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    },
+    "hero": {
+      "type": "deedap-hero",
+      "blocks": {
+        "t0": {
+          "type": "trust",
+          "settings": {
+            "text": "Verified retail"
+          }
+        },
+        "t1": {
+          "type": "trust",
+          "settings": {
+            "text": "Wholesale sourcing"
+          }
+        },
+        "t2": {
+          "type": "trust",
+          "settings": {
+            "text": "Direct-to-consumer"
+          }
+        }
+      },
+      "block_order": [
+        "t0",
+        "t1",
+        "t2"
+      ],
+      "settings": {}
+    },
+    "festival": {
+      "type": "deedap-festival",
+      "settings": {
+        "theme": "diwali"
+      }
+    },
+    "arrivals": {
+      "type": "deedap-new-arrivals",
+      "blocks": {
+        "c0": {
+          "type": "collection",
+          "settings": {
+            "collection": "clothing-textiles",
+            "label": "Clothing & Textiles",
+            "color": "#C2780C",
+            "tint": "#F4E4CB"
+          }
+        },
+        "c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "information-technology",
+            "label": "Information & Technology",
+            "color": "#1E88C7",
+            "tint": "#DCEBF5"
+          }
+        },
+        "c2": {
+          "type": "collection",
+          "settings": {
+            "collection": "organic-natural",
+            "label": "Organic & Natural",
+            "color": "#B0541A",
+            "tint": "#F1E0CE"
+          }
+        },
+        "c3": {
+          "type": "collection",
+          "settings": {
+            "collection": "global-collections",
+            "label": "Global Collections",
+            "color": "#6D3FD1",
+            "tint": "#E6DEF5"
+          }
+        },
+        "c4": {
+          "type": "collection",
+          "settings": {
+            "collection": "essentials",
+            "label": "Essentials",
+            "color": "#0E8F6E",
+            "tint": "#D8EEE6"
+          }
+        },
+        "c5": {
+          "type": "collection",
+          "settings": {
+            "collection": "jewellery",
+            "label": "Jewellery",
+            "color": "#8A6416",
+            "tint": "#F0E4C8"
+          }
+        },
+        "c6": {
+          "type": "collection",
+          "settings": {
+            "collection": "cookware",
+            "label": "Cookware",
+            "color": "#D1334A",
+            "tint": "#F6DDE0"
+          }
+        },
+        "c7": {
+          "type": "collection",
+          "settings": {
+            "collection": "gift-hampers",
+            "label": "Gift Hampers",
+            "color": "#C42B67",
+            "tint": "#F5DCE7"
+          }
+        },
+        "c8": {
+          "type": "collection",
+          "settings": {
+            "collection": "carryout-bags",
+            "label": "Carryout Bags",
+            "color": "#1F9D6B",
+            "tint": "#D9EFE5"
+          }
+        },
+        "c9": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "label": "Accessories",
+            "color": "#4C3FD1",
+            "tint": "#E0DEF6"
+          }
+        }
+      },
+      "block_order": [
+        "c0",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8",
+        "c9"
+      ],
+      "settings": {}
+    },
+    "row-clothing-textiles": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "clothing-textiles",
+        "subtitle": "Everyday weaves & home textiles",
+        "color": "#C2780C",
+        "tint": "#F4E4CB"
+      }
+    },
+    "row-information-technology": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "information-technology",
+        "subtitle": "Gadgets, chargers & accessories",
+        "color": "#1E88C7",
+        "tint": "#DCEBF5"
+      }
+    },
+    "row-organic-natural": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "organic-natural",
+        "subtitle": "Pure, unprocessed & small-batch",
+        "color": "#B0541A",
+        "tint": "#F1E0CE"
+      }
+    },
+    "row-global-collections": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "global-collections",
+        "subtitle": "Finds from around the world",
+        "color": "#6D3FD1",
+        "tint": "#E6DEF5"
+      }
+    },
+    "row-essentials": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "essentials",
+        "subtitle": "Daily needs, done well",
+        "color": "#0E8F6E",
+        "tint": "#D8EEE6"
+      }
+    },
+    "row-jewellery": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "jewellery",
+        "subtitle": "Gold, diamonds & pearls",
+        "color": "#8A6416",
+        "tint": "#F0E4C8"
+      }
+    },
+    "row-cookware": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "cookware",
+        "subtitle": "Built for the Indian kitchen",
+        "color": "#D1334A",
+        "tint": "#F6DDE0"
+      }
+    },
+    "row-gift-hampers": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "gift-hampers",
+        "subtitle": "Ready-to-gift, beautifully boxed",
+        "color": "#C42B67",
+        "tint": "#F5DCE7"
+      }
+    },
+    "row-carryout-bags": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "carryout-bags",
+        "subtitle": "Strong, reusable & stylish",
+        "color": "#1F9D6B",
+        "tint": "#D9EFE5"
+      }
+    },
+    "row-accessories": {
+      "type": "deedap-category-row",
+      "settings": {
+        "collection": "accessories",
+        "subtitle": "Finishing touches",
+        "color": "#4C3FD1",
+        "tint": "#E0DEF6"
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header",
+    "hero",
+    "festival",
+    "arrivals",
+    "row-clothing-textiles",
+    "row-information-technology",
+    "row-organic-natural",
+    "row-global-collections",
+    "row-essentials",
+    "row-jewellery",
+    "row-cookware",
+    "row-gift-hampers",
+    "row-carryout-bags",
+    "row-accessories"
+  ]
+}

@@ -1,0 +1,207 @@
+<section class="page-width deedap-specs-showcase" id="specs">
+  <div class="deedap-section-header">
+    <div>
+      <div class="deedap-kicker">{{ section.settings.kicker | default: '03 // Verification Architecture' }}</div>
+      <h2 class="deedap-heading-xl">{{ section.settings.heading | default: 'Multi-Attribute Specifications' }}</h2>
+    </div>
+  </div>
+
+  <div class="specs-showcase-box">
+    <div class="specs-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="spec-card" {{ block.shopify_attributes }}>
+            <div class="spec-header" style="color: {{ block.settings.header_color | default: 'var(--cat-clothing)' }};">
+              <span>{{ block.settings.icon | default: '📋' }}</span> {{ block.settings.title | default: 'Product Spec' }}
+            </div>
+            {%- if block.settings.row1_label != blank -%}
+              <div class="spec-row"><span class="spec-label">{{ block.settings.row1_label }}</span><span class="spec-val">{{ block.settings.row1_val }}</span></div>
+            {%- endif -%}
+            {%- if block.settings.row2_label != blank -%}
+              <div class="spec-row"><span class="spec-label">{{ block.settings.row2_label }}</span><span class="spec-val">{{ block.settings.row2_val }}</span></div>
+            {%- endif -%}
+            {%- if block.settings.row3_label != blank -%}
+              <div class="spec-row"><span class="spec-label">{{ block.settings.row3_label }}</span><span class="spec-val">{{ block.settings.row3_val }}</span></div>
+            {%- endif -%}
+            {%- if block.settings.row4_label != blank -%}
+              <div class="spec-row"><span class="spec-label">{{ block.settings.row4_label }}</span><span class="spec-val">{{ block.settings.row4_val }}</span></div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="spec-card">
+          <div class="spec-header" style="color: var(--cat-clothing);"><span>👕</span> Clothing &amp; Textiles Spec</div>
+          <div class="spec-row"><span class="spec-label">Fabric Material</span><span class="spec-val">100% Organic Washed Linen</span></div>
+          <div class="spec-row"><span class="spec-label">Measurement</span><span class="spec-val">Chest 42&quot;, Length 29.5&quot; (Size M)</span></div>
+          <div class="spec-row"><span class="spec-label">Care Guide</span><span class="spec-val">Machine Wash 30°C / Line Dry</span></div>
+          <div class="spec-row"><span class="spec-label">Weave Provenance</span><span class="spec-val">Artisan Loom Inspected</span></div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-header" style="color: var(--cat-electronics);"><span>⚡</span> Electronics &amp; Tech Spec</div>
+          <div class="spec-row"><span class="spec-label">Compatibility</span><span class="spec-val">Universal USB-C / Bluetooth 5.3</span></div>
+          <div class="spec-row"><span class="spec-label">Battery Endurance</span><span class="spec-val">Up to 48 Hours Continuous Play</span></div>
+          <div class="spec-row"><span class="spec-label">Warranty</span><span class="spec-val">12-Month DEEDAP Direct Replacement</span></div>
+          <div class="spec-row"><span class="spec-label">Safety Mark</span><span class="spec-val">CE, FCC, RoHS Certified</span></div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-header" style="color: var(--cat-honey);"><span>🍯</span> Raw Honey Purity Spec</div>
+          <div class="spec-row"><span class="spec-label">Net Weight</span><span class="spec-val">500 grams (17.6 oz)</span></div>
+          <div class="spec-row"><span class="spec-label">Purity Level</span><span class="spec-val">100% Raw, Unfiltered &amp; Unheated</span></div>
+          <div class="spec-row"><span class="spec-label">Storage Guide</span><span class="spec-val">Store at Room Temp (Avoid Direct Sun)</span></div>
+          <div class="spec-row"><span class="spec-label">Harvest Origin</span><span class="spec-val">Highland Wildflower Reserves</span></div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DEEDAP Specifications",
+  "tag": "section",
+  "class": "section-deedap-specifications",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Section Kicker",
+      "default": "03 // Verification Architecture"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Multi-Attribute Specifications"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec_card",
+      "name": "Specification Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Card Icon (Emoji)",
+          "default": "📋"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Header Title",
+          "default": "Department Spec"
+        },
+        {
+          "type": "color",
+          "id": "header_color",
+          "label": "Header Accent Color",
+          "default": "#D97706"
+        },
+        {
+          "type": "text",
+          "id": "row1_label",
+          "label": "Row 1 Label",
+          "default": "Specification 1"
+        },
+        {
+          "type": "text",
+          "id": "row1_val",
+          "label": "Row 1 Value",
+          "default": "Verified Standard"
+        },
+        {
+          "type": "text",
+          "id": "row2_label",
+          "label": "Row 2 Label",
+          "default": "Specification 2"
+        },
+        {
+          "type": "text",
+          "id": "row2_val",
+          "label": "Row 2 Value",
+          "default": "Verified Standard"
+        },
+        {
+          "type": "text",
+          "id": "row3_label",
+          "label": "Row 3 Label",
+          "default": "Specification 3"
+        },
+        {
+          "type": "text",
+          "id": "row3_val",
+          "label": "Row 3 Value",
+          "default": "Verified Standard"
+        },
+        {
+          "type": "text",
+          "id": "row4_label",
+          "label": "Row 4 Label",
+          "default": "Specification 4"
+        },
+        {
+          "type": "text",
+          "id": "row4_val",
+          "label": "Row 4 Value",
+          "default": "Verified Standard"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DEEDAP Specifications",
+      "blocks": [
+        {
+          "type": "spec_card",
+          "settings": {
+            "icon": "👕",
+            "title": "Clothing & Textiles Spec",
+            "header_color": "#D97706",
+            "row1_label": "Fabric Material",
+            "row1_val": "100% Organic Washed Linen",
+            "row2_label": "Measurement",
+            "row2_val": "Chest 42\", Length 29.5\" (Size M)",
+            "row3_label": "Care Guide",
+            "row3_val": "Machine Wash 30°C / Line Dry",
+            "row4_label": "Weave Provenance",
+            "row4_val": "Artisan Loom Inspected"
+          }
+        },
+        {
+          "type": "spec_card",
+          "settings": {
+            "icon": "⚡",
+            "title": "Electronics & Tech Spec",
+            "header_color": "#0284C7",
+            "row1_label": "Compatibility",
+            "row1_val": "Universal USB-C / Bluetooth 5.3",
+            "row2_label": "Battery Endurance",
+            "row2_val": "Up to 48 Hours Continuous Play",
+            "row3_label": "Warranty",
+            "row3_val": "12-Month DEEDAP Direct Replacement",
+            "row4_label": "Safety Mark",
+            "row4_val": "CE, FCC, RoHS Certified"
+          }
+        },
+        {
+          "type": "spec_card",
+          "settings": {
+            "icon": "🍯",
+            "title": "Raw Honey Purity Spec",
+            "header_color": "#B45309",
+            "row1_label": "Net Weight",
+            "row1_val": "500 grams (17.6 oz)",
+            "row2_label": "Purity Level",
+            "row2_val": "100% Raw, Unfiltered & Unheated",
+            "row3_label": "Storage Guide",
+            "row3_val": "Store at Room Temp (Avoid Direct Sun)",
+            "row4_label": "Harvest Origin",
+            "row4_val": "Highland Wildflower Reserves"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
