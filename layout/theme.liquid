@@ -306,6 +306,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
     {{ 'deedap-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'deedap-order-form.css' | asset_url | stylesheet_tag }}
     {% style %}
       :root {
         {% if settings.deedap_canvas_bg != blank %}
@@ -322,12 +323,6 @@
         {% endif %}
         {% if settings.deedap_cat_honey != blank %}
           --cat-honey: {{ settings.deedap_cat_honey }};
-        {% endif %}
-        {% if settings.deedap_cat_imported != blank %}
-          --cat-imported: {{ settings.deedap_cat_imported }};
-        {% endif %}
-        {% if settings.deedap_cat_essentials != blank %}
-          --cat-essentials: {{ settings.deedap_cat_essentials }};
         {% endif %}
       }
     {% endstyle %}
@@ -397,6 +392,8 @@
     {% sections 'footer-group' %}
     {% render 'deedap-quickview-modal' %}
     <script src="{{ 'deedap-quickview.js' | asset_url }}" defer="defer"></script>
+    {% comment %} {% render 'deedap-order-form' %} {% endcomment %}
+{% comment %}     <script src="{{ 'deedap-order-form.js' | asset_url }}" defer="defer"></script> {% endcomment %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

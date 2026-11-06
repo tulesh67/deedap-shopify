@@ -43,8 +43,10 @@ function deedapRefreshCartDrawer() {
     });
 }
 
-function deedapQuickAdd(variantId, title, priceFormatted, imageSrc, options) {
+function deedapQuickAdd(variantId, title, priceFormatted, imageSrc, options, button) {
+  const btn = button;
   const buyNow = Boolean(options && options.buyNow);
+  const redirectCart = Boolean(options && options.redirectCart);
   const formData = {
     items: [
       {
@@ -73,16 +75,37 @@ function deedapQuickAdd(variantId, title, priceFormatted, imageSrc, options) {
         return data;
       }
 
-      const deedapBadge = document.getElementById('deedapCartCount');
-      if (deedapBadge) {
-        const current = parseInt(deedapBadge.textContent, 10) || 0;
-        deedapBadge.textContent = current + 1;
-      }
+      const originalLabel = btn.dataset.originalLabel || btn.innerHTML;
+      const originalAriaLabel = btn.dataset.originalAriaLabel || btn.getAttribute('aria-label');
+      btn.dataset.originalLabel = originalLabel;
+      btn.dataset.originalAriaLabel = originalAriaLabel || '';
+      btn.classList.add('is-added');
+      btn.setAttribute('aria-label', 'Added to bag');
+      btn.innerHTML = 'ADDED TO BAG ✓';
+      window.setTimeout(() => {
+        btn.classList.remove('is-added');
+        btn.innerHTML = originalLabel;
+        if (originalAriaLabel) btn.setAttribute('aria-label', originalAriaLabel);
+      }, 1800);
 
-      return deedapRefreshCartDrawer().then(() => data);
+      // Update the bag count immediately after Shopify confirms the item was added.
+      return fetch(deedapStoreRoot() + 'cart.js', { headers: { Accept: 'application/json' } })
+        .then((cartResponse) => (cartResponse.ok ? cartResponse.json() : null))
+        .catch(() => null)
+        .then((cart) => {
+          if (cart) {
+            document.querySelectorAll('[data-dd-cart-count], #deedapCartCount').forEach((badge) => {
+              badge.textContent = cart.item_count;
+            });
+            const bagLink = document.querySelector('.dd-bagb');
+            if (bagLink) bagLink.setAttribute('aria-label', `Bag, ${cart.item_count} items`);
+            document.dispatchEvent(new CustomEvent('dd:cart-updated', { detail: cart }));
+          }
+          if (redirectCart) window.location.href = deedapStoreRoot() + 'cart';
+          return data;
+        });
     });
 }
-
 document.addEventListener('click', function (event) {
   const chip = event.target.closest('[data-deedap-variant]');
   if (chip && !chip.disabled) {
@@ -114,7 +137,7 @@ document.addEventListener('click', function (event) {
   if (!variantId) return;
 
   btn.classList.add('is-busy');
-  deedapQuickAdd(variantId, '', '', '', { buyNow: Boolean(buyBtn) }).catch(function (error) {
+  deedapQuickAdd(variantId, '', '', '', { buyNow: Boolean(buyBtn), redirectCart: Boolean(addBtn && addBtn.hasAttribute('data-deedap-redirect-cart')) }, btn).catch(function (error) {
     console.warn('DEEDAP cart action failed', error);
     window.alert(error.message || 'This product could not be added right now.');
   }).finally(function () {

@@ -97,6 +97,7 @@
             type="button"
             name="buy_now"
             data-buy-now
+            data-deedap-order-trigger
             class="product-form__buy-now button button--full-width button--primary"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
@@ -108,9 +109,6 @@
             <span>{{ 'products.product.buy_now' | t }}</span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
-          {%- endif -%}
         </div>
       {%- endform -%}
     </product-form>

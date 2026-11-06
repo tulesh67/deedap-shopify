@@ -39,8 +39,7 @@
           btn.classList.remove('is-added');
           btn.setAttribute('aria-pressed', 'false');
         }, 1800);
-      })
-      .catch(function () {
+      })      .catch(function () {
         var url = btn.getAttribute('data-product-url');
         if (url) window.location.href = url;
       })

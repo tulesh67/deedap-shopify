@@ -82,7 +82,9 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     const index = event.target.dataset.index;
     let message = '';
 
-    if (inputValue < event.target.dataset.min) {
+    // A cart quantity of zero removes the line, even when the product's
+    // purchase rule requires at least one unit when adding it.
+    if (inputValue !== 0 && inputValue < event.target.dataset.min) {
       message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
     } else if (inputValue > parseInt(event.target.max)) {
       message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
@@ -142,28 +144,21 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   getSectionsToRender() {
+    // This theme uses a custom bag header and does not render Dawn's
+    // cart-icon-bubble or cart-live-region-text sections. Refresh only the
+    // cart sections that actually exist on the cart page.
     return [
       {
         id: 'main-cart-items',
-        section: document.getElementById('main-cart-items').dataset.id,
+        section: document.getElementById('main-cart-items')?.dataset.id,
         selector: '.js-contents',
-      },
-      {
-        id: 'cart-icon-bubble',
-        section: 'cart-icon-bubble',
-        selector: '.shopify-section',
-      },
-      {
-        id: 'cart-live-region-text',
-        section: 'cart-live-region-text',
-        selector: '.shopify-section',
       },
       {
         id: 'main-cart-footer',
-        section: document.getElementById('main-cart-footer').dataset.id,
+        section: document.getElementById('main-cart-footer')?.dataset.id,
         selector: '.js-contents',
       },
-    ];
+    ].filter((section) => section.section && document.getElementById(section.id));
   }
 
   updateQuantity(line, quantity, event, name, variantId) {
@@ -213,7 +208,12 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
             return;
           }
 
-          this.classList.toggle('is-empty', parsedState.item_count === 0);
+                    this.classList.toggle('is-empty', parsedState.item_count === 0);
+          document.querySelectorAll('[data-dd-cart-count], #deedapCartCount').forEach((badge) => {
+            badge.textContent = parsedState.item_count;
+          });
+          const bagLink = document.querySelector('.dd-bagb');
+          if (bagLink) bagLink.setAttribute('aria-label', `Bag, ${parsedState.item_count} items`);
           const cartDrawerWrapper = document.querySelector('cart-drawer');
           const cartFooter = document.getElementById('main-cart-footer');
 

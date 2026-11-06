@@ -13,7 +13,7 @@
   background: transparent;
   position: relative;
   width: 100%;
-  padding: 14px 24px 30px;
+  padding: 0 24px 20px;
   box-sizing: border-box;
 }
 
@@ -225,7 +225,7 @@
   aspect-ratio: 4/5;
   border-radius: 24px;
   overflow: hidden;
-  border: 2.5px solid #14110C !important;
+  border: 3.5px solid #5C091E !important;
   box-sizing: border-box !important;
   transition: box-shadow .5s, border-color .3s ease;
 }
@@ -301,7 +301,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1.5px solid #14110C;
+  border: 3.5px solid #5C091E !important;
   background: #fff;
   color: #14110C;
   cursor: pointer;
@@ -322,7 +322,7 @@
 .na-addb:hover {
   background: #14110C;
   color: #F4D98F;
-  border-color: #14110C;
+  border-color: #5C091E;
   transform: rotate(90deg);
 }
 
@@ -417,7 +417,7 @@
 
 @media (max-width: 640px) {
   .na-section {
-    padding: 14px 16px 24px;
+    padding: 0 16px 18px;
   }
   .na-row {
     grid-auto-columns: minmax(150px, calc((100% - 14px) / 2));
@@ -437,12 +437,12 @@
 }
 /* ===== NEW ARRIVALS PRODUCT CARDS: MANDATORY THICK BORDER ===== */
 .na-sqimg {
-  border: 2.5px solid #14110C !important;
+  border: 3.5px solid #5C091E !important;
   box-sizing: border-box !important;
   transition: border-color 0.3s ease, box-shadow 0.4s ease !important;
 }
 
 .na-sq:hover .na-sqimg {
   border-color: #B8923F !important;
-  box-shadow: 0 22px 42px -16px rgba(20, 17, 12, 0.45) !important;
+  box-shadow: 0 22px 42px -16px rgba(92, 9, 30, 0.45) !important;
 }

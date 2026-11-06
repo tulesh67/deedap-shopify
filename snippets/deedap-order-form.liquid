@@ -1,0 +1,333 @@
+{% comment %}
+  DEEDAP Customer Order Enquiry & Reservation Form Modal
+  Integrated natively with Shopify Draft Orders via Secure Backend Proxy.
+  Matches DEEDAP luxury brand design language.
+{% endcomment %}
+
+<div id="deedapOrderModal" class="dd-order-modal" aria-hidden="true" role="dialog" aria-labelledby="ddModalTitle">
+  <div class="dd-order-modal__backdrop" data-dd-close-modal></div>
+  
+  <div class="dd-order-modal__dialog" role="document">
+    <!-- Header -->
+    <div class="dd-order-modal__header">
+      <div class="dd-order-modal__brand">
+        <span class="dd-order-modal__seal">&#9733; DEEDAP CONCIERGE</span>
+        <h2 id="ddModalTitle" class="dd-order-modal__title">Complete Your Order Enquiry</h2>
+        <p class="dd-order-modal__subtitle">Review your selected item and enter delivery details. No advance payment required.</p>
+      </div>
+      <button type="button" class="dd-order-modal__close" data-dd-close-modal aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="dd-order-modal__body">
+      <!-- 1. FORM VIEW (Initial State) -->
+      <div id="ddModalFormView" class="dd-modal-view">
+        <!-- Product Summary Card -->
+        <div class="dd-product-card-preview">
+          <div class="dd-product-card-preview__thumb">
+            <img id="ddOrderProductImg" src="" alt="Selected Product" loading="lazy">
+          </div>
+          <div class="dd-product-card-preview__info">
+            <span class="dd-product-card-preview__tag">Selected Item</span>
+            <h3 id="ddOrderProductTitle" class="dd-product-card-preview__title">Product Name</h3>
+            
+            <div class="dd-product-card-preview__options">
+              <span class="dd-opt-chip" id="ddOrderSizeChip">
+                <span class="dd-opt-chip__label">Size:</span>
+                <strong id="ddOrderSizeVal">Standard</strong>
+              </span>
+              <span class="dd-opt-chip" id="ddOrderColorChip">
+                <span class="dd-opt-chip__label">Colour:</span>
+                <strong id="ddOrderColorVal">Standard</strong>
+              </span>
+            </div>
+
+            <div class="dd-product-card-preview__pricing">
+              <div class="dd-pricing-unit">
+                <span class="dd-pricing-label">Price:</span>
+                <span id="ddOrderUnitPrice" class="dd-price-val">Rs. 0</span>
+              </div>
+              
+              <!-- Quantity Controls -->
+              <div class="dd-qty-selector">
+                <span class="dd-qty-label">Quantity:</span>
+                <div class="dd-qty-controls">
+                  <button type="button" class="dd-qty-btn" id="ddQtyMinus" aria-label="Decrease quantity">&minus;</button>
+                  <input type="number" id="ddOrderQtyInput" class="dd-qty-input" value="1" min="1" max="99" readonly>
+                  <button type="button" class="dd-qty-btn" id="ddQtyPlus" aria-label="Increase quantity">&plus;</button>
+                </div>
+              </div>
+
+              <div class="dd-pricing-subtotal">
+                <span class="dd-subtotal-label">Subtotal:</span>
+                <strong id="ddOrderSubtotal" class="dd-subtotal-val">Rs. 0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Pill -->
+        <div class="dd-trust-notice">
+          <span class="dd-trust-notice__dot"></span>
+          <span>Direct Dispatch Enquiry &bull; Cash On Delivery & Online Invoice available upon confirmation</span>
+        </div>
+
+        <!-- Form Error / Success Alert -->
+        <div id="ddFormAlert" class="dd-form-alert" role="alert" style="display: none;"></div>
+
+        <!-- Customer Details Form -->
+        <form id="deedapOrderForm" class="dd-order-form" novalidate>
+          <!-- Auto-captured Hidden Fields -->
+          <input type="hidden" id="ddFieldProductId" name="product_id" value="">
+          <input type="hidden" id="ddFieldProductName" name="product_name" value="">
+          <input type="hidden" id="ddFieldProductImage" name="product_image" value="">
+          <input type="hidden" id="ddFieldVariantId" name="variant_id" value="">
+          <input type="hidden" id="ddFieldSelectedSize" name="selected_size" value="">
+          <input type="hidden" id="ddFieldSelectedColor" name="selected_color" value="">
+          <input type="hidden" id="ddFieldProductPrice" name="product_price" value="">
+          <input type="hidden" id="ddFieldQuantity" name="quantity" value="1">
+          <input type="hidden" id="ddFieldOrderDate" name="order_date" value="">
+          <input type="hidden" id="ddFieldOrderReference" name="order_reference" value="">
+
+          <!-- Field 1: Full Name -->
+          <div class="dd-form-group">
+            <label for="ddCustName" class="dd-form-label">Full Name <span class="dd-required">*</span></label>
+            <input 
+              type="text" 
+              id="ddCustName" 
+              name="full_name" 
+              class="dd-form-input" 
+              placeholder="e.g. Priya Sharma" 
+              autocomplete="name" 
+              required
+            >
+            <span class="dd-field-error" id="ddErrName"></span>
+          </div>
+
+          <!-- Field 2 & 3: Mobile Number & Email Address (2 columns) -->
+          <div class="dd-form-row dd-form-row--2">
+            <div class="dd-form-group">
+              <label for="ddCustPhone" class="dd-form-label">Mobile Number <span class="dd-required">*</span></label>
+              <div class="dd-phone-input-wrap">
+                <span class="dd-phone-prefix">+91</span>
+                <input 
+                  type="tel" 
+                  id="ddCustPhone" 
+                  name="mobile_number" 
+                  class="dd-form-input dd-form-input--phone" 
+                  placeholder="10-digit number" 
+                  autocomplete="tel" 
+                  maxlength="10"
+                  required
+                >
+              </div>
+              <span class="dd-field-error" id="ddErrPhone"></span>
+            </div>
+
+            <div class="dd-form-group">
+              <label for="ddCustEmail" class="dd-form-label">Email Address <span class="dd-required">*</span></label>
+              <input 
+                type="email" 
+                id="ddCustEmail" 
+                name="email_address" 
+                class="dd-form-input" 
+                placeholder="e.g. priya@example.com" 
+                autocomplete="email" 
+                required
+              >
+              <span class="dd-field-error" id="ddErrEmail"></span>
+            </div>
+          </div>
+
+          <!-- Field 4: Complete Delivery Address -->
+          <div class="dd-form-group">
+            <label for="ddCustAddress" class="dd-form-label">Complete Delivery Address <span class="dd-required">*</span></label>
+            <textarea 
+              id="ddCustAddress" 
+              name="delivery_address" 
+              class="dd-form-textarea" 
+              rows="3" 
+              placeholder="Flat / House No., Building Name, Street, Landmark" 
+              autocomplete="street-address" 
+              required
+            ></textarea>
+            <span class="dd-field-error" id="ddErrAddress"></span>
+          </div>
+
+          <!-- Field 5, 6, 7: City, State, PIN Code (3 columns) -->
+          <div class="dd-form-row dd-form-row--3">
+            <div class="dd-form-group">
+              <label for="ddCustCity" class="dd-form-label">City <span class="dd-required">*</span></label>
+              <input 
+                type="text" 
+                id="ddCustCity" 
+                name="city" 
+                class="dd-form-input" 
+                placeholder="e.g. Mumbai" 
+                autocomplete="address-level2" 
+                required
+              >
+              <span class="dd-field-error" id="ddErrCity"></span>
+            </div>
+
+            <div class="dd-form-group">
+              <label for="ddCustState" class="dd-form-label">State <span class="dd-required">*</span></label>
+              <select id="ddCustState" name="state" class="dd-form-select" required>
+                <option value="" disabled selected>Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Andaman and Nicobar Islands">Andaman and Nicobar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra & Nagar Haveli</option>
+                <option value="Delhi">Delhi / NCR</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Ladakh">Ladakh</option>
+                <option value="Lakshadweep">Lakshadweep</option>
+                <option value="Puducherry">Puducherry</option>
+                <option value="Other">Other / International</option>
+              </select>
+              <span class="dd-field-error" id="ddErrState"></span>
+            </div>
+
+            <div class="dd-form-group">
+              <label for="ddCustPincode" class="dd-form-label">PIN Code <span class="dd-required">*</span></label>
+              <input 
+                type="text" 
+                id="ddCustPincode" 
+                name="pincode" 
+                class="dd-form-input" 
+                placeholder="e.g. 400001" 
+                autocomplete="postal-code" 
+                maxlength="6"
+                required
+              >
+              <span class="dd-field-error" id="ddErrPincode"></span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="dd-form-submit-wrap">
+            <button type="submit" id="ddSubmitOrderBtn" class="dd-submit-btn">
+              <span class="dd-submit-btn__label">SUBMIT ORDER ENQUIRY &rarr;</span>
+              <span class="dd-submit-btn__spinner" style="display: none;">
+                <svg class="dd-spinner-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                  <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+                </svg>
+                <span>Creating Official Order Request...</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Security & Privacy Disclaimer -->
+          <div class="dd-form-footer-assurance">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>100% Secure Enquiry &bull; Saved directly in DEEDAP Shopify Store &bull; No advance payment required</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- 2. SUCCESS CONFIRMATION VIEW (Post-Submission) -->
+      <div id="ddModalSuccessView" class="dd-modal-view dd-modal-success" style="display: none;">
+        <div class="dd-confirm-icon-wrap">
+          <div class="dd-confirm-pulse-ring"></div>
+          <div class="dd-confirm-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="dd-confirm-brand">
+          <span class="dd-confirm-kicker">&#9733; DEEDAP CONCIERGE CONFIRMATION</span>
+          <h2 class="dd-confirm-title">THANK YOU FOR CHOOSING DEEDAP!</h2>
+          <p class="dd-confirm-lead">Your order request has been received successfully.</p>
+        </div>
+
+        <div class="dd-confirm-ref-card">
+          <span class="dd-confirm-ref-label">Order Enquiry Reference Number</span>
+          <div class="dd-confirm-ref-val-wrap">
+            <strong id="ddSuccessOrderRef" class="dd-confirm-ref-val">DDP-ENQ-PENDING</strong>
+            <button type="button" id="ddSuccessCopyBtn" class="dd-copy-ref-btn" aria-label="Copy reference number">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="ddSuccessCopyText">Copy</span>
+            </button>
+          </div>
+          <div class="dd-confirm-status-pill">
+            <span class="dd-status-dot"></span>
+            <span>Status: <strong>New Order Enquiry (Pending Confirmation)</strong></span>
+          </div>
+        </div>
+
+        <div class="dd-confirm-notice">
+          <div class="dd-confirm-notice__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="dd-confirm-notice__content">
+            Our team will review your details and contact you shortly to confirm your order and assist you with the next steps.
+          </div>
+        </div>
+
+        <div class="dd-confirm-closing">
+          <p class="dd-closing-text">We appreciate your interest in DEEDAP!</p>
+          <p class="dd-closing-slogan">DEEDAP &ndash; Bringing the World Closer to You.</p>
+        </div>
+
+        <div class="dd-confirm-actions">
+          <button type="button" class="dd-btn-continue" data-dd-close-modal>
+            &larr; CONTINUE SHOPPING
+          </button>
+          <button type="button" onclick="window.print()" class="dd-btn-print">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Slip
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

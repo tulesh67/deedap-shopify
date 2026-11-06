@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "textile_category": {
+      "type": "deedap-textile-category",
+      "settings": {
+        "category_title": "Women’s Kurtas & Suits",
+        "intro": "Discover expressive prints and comfortable silhouettes, chosen to feel like you.",
+        "collection": "women-clothing-textiles",
+        "banner_asset": "women-banner-deedap.png",
+        "hide_products_head": true,
+        "product_limit": 30
+      }
+    }
+  },
+  "order": ["textile_category"]
+}

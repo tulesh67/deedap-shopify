@@ -1,0 +1,105 @@
+{% if category_title contains 'Women' or category_title contains 'Kids' %}{% assign hide_products_head = true %}{% endif %}
+<section id="{{ category_id }}" class="dd-textile-products{% if compact_products %} dd-textile-products--compact{% endif %}" aria-label="{{ category_title | escape }} products">
+  <div class="dd-textile-products__inner">
+    {% unless hide_products_head %}
+    <div class="dd-textile-products__head">
+      <div>
+        <p class="dd-textile-products__eyebrow">DEEDAP TEXTILES · {{ category_title | escape }}</p>
+        <h2 id="{{ category_id }}-heading">{{ category_title | escape }} collection</h2>
+        <p class="dd-textile-products__intro">Everyday pieces, selected for comfort and made to be worn on repeat.</p>
+      </div>
+      {% if textile_collection != blank %}<a href="{{ textile_collection.url }}" class="dd-textile-products__all">SHOP ALL {{ category_title | upcase }} <span aria-hidden="true">↗</span></a>{% endif %}
+    </div>
+    {% endunless %}
+
+    <div class="dd-textile-products__grid">
+      {% if textile_collection == blank %}
+        <p class="dd-textile-products__empty">Choose the {{ category_title | escape }} collection in the Shopify theme editor, then add up to 10 products. Set each item's price to Rs. 999 and compare-at price to Rs. 1,399 in Shopify Products.</p>
+      {% else %}
+        {% assign textile_product_limit = product_limit | default: 10 | plus: 0 %}
+        {% for textile_product in textile_collection.products limit: textile_product_limit %}
+          {% assign textile_variant = textile_product.selected_or_first_available_variant %}
+          <article class="dd-textile-card">
+            <div class="dd-textile-card__gallery" data-dd-textile-carousel>
+              <div class="dd-textile-card__track" data-dd-gallery-track>
+                {% if textile_product.images.size > 0 %}
+                  {% for textile_image in textile_product.images %}
+                    <a href="{{ textile_product.url }}" class="dd-textile-card__slide" aria-label="View {{ textile_product.title | escape }}, image {{ forloop.index }} of {{ textile_product.images.size }}">
+                      {{ textile_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', alt: textile_image.alt | default: textile_product.title }}
+                    </a>
+                  {% endfor %}
+                {% else %}
+                  <a href="{{ textile_product.url }}" class="dd-textile-card__slide" aria-label="View {{ textile_product.title | escape }}">
+                    {{ 'product-1' | placeholder_svg_tag: 'dd-textile-card__placeholder' }}
+                  </a>
+                {% endif %}
+              </div>
+              {% if textile_product.images.size > 1 %}
+                <button type="button" class="dd-textile-card__gallery-arrow dd-textile-card__gallery-arrow--prev" data-dd-gallery-step="-1" aria-label="Previous {{ textile_product.title | escape }} image">‹</button>
+                <button type="button" class="dd-textile-card__gallery-arrow dd-textile-card__gallery-arrow--next" data-dd-gallery-step="1" aria-label="Next {{ textile_product.title | escape }} image">›</button>
+                <span class="dd-textile-card__gallery-count" data-dd-gallery-count aria-live="polite">1 / {{ textile_product.images.size }}</span>
+              {% endif %}
+              <span class="dd-textile-card__tag">{{ category_title | escape }}</span>
+            </div>
+            <div class="dd-textile-card__body">
+              <h3><a href="{{ textile_product.url }}">{{ textile_product.title | escape }}</a></h3>
+              {% if textile_product.description != blank %}<p>{{ textile_product.description | strip_html | truncate: 100 }}</p>{% endif %}
+              <div class="dd-textile-card__buy">
+                <div class="dd-textile-card__price">
+                  {% if textile_variant.compare_at_price > textile_variant.price %}<s>{{ textile_variant.compare_at_price | money }}</s>{% endif %}
+                  <strong>{{ textile_variant.price | money }}</strong>
+                </div>
+                {% if textile_variant.available %}
+                  <button type="button" class="dd-textile-card__add" data-deedap-add data-variant-id="{{ textile_variant.id }}" aria-label="Add {{ textile_product.title | escape }} to bag">ADD TO BAG <span aria-hidden="true">＋</span></button>
+                {% else %}
+                  <button type="button" class="dd-textile-card__add" disabled>SOLD OUT</button>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% else %}
+          <p class="dd-textile-products__empty">Add products to the {{ category_title | escape }} collection in Shopify to show them here.</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dd-textile-products{scroll-margin-top:150px;background:#fff;padding:clamp(36px,5vw,72px) 22px;color:#211b17;border-top:1px solid rgba(33,27,23,.1)} .dd-textile-products--compact{padding-top:clamp(18px,2.5vw,30px);border-top:0}
+  .dd-textile-products__inner{max-width:1320px;margin:0 auto}
+  .dd-textile-products__head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(33,27,23,.14)}
+  .dd-textile-products__eyebrow{margin:0 0 8px;color:#9c542e;font-size:10px;font-weight:850;letter-spacing:.2em}
+  .dd-textile-products__head h2{margin:0;font-family:var(--font-heading-family,Georgia,serif);font-size:clamp(30px,4vw,48px);font-weight:500;letter-spacing:-.035em;line-height:1.05}
+  .dd-textile-products__intro{margin:9px 0 0;color:#746b62;font-size:14px;line-height:1.5}
+  .dd-textile-products__all{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#64182b;font-size:11px;font-weight:850;letter-spacing:.1em;text-decoration:none;white-space:nowrap}
+  .dd-textile-products__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+  .dd-textile-card{overflow:hidden;border:3.5px solid #5C091E !important;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(39,27,20,.055)}
+  .dd-textile-card__gallery{position:relative;aspect-ratio:4/5;overflow:hidden;background:#f5f3ef}
+  .dd-textile-card__track{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;touch-action:pan-x}
+  .dd-textile-card__track::-webkit-scrollbar{display:none}
+  .dd-textile-card__slide{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start}
+  .dd-textile-card__slide img,.dd-textile-card__placeholder{display:block;width:100%;height:100%;object-fit:cover}
+  .dd-textile-card__gallery-arrow{position:absolute;top:50%;z-index:2;display:grid;width:36px;height:36px;place-items:center;transform:translateY(-50%);border:1px solid rgba(255,255,255,.7);border-radius:50%;background:rgba(255,255,255,.92);color:#64182b;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+  .dd-textile-card__gallery-arrow--prev{left:10px}
+  .dd-textile-card__gallery-arrow--next{right:10px}
+  .dd-textile-card__gallery-count{position:absolute;right:10px;bottom:10px;z-index:2;padding:5px 8px;border-radius:99px;background:rgba(25,18,16,.7);color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em}
+  
+  .dd-textile-card__tag{position:absolute;top:12px;left:12px;padding:7px 10px;border-radius:999px;background:#fff;color:#64182b;font-size:9px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+  .dd-textile-card__body{padding:15px}
+  .dd-textile-card h3{margin:0;font-size:16px;line-height:1.35}
+  .dd-textile-card h3 a{color:#211b17;text-decoration:none}
+  .dd-textile-card__body>p{min-height:38px;margin:7px 0 12px;color:#746b62;font-size:12px;line-height:1.5}
+  .dd-textile-card__buy{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:12px;border-top:1px solid #eee9e2}
+  .dd-textile-card__price{display:flex;flex-direction:column;gap:1px;white-space:nowrap}
+  .dd-textile-card__price s{color:#80746b;font-size:11px}
+  .dd-textile-card__price strong{color:#64182b;font-size:19px}
+  .dd-textile-card__add{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 12px;border:0;border-radius:999px;background:#64182b;color:#fff;font:inherit;font-size:9px;font-weight:850;letter-spacing:.07em;cursor:pointer;white-space:nowrap}
+  .dd-textile-card__add:hover{background:#481020}
+  .dd-textile-card__add:disabled{background:#817b77;cursor:not-allowed}
+  .dd-textile-card__add.is-busy{opacity:.65}
+  .dd-textile-card__add span{font-size:15px}
+  .dd-textile-products__empty{grid-column:1/-1;margin:0;padding:24px;border:1px dashed rgba(33,27,23,.22);color:#746b62;text-align:center;line-height:1.6}
+  @media(max-width:1000px){.dd-textile-products__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}}
+  @media(max-width:700px){.dd-textile-products{padding:34px 15px}.dd-textile-products--compact{padding:12px 15px 24px}.dd-textile-products__head{align-items:flex-start;flex-direction:column;gap:8px}.dd-textile-products__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dd-textile-card__body{padding:11px}.dd-textile-card h3{font-size:14px}.dd-textile-card__body>p{font-size:11px}.dd-textile-card__buy{align-items:flex-start;flex-direction:column}.dd-textile-card__add{width:100%}}
+</style>

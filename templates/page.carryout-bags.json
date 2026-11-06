@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "landing": {
@@ -22,7 +31,8 @@
             "title": "Kraft Paper Carry Bag",
             "description": "A simple, sturdy sample option for everyday shopping and takeaway orders.",
             "price": "₹25",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-kraft-paper-carry-bag"
           }
         },
         "reusable_bag": {
@@ -34,7 +44,8 @@
             "title": "Everyday Reusable Shopper",
             "description": "A reusable bag concept for market trips and daily errands.",
             "price": "₹199",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-reusable-shopper"
           }
         },
         "gift_bag": {
@@ -46,12 +57,19 @@
             "title": "Festive Gift Carry Bag",
             "description": "A polished sample bag for presenting a thoughtful gift.",
             "price": "₹75",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-festive-gift-carry-bag"
           }
         }
       },
-      "block_order": ["kraft_bag", "reusable_bag", "gift_bag"]
+      "block_order": [
+        "kraft_bag",
+        "reusable_bag",
+        "gift_bag"
+      ]
     }
   },
-  "order": ["landing"]
+  "order": [
+    "landing"
+  ]
 }

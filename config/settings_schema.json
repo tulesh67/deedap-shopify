@@ -1511,18 +1511,6 @@
         "default": "#B45309"
       },
       {
-        "type": "color",
-        "id": "deedap_cat_imported",
-        "label": "Global Finds Accent",
-        "default": "#7C3AED"
-      },
-      {
-        "type": "color",
-        "id": "deedap_cat_essentials",
-        "label": "Everyday Essentials Accent",
-        "default": "#059669"
-      },
-      {
         "type": "header",
         "content": "Interactive Animations"
       },

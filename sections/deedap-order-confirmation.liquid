@@ -1,0 +1,651 @@
+{% comment %}
+  DEEDAP Custom Order Enquiry Confirmation Section
+  Displays the official order reservation confirmation, reference number,
+  and DEEDAP concierge communication details.
+{% endcomment %}
+
+<div class="dd-confirm-wrapper">
+  <div class="dd-confirm-container">
+    <!-- Success Icon -->
+    <div class="dd-confirm-icon-wrap">
+      <div class="dd-confirm-pulse-ring"></div>
+      <div class="dd-confirm-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Official Brand Message -->
+    <div class="dd-confirm-brand">
+      <span class="dd-confirm-kicker">&#9733; DEEDAP CONCIERGE CONFIRMATION</span>
+      <h1 class="dd-confirm-title">THANK YOU FOR CHOOSING DEEDAP!</h1>
+      <p class="dd-confirm-lead">Your order request has been received successfully.</p>
+    </div>
+
+    <!-- Reference Number Badge -->
+    <div class="dd-confirm-ref-card">
+      <span class="dd-confirm-ref-label">Order Enquiry Reference Number</span>
+      <div class="dd-confirm-ref-val-wrap">
+        <strong id="ddDisplayOrderRef" class="dd-confirm-ref-val">DDP-ENQ-PENDING</strong>
+        <button type="button" id="ddCopyRefBtn" class="dd-copy-ref-btn" aria-label="Copy reference number">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span id="ddCopyRefText">Copy</span>
+        </button>
+      </div>
+      <div class="dd-confirm-status-pill">
+        <span class="dd-status-dot"></span>
+        <span>Status: <strong>New Order Enquiry (Pending Confirmation)</strong></span>
+      </div>
+    </div>
+
+    <!-- Important Enquiry Workflow Notice -->
+    <div class="dd-confirm-notice">
+      <div class="dd-confirm-notice__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96752C" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div class="dd-confirm-notice__content">
+        <strong>Important Notice:</strong> This is an order enquiry and reservation workflow, not a completed payment. Our team will review your details and contact you shortly to confirm your order and assist you with the next steps.
+      </div>
+    </div>
+
+    <!-- Dynamic Order Details Card (Populated by JavaScript) -->
+    <div id="ddOrderDetailsCard" class="dd-confirm-details-card" style="display: none;">
+      <h3 class="dd-details-card-title">Enquiry Summary</h3>
+      
+      <div class="dd-confirm-item-row">
+        <div class="dd-confirm-item-thumb">
+          <img id="ddConfirmItemImg" src="" alt="Product">
+        </div>
+        <div class="dd-confirm-item-meta">
+          <h4 id="ddConfirmItemTitle" class="dd-confirm-item-title">Product Name</h4>
+          <div class="dd-confirm-item-tags">
+            <span class="dd-tag" id="ddConfirmItemSize">Size: Standard</span>
+            <span class="dd-tag" id="ddConfirmItemColor">Colour: Standard</span>
+            <span class="dd-tag" id="ddConfirmItemQty">Qty: 1</span>
+          </div>
+          <div class="dd-confirm-item-price">
+            Total Value: <strong id="ddConfirmItemPrice">Rs. 0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="dd-confirm-shipping-info">
+        <h4 class="dd-shipping-info-title">Delivery Contact Details</h4>
+        <div class="dd-shipping-grid">
+          <div>
+            <span class="dd-info-label">Customer Name:</span>
+            <span id="ddConfirmCustName" class="dd-info-val">-</span>
+          </div>
+          <div>
+            <span class="dd-info-label">Mobile Number:</span>
+            <span id="ddConfirmCustPhone" class="dd-info-val">-</span>
+          </div>
+          <div>
+            <span class="dd-info-label">Email Address:</span>
+            <span id="ddConfirmCustEmail" class="dd-info-val">-</span>
+          </div>
+          <div>
+            <span class="dd-info-label">Destination City:</span>
+            <span id="ddConfirmCustCity" class="dd-info-val">-</span>
+          </div>
+          <div class="dd-shipping-grid__full">
+            <span class="dd-info-label">Full Address:</span>
+            <span id="ddConfirmCustAddress" class="dd-info-val">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official Closing Statement -->
+    <div class="dd-confirm-closing">
+      <p class="dd-closing-text">We appreciate your interest in DEEDAP!</p>
+      <p class="dd-closing-slogan">DEEDAP &ndash; Bringing the World Closer to You.</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="dd-confirm-actions">
+      <a href="{{ routes.all_products_collection_url | default: '/' }}" class="dd-btn-continue">
+        &larr; CONTINUE SHOPPING
+      </a>
+      <button type="button" onclick="window.print()" class="dd-btn-print">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print Enquiry Slip
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dd-confirm-wrapper {
+    background-color: #FAF8F3;
+    min-height: 80vh;
+    padding: 48px 16px 80px;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1A140E;
+    box-sizing: border-box;
+  }
+
+  .dd-confirm-container {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid rgba(150, 117, 44, 0.25);
+    box-shadow: 0 20px 60px -10px rgba(18, 14, 10, 0.12), 0 2px 8px rgba(150, 117, 44, 0.08);
+    padding: 40px 36px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* Success Icon */
+  .dd-confirm-icon-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dd-confirm-icon {
+    width: 72px;
+    height: 72px;
+    background: #FAF5E9;
+    border: 2px solid #96752C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(150, 117, 44, 0.22);
+    position: relative;
+    z-index: 2;
+  }
+
+  .dd-confirm-pulse-ring {
+    position: absolute;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: rgba(150, 117, 44, 0.15);
+    animation: ddConfirmPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  }
+
+  @keyframes ddConfirmPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 0.3; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+  }
+
+  /* Brand Header */
+  .dd-confirm-kicker {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #96752C;
+    background: rgba(150, 117, 44, 0.12);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .dd-confirm-title {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #14110C;
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+
+  .dd-confirm-lead {
+    font-size: 15px;
+    font-weight: 500;
+    color: #4A443A;
+    margin: 0 0 24px;
+    line-height: 1.5;
+  }
+
+  /* Reference Card */
+  .dd-confirm-ref-card {
+    background: #FAF8F3;
+    border: 1px solid rgba(150, 117, 44, 0.28);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+  }
+
+  .dd-confirm-ref-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7A7266;
+    margin-bottom: 6px;
+  }
+
+  .dd-confirm-ref-val-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .dd-confirm-ref-val {
+    font-family: 'Syne', monospace;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #96752C;
+  }
+
+  .dd-copy-ref-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #FFFFFF;
+    border: 1px solid rgba(150, 117, 44, 0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #3C352D;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .dd-copy-ref-btn:hover {
+    background: #96752C;
+    color: #FFFFFF;
+  }
+
+  .dd-confirm-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #6C541B;
+    background: #FFF9E6;
+    border: 1px solid rgba(150, 117, 44, 0.2);
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .dd-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #D97706;
+    box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+  }
+
+  /* Notice Box */
+  .dd-confirm-notice {
+    display: flex;
+    gap: 12px;
+    text-align: left;
+    background: #FDF9F0;
+    border-left: 4px solid #96752C;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4A3E2A;
+    margin-bottom: 24px;
+  }
+
+  .dd-confirm-notice__icon {
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* Details Card */
+  .dd-confirm-details-card {
+    background: #FAF8F3;
+    border: 1px solid rgba(150, 117, 44, 0.2);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
+  .dd-details-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #14110C;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(150, 117, 44, 0.16);
+  }
+
+  .dd-confirm-item-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(150, 117, 44, 0.2);
+  }
+
+  .dd-confirm-item-thumb {
+    width: 64px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #EFECE6;
+    flex-shrink: 0;
+  }
+
+  .dd-confirm-item-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dd-confirm-item-meta {
+    flex: 1;
+  }
+
+  .dd-confirm-item-title {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #14110C;
+  }
+
+  .dd-confirm-item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .dd-tag {
+    font-size: 11px;
+    background: #FFFFFF;
+    border: 1px solid rgba(150, 117, 44, 0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #4A443A;
+  }
+
+  .dd-confirm-item-price {
+    font-size: 13px;
+    color: #7A7266;
+  }
+
+  .dd-confirm-item-price strong {
+    color: #96752C;
+    font-size: 15px;
+  }
+
+  .dd-shipping-info-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #7A7266;
+    margin: 0 0 10px;
+  }
+
+  .dd-shipping-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    font-size: 12.5px;
+  }
+
+  .dd-shipping-grid__full {
+    grid-column: 1 / -1;
+  }
+
+  .dd-info-label {
+    display: block;
+    color: #8C8477;
+    font-size: 10.5px;
+    text-transform: uppercase;
+  }
+
+  .dd-info-val {
+    font-weight: 600;
+    color: #1A140E;
+  }
+
+  /* Closing Statement */
+  .dd-confirm-closing {
+    margin: 28px 0 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(150, 117, 44, 0.16);
+  }
+
+  .dd-closing-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #3C352D;
+    margin: 0 0 4px;
+  }
+
+  .dd-closing-slogan {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #96752C;
+    margin: 0;
+  }
+
+  /* Action Buttons */
+  .dd-confirm-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .dd-btn-continue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 28px;
+    background: #14110C;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+
+  .dd-btn-continue:hover {
+    background: #96752C;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(150, 117, 44, 0.28);
+    color: #FFFFFF;
+  }
+
+  .dd-btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    background: #FFFFFF;
+    color: #3C352D;
+    border: 1px solid rgba(18, 20, 26, 0.2);
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .dd-btn-print:hover {
+    border-color: #96752C;
+    color: #96752C;
+  }
+
+  @media (max-width: 640px) {
+    .dd-confirm-wrapper {
+      padding: 24px 12px 48px;
+    }
+
+    .dd-confirm-container {
+      padding: 28px 18px;
+      border-radius: 16px;
+    }
+
+    .dd-confirm-title {
+      font-size: 19px;
+    }
+
+    .dd-confirm-ref-val {
+      font-size: 16px;
+    }
+
+    .dd-shipping-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dd-confirm-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .dd-btn-continue, .dd-btn-print {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .dd-confirm-wrapper, .dd-confirm-wrapper * {
+      visibility: visible;
+    }
+    .dd-confirm-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      background: #FFFFFF;
+      padding: 0;
+    }
+    .dd-confirm-actions {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    // 1. Read reference from URL query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const refFromUrl = urlParams.get('ref');
+
+    const displayRefEl = document.getElementById('ddDisplayOrderRef');
+    const detailsCardEl = document.getElementById('ddOrderDetailsCard');
+
+    // 2. Read cached details from sessionStorage
+    let orderData = null;
+    try {
+      const stored = sessionStorage.getItem('deedap_order_confirmation');
+      if (stored) {
+        orderData = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Could not read cached order data', e);
+    }
+
+    const activeRef = refFromUrl || (orderData && orderData.orderReference) || 'DDP-ENQ-' + Math.floor(Math.random() * 90000 + 10000);
+    if (displayRefEl) {
+      displayRefEl.textContent = activeRef;
+    }
+
+    // Populate order details if available
+    if (orderData && orderData.product) {
+      const p = orderData.product;
+      const c = orderData.customer || {};
+
+      const imgEl = document.getElementById('ddConfirmItemImg');
+      const titleEl = document.getElementById('ddConfirmItemTitle');
+      const sizeEl = document.getElementById('ddConfirmItemSize');
+      const colorEl = document.getElementById('ddConfirmItemColor');
+      const qtyEl = document.getElementById('ddConfirmItemQty');
+      const priceEl = document.getElementById('ddConfirmItemPrice');
+
+      if (imgEl && p.image) imgEl.src = p.image;
+      if (titleEl) titleEl.textContent = p.title || 'Product';
+      if (sizeEl) sizeEl.textContent = 'Size: ' + (p.size || 'Standard');
+      if (colorEl) colorEl.textContent = 'Colour: ' + (p.color || 'Standard');
+      if (qtyEl) qtyEl.textContent = 'Qty: ' + (p.quantity || 1);
+      if (priceEl) priceEl.textContent = 'Rs. ' + Math.round(p.totalPrice || (p.unitPrice * p.quantity)).toLocaleString('en-IN');
+
+      // Populate customer info
+      const nameEl = document.getElementById('ddConfirmCustName');
+      const phoneEl = document.getElementById('ddConfirmCustPhone');
+      const emailEl = document.getElementById('ddConfirmCustEmail');
+      const cityEl = document.getElementById('ddConfirmCustCity');
+      const addressEl = document.getElementById('ddConfirmCustAddress');
+
+      if (nameEl) nameEl.textContent = c.name || '-';
+      if (phoneEl) phoneEl.textContent = c.phone || '-';
+      if (emailEl) emailEl.textContent = c.email || '-';
+      if (cityEl) cityEl.textContent = (c.city ? c.city + ', ' : '') + (c.state || '') + (c.pincode ? ' - ' + c.pincode : '');
+      if (addressEl) addressEl.textContent = c.address || '-';
+
+      if (detailsCardEl) detailsCardEl.style.display = 'block';
+    }
+
+    // Copy reference button
+    const copyBtn = document.getElementById('ddCopyRefBtn');
+    const copyText = document.getElementById('ddCopyRefText');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(activeRef).then(function () {
+          if (copyText) copyText.textContent = 'Copied!';
+          setTimeout(function () {
+            if (copyText) copyText.textContent = 'Copy';
+          }, 2000);
+        }).catch(function () {
+          alert('Reference: ' + activeRef);
+        });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DEEDAP Order Confirmation",
+  "settings": [],
+  "presets": [
+    {
+      "name": "DEEDAP Order Confirmation"
+    }
+  ]
+}
+{% endschema %}

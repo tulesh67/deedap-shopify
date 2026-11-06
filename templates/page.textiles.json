@@ -12,18 +12,13 @@
     "textile_page": {
       "type": "deedap-textile-hub",
       "settings": {
-        "men_collection": "",
-        "women_collection": "",
-        "kids_collection": ""
+        "men_collection": "men-clothing-textiles",
+        "women_collection": "women-clothing-textiles",
+        "kids_collection": "kids-clothing-textiles"
       }
-    },
-    "organic_page": {
-      "type": "deedap-organic-hub",
-      "settings": {}
     }
   },
   "order": [
-    "textile_page",
-    "organic_page"
+    "textile_page"
   ]
 }

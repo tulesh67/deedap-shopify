@@ -1,9 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "gift_hampers": {
       "type": "deedap-gift-hampers",
-      "settings": {}
+      "settings": {
+        "product_cashews": "deedap-hamper-cashews-100g",
+        "product_diya": "deedap-hamper-brass-diya",
+        "product_festive": "deedap-festive-gift-hamper",
+        "banner_asset": "iconic-gift-guide.jpg"
+      }
     }
   },
-  "order": ["gift_hampers"]
+  "order": [
+    "gift_hampers"
+  ]
 }

@@ -597,7 +597,7 @@
 /* ===== GLOBAL PRODUCT CARDS: MANDATORY 2.5PX THICK BORDER ===== */
 .card--card,
 .card--standard .card__inner {
-  border: 2.5px solid #14110C !important;
+  border: 3.5px solid #5C091E !important;
   transition: border-color 0.3s ease, box-shadow 0.4s ease !important;
 }
 

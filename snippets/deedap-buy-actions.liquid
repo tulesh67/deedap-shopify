@@ -24,7 +24,11 @@
       type="button"
       class="deedap-buy-actions__buy"
       data-deedap-buy
+      data-deedap-order-trigger
       data-variant-id="{{ action_variant.id }}"
+      data-product-title="{{ action_product.title | escape }}"
+      data-product-price="{{ action_variant.price | divided_by: 100.0 }}"
+      data-product-image="{{ action_product.featured_image | image_url: width: 400 }}"
     >
       Buy now
     </button>

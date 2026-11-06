@@ -1,0 +1,49 @@
+<section class="dd-textile-category" aria-labelledby="dd-textile-category-title">
+  {% assign has_category_banner = false %}
+  {% if section.settings.banner_asset != blank %}
+    {% assign has_category_banner = true %}
+    <div class="dd-textile-category__banner">
+      <img src="{{ section.settings.banner_asset | asset_url }}" alt="{{ section.settings.category_title | escape }} collection banner" width="2160" height="726" fetchpriority="high">
+    </div>
+  {% else %}
+    <div class="dd-textile-category__hero">
+      <p class="dd-textile-category__eyebrow">DEEDAP · CLOTHING &amp; TEXTILES</p>
+      <h1 id="dd-textile-category-title">{{ section.settings.category_title | escape }}</h1>
+      <p>{{ section.settings.intro | escape }}</p>
+      <a href="/pages/textiles" class="dd-textile-category__back">ALL TEXTILE EDITS <span aria-hidden="true">↗</span></a>
+    </div>
+  {% endif %}
+  {% assign category_id = section.settings.category_title | handleize | append: '-products' %}
+  {% render 'deedap-textile-collection-grid', textile_collection: section.settings.collection, category_title: section.settings.category_title, category_id: category_id, section_id: section.id, compact_products: has_category_banner, hide_products_head: section.settings.hide_products_head, product_limit: section.settings.product_limit %}
+</section>
+<script src="{{ 'deedap-textile-gallery.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .dd-textile-category{background:#fff;color:#211b17} .dd-textile-category__banner{width:100%;line-height:0} .dd-textile-category__banner img{display:block;width:100%;height:auto;object-fit:cover}
+  .dd-textile-category__hero{padding:clamp(30px,5vw,66px) 20px 24px;text-align:center}
+  .dd-textile-category__eyebrow{margin:0 0 11px;color:#64182b;font-size:10px;font-weight:850;letter-spacing:.2em}
+  .dd-textile-category__hero h1{margin:0;font-family:var(--font-heading-family,Georgia,serif);font-size:clamp(34px,5vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.08}
+  .dd-textile-category__hero>p:not(.dd-textile-category__eyebrow){max-width:680px;margin:12px auto 0;color:#746b62;font-size:clamp(14px,1.6vw,17px);line-height:1.6}
+  .dd-textile-category__back{display:inline-flex;align-items:center;gap:9px;margin-top:17px;color:#64182b;font-size:10px;font-weight:850;letter-spacing:.12em;text-decoration:none}
+  .dd-textile-category__back span{font-size:15px}
+  @media(max-width:700px){.dd-textile-category__hero{padding:28px 16px 14px}}
+</style>
+
+{% schema %}
+{
+  "name": "DEEDAP Textile Category",
+  "tag": "section",
+  "class": "section-deedap-textile-category",
+  "settings": [
+    { "type": "text", "id": "category_title", "label": "Category title", "default": "Women’s Kurtas" },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Explore thoughtful everyday styles, selected for comfort and made to be worn on repeat." },
+    { "type": "text", "id": "banner_asset", "label": "Banner asset filename (optional)" },
+    { "type": "checkbox", "id": "hide_products_head", "label": "Hide products heading", "default": false },
+    { "type": "range", "id": "product_limit", "label": "Products to show", "min": 10, "max": 30, "step": 1, "default": 10 },
+    { "type": "collection", "id": "collection", "label": "Products collection" }
+  ],
+  "presets": [
+    { "name": "DEEDAP Textile Category" }
+  ]
+}
+{% endschema %}

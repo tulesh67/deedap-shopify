@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "landing": {
@@ -22,7 +31,8 @@
             "title": "Raw Wild Forest Honey",
             "description": "Unfiltered, single-origin honey with a deep floral finish.",
             "price": "₹850",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "raw-forest-honey"
           }
         },
         "vedic_turmeric": {
@@ -34,7 +44,8 @@
             "title": "Stone-Ground Vedic Turmeric",
             "description": "Small-batch turmeric, slow milled for a bright, earthy aroma.",
             "price": "₹280",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-vedic-turmeric"
           }
         },
         "mustard_oil": {
@@ -46,7 +57,8 @@
             "title": "Cold-Pressed Mustard Oil",
             "description": "Traditional wood-pressed oil with a rich, peppery character.",
             "price": "₹450",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "cold-pressed-mustard-oil"
           }
         },
         "green_tea": {
@@ -58,7 +70,8 @@
             "title": "Whole-Leaf Green Tea",
             "description": "Fresh green tea leaves with a light, clean finish.",
             "price": "₹580",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-whole-leaf-green-tea"
           }
         },
         "coconut_oil": {
@@ -70,7 +83,8 @@
             "title": "Virgin Coconut Oil",
             "description": "Cold-pressed coconut oil for everyday kitchen rituals.",
             "price": "₹490",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-virgin-coconut-oil"
           }
         },
         "botanical_soap": {
@@ -82,12 +96,22 @@
             "title": "Herbal Botanical Soap",
             "description": "Gentle, plant-based cleansing with a fresh herbal scent.",
             "price": "₹220",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-herbal-botanical-soap"
           }
         }
       },
-      "block_order": ["forest_honey", "vedic_turmeric", "mustard_oil", "green_tea", "coconut_oil", "botanical_soap"]
+      "block_order": [
+        "forest_honey",
+        "vedic_turmeric",
+        "mustard_oil",
+        "green_tea",
+        "coconut_oil",
+        "botanical_soap"
+      ]
     }
   },
-  "order": ["landing"]
+  "order": [
+    "landing"
+  ]
 }

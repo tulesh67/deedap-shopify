@@ -39,7 +39,7 @@
   assign accent = section.settings.color
 -%}
 
-<section class="dd-na dd-sec dd-catsec" aria-label="{{ heading | escape }}" style="--c:{{ accent }}">
+<section class="dd-na dd-sec dd-catsec{% if request.page_type == 'index' %} dd-catsec--home{% endif %}" aria-label="{{ heading | escape }}" style="--c:{{ accent }}">
   <div class="dd-wrap" style="padding:18px 0 4px">
     <div class="dd-sh">
       <div class="dd-sh-l">
@@ -157,6 +157,14 @@
   </div>
 </section>
 
+<style>
+  .dd-catsec--home { padding-top: 4px !important; padding-bottom: 14px !important; }
+  .dd-catsec--home > .dd-wrap { padding-top: 8px !important; padding-bottom: 0 !important; }
+  .dd-catsec--home .dd-prog { margin: 4px 0 10px !important; }
+  @media (max-width: 600px) {
+    .dd-catsec--home { padding-top: 4px !important; padding-bottom: 10px !important; }
+  }
+</style>
 {% schema %}
 {
   "name": "Deedap · Category row",

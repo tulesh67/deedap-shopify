@@ -1253,3 +1253,39 @@ button.chip-item {
   padding: 0 1rem 1rem;
   margin-top: auto;
 }
+
+
+/* ===== DEEDAP SIGNATURE ROYAL MAROON PRODUCT CARD BORDERS ===== */
+.card-wrapper .card__inner,
+.card.card--standard .card__inner,
+.card.card--card,
+.dd-sqimg,
+.dd-sq-img,
+.na-sqimg,
+.fk-card,
+.deedap-card,
+.dd-textile-card,
+.organic-product-card,
+.cw-prod-card,
+.dd-gh-card,
+.dd-edit-product {
+  border: 3.5px solid #5C091E !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.card-wrapper:hover .card__inner,
+.card.card--standard:hover .card__inner,
+.card.card--card:hover,
+.dd-sq:hover .dd-sqimg,
+.dd-sq:hover .dd-sq-img,
+.na-sq:hover .na-sqimg,
+.fk-card:hover,
+.deedap-card:hover,
+.dd-textile-card:hover,
+.organic-product-card:hover,
+.cw-prod-card:hover,
+.dd-gh-card:hover,
+.dd-edit-product:hover {
+  border-color: #B8923F !important;
+}

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "landing": {
@@ -22,7 +31,8 @@
             "title": "Everyday Non-Stick Frypan",
             "description": "A versatile sample pick for quick breakfasts and easy weeknight meals.",
             "price": "₹1,299",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-everyday-non-stick-frypan"
           }
         },
         "steel_set": {
@@ -34,7 +44,8 @@
             "title": "Stainless Steel Cookware Set",
             "description": "A polished cookware set concept for everyday kitchen routines.",
             "price": "₹3,999",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-stainless-steel-cookware-set"
           }
         },
         "cast_iron": {
@@ -46,12 +57,19 @@
             "title": "Cast Iron Kadai",
             "description": "A sturdy sample pick for slow-cooked favourites and shared meals.",
             "price": "₹2,149",
-            "link_label": "View collection"
+            "link_label": "View collection",
+            "product": "deedap-cast-iron-kadai"
           }
         }
       },
-      "block_order": ["frypan", "steel_set", "cast_iron"]
+      "block_order": [
+        "frypan",
+        "steel_set",
+        "cast_iron"
+      ]
     }
   },
-  "order": ["landing"]
+  "order": [
+    "landing"
+  ]
 }
